@@ -1469,7 +1469,8 @@ img {
 }
 
 .img-circle {
-  border-radius: 50%;
+  border-radius: 50% !important;
+  object-fit: cover;
 }
 
 hr {
@@ -6507,6 +6508,9 @@ a.thumbnail.active {
 
 .media {
   margin-top: 15px;
+  display: flex;
+  align-items: center;
+  
 }
 
 .media:first-child {

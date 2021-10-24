@@ -24,8 +24,7 @@
      * @param UploadRepository $uploadRepository
      * @param ImportAttendanceData $attendanceData
      */
-    public function __construct(ExportRepository $exportRepository, UploadRepository $uploadRepository, ImportAttendanceData $attendanceData)
-    {
+    public function __construct(ExportRepository $exportRepository, UploadRepository $uploadRepository, ImportAttendanceData $attendanceData) {
       $this->export = $exportRepository;
       $this->upload = $uploadRepository;
       $this->attendanceData = $attendanceData;
@@ -34,8 +33,7 @@
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function importAttendanceFile()
-    {
+    public function importAttendanceFile() {
       $files = AttendanceFilename::paginate(10);
       return view('hrms.attendance.upload_file', compact('files'));
     }
@@ -44,8 +42,7 @@
      * @param Request $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function uploadFile(Request $request)
-    {
+    public function uploadFile(Request $request) {
       if (Input::hasFile('upload_file')) {
         $file = Input::file('upload_file');
           $filename = $this->upload->File($file, $request->description, $request->date);
@@ -76,8 +73,7 @@
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function showSheetDetails()
-    {
+    public function showSheetDetails() {
       $column = '';
       $string = '';
       $dateFrom = '';
@@ -90,8 +86,7 @@
      * @param $id
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function doDelete($id)
-    {
+    public function doDelete($id) {
       $file = AttendanceFilename::find($id);
       $file->delete();
 
@@ -103,8 +98,7 @@
      * @param Request $request
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View|\Symfony\Component\HttpFoundation\BinaryFileResponse
      */
-    public function searchAttendance(Request $request)
-    {
+    public function searchAttendance(Request $request) {
       try {
         $string = $request->string;
         $column = $request->column;

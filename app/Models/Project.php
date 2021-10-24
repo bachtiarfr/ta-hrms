@@ -8,8 +8,7 @@
     {
         protected $guarded = [];
 
-        public function client()
-        {
+        public function client() {
             return $this->belongsTo(Client::class);
         }
     }

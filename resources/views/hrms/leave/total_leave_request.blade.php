@@ -214,10 +214,75 @@
 
         </div>
     </div>
-
-
+    
     <!-- /Notification Modal -->
 </div>
+
+<!-- -------------- jQuery -------------- -->
+<script src="/assets/js/jquery/jquery-1.11.3.min.js"></script>
+{{--<script src="/assets/js/jquery/jquery-2.2.4.min.js"></script>--}}
+<script src="/assets/js/jquery/jquery_ui/jquery-ui.min.js"></script>
+<script src="/assets/js/custom.js"></script>
+<script>
+    
+$('.approveClick').click(function () {
+    var leaveId = $(this).data('id');
+    var type = $(this).data('name');
+    var token = $('#token').val();
+    $('#leave_id').val(leaveId);
+    $('#type').val(type);
+    $('#remarkModal').modal('show');
+
+});
+
+$('#proceed-button').click(function () {
+    $('#loader').removeClass('hidden');
+    console.log('please wait processing...');
+    var remarks = $('#remark-text').val();
+    var type = $('#type').val();
+    console.log('remarks ' + remarks);
+    var leave_id = $('#leave_id').val();
+    var token = $('#token').val();
+    var message = '';
+    var divClass = 'alert-success';
+    var url = '/approve-leave';
+    var buttonText = 'Approved';
+    var buttonClass = 'btn-success';
+    var buttonIcon = 'fa-check';
+
+    if (type == 'approve') {
+        message = 'Successfully Approved';
+    }
+    else {
+        message = 'Leave Rejected';
+        divClass = 'alert-danger';
+        url = '/disapprove-leave';
+        buttonText = 'Disapproved';
+        buttonClass = 'btn-danger';
+        buttonIcon = 'fa-times';
+    }
+
+    $.post(url, {'leaveId': leave_id, 'remarks': remarks, '_token': token}, function (data) {
+        var parsed = JSON.parse(data);
+        if (parsed === 'success') {
+            $('#loader').addClass('hidden');
+            var statusmessage = $('#status-message');
+            statusmessage.append("<div class='alert " + divClass + "'>" + message + "</div>");
+            statusmessage.removeClass('hidden');
+            var remarks_div = $('#remark-' + leave_id);
+            remarks_div.append(remarks);
+            var leavebutton = $('#button-' + leave_id);
+            leavebutton.empty();
+            leavebutton.append("<button type='button' class='btn " + buttonClass + " br2 btn-xs fs12' aria-expanded='false'><i class='fa " + buttonIcon + "'>" + buttonText + "</i> </button>");
+            setTimeout(function () {
+                $('#remarkModal').modal('hide');
+            }, 4000);
+
+
+        }
+    });
+});
+</script>
 @endsection
 @push('scripts')
     <script src="/assets/js/custom.js"></script>

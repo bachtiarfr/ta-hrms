@@ -17,27 +17,19 @@ class AttendanceManager extends Model
         $dateTo =  date_format(date_create($request['dateTo']), 'Y-m-d');
         $dateFrom =  date_format(date_create($request['dateFrom']), 'Y-m-d');
 
-        if(!empty($column) && !empty($string) && empty($dateFrom) && empty($dateTo))
-        {
+        if(!empty($column) && !empty($string) && empty($dateFrom) && empty($dateTo)) {
             $attendances = AttendanceManager::whereRaw($column . " like '%" . $string . "%'")->paginate(20);
-        }
-        elseif(!empty($dateFrom) && !empty($dateTo) && empty($column) && empty($string))
-        {
+        } elseif(!empty($dateFrom) && !empty($dateTo) && empty($column) && empty($string)) {
             $attendances = AttendanceManager::whereBetween('date', [$dateFrom, $dateTo])->paginate(20);
-        }
-        elseif(!empty($column) && !empty($string) && !empty($dateFrom) && !empty($dateTo)) {
+        } elseif(!empty($column) && !empty($string) && !empty($dateFrom) && !empty($dateTo)) {
             $attendances = AttendanceManager::whereRaw($column . " like '%" . $string . "%'")->whereBetween('date', [$dateFrom, $dateTo])->paginate(20);
-        }
-        else
-        {
+        } else {
             $attendances = AttendanceManager::paginate(20);
         }
-
         return $attendances;
     }
 
-    public static function saveExcelData($row, $hoursWorked, $difference)
-    {
+    public static function saveExcelData($row, $hoursWorked, $difference) {
         $user = Employee::where('code', $row->code)->first();
         $attendance = new AttendanceManager();
         $attendance->name = $row->name;

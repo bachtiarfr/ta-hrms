@@ -43,6 +43,8 @@
     <!-- Sweet alert -->
     <link rel="stylesheet" type="text/css" href="/assets/sweetalert.css">
 
+    {{-- App css --}}
+    <link rel="stylesheet" type="text/css" href="/css/app.css">
 @stack('styles')
 
     <!-- -------------- IE8 HTML5 support  -------------- -->

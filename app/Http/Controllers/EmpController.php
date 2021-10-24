@@ -28,8 +28,13 @@ class EmpController extends Controller
 
     public function processEmployee(Request $request)
     {
-        dd($request);
         $filename = public_path('photos');
+
+        if ($request->hasFile('photo')) {
+            dd($request->photo);
+        }
+
+        dd('haha');
         if ($request->file('photo')) {
             $file             = $request->file('photo');
             $filename         = str_random(12);
@@ -41,7 +46,6 @@ class EmpController extends Controller
             }
             $filename = $filename . '.' . $fileExt;
             $file->move($destinationPath, $filename);
-
         }
 
         $user           = new User;

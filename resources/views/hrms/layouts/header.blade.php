@@ -1,7 +1,7 @@
 <header class="navbar navbar-fixed-top bg-system">
     <div class="navbar-logo-wrapper bg-system">
         <a class="navbar-logo-text" href="welcome">
-            <b> H R M S </b>
+            <b> H R M S - Born Digital Jogja</b>
         </a>
 
         <span id="sidebar_left_toggle" class="ad ad-lines"></span>

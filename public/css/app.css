@@ -1,12 +1,19 @@
 @import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);@charset "UTF-8";
 
-/*!
- * Bootstrap v3.4.1 (https://getbootstrap.com/)
- * Copyright 2011-2019 Twitter, Inc.
- * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
- */
+/* sidebar */
+.navbar-logo-wrapper.dark.bg-dark {
+  background-color: #a8b81c !important;
+}
 
-/*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */
+.sidebar-menu > li > ul > li:first-child > a {
+  padding-top: 0;
+}
+
+.sidebar-menu > li > ul > li:last-child > a:not(.accordion-toggle.menu-open) {
+  padding-bottom: 0;
+}
+
+
 
 html {
   font-family: sans-serif;
@@ -5065,12 +5072,14 @@ tbody.collapse.in {
   position: relative;
   display: block;
   padding: 10px 15px;
+  display: flex;
+  align-items: center;
 }
 
 .nav > li > a:hover,
 .nav > li > a:focus {
   text-decoration: none;
-  background-color: #eeeeee;
+  background-color: #a8b81c !important;
 }
 
 .nav > li.disabled > a {

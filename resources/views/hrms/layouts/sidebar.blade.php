@@ -108,24 +108,6 @@
 
         <li>
             <a class="accordion-toggle" href="/dashboard">
-                <span class="fa fa-group"></span>
-                <span class="sidebar-title">Teams</span>
-                <span class="caret"></span>
-            </a>
-            <ul class="nav sub-nav">
-                <li>
-                    <a href="{{route('add-team')}}">
-                        <span class="glyphicon glyphicon-book"></span> Add Team </a>
-                </li>
-                <li>
-                    <a href="{{route('team-listing')}}">
-                        <span class="glyphicon glyphicon-modal-window"></span> Team Listings </a>
-                </li>
-            </ul>
-        </li>
-
-        <li>
-            <a class="accordion-toggle" href="/dashboard">
                 <span class="fa fa-graduation-cap"></span>
                 <span class="sidebar-title">Roles</span>
                 <span class="caret"></span>
@@ -138,31 +120,6 @@
                 <li>
                     <a href="{{route('role-list')}}">
                         <span class="glyphicon glyphicon-modal-window"></span> Role Listings </a>
-                </li>
-            </ul>
-        </li>
-        <li>
-            <a class="accordion-toggle" href="/dashboard">
-                <span class="fa fa fa-laptop"></span>
-                <span class="sidebar-title">Assets</span>
-                <span class="caret"></span>
-            </a>
-            <ul class="nav sub-nav">
-                <li>
-                    <a href="{{route('add-asset')}}">
-                        <span class="glyphicon glyphicon-shopping-cart"></span> Add Asset </a>
-                </li>
-                <li>
-                    <a href="{{route('asset-listing')}}">
-                        <span class="glyphicon glyphicon-calendar"></span> Asset Listings </a>
-                </li>
-                <li>
-                    <a href="{{route('assign-asset')}}">
-                        <span class="fa fa-desktop"></span> Assign Asset </a>
-                </li>
-                <li>
-                    <a href="{{route('assignment-listing')}}">
-                        <span class="fa fa-clipboard"></span> Assignment Listings </a>
                 </li>
             </ul>
         </li>
@@ -217,24 +174,6 @@
                 <li>
                     <a href="/show-promotion">
                         <span class="glyphicon glyphicon-modal-window"></span> Promotion Listings </a>
-                </li>
-            </ul>
-        </li>
-
-        <li>
-            <a class="accordion-toggle" href="/dashboard">
-                <span class="fa fa-money"></span>
-                <span class="sidebar-title">Expenses</span>
-                <span class="caret"></span>
-            </a>
-            <ul class="nav sub-nav">
-                <li>
-                    <a href="{{route('add-expense')}}">
-                        <span class="glyphicon glyphicon-book"></span> Add Expense </a>
-                </li>
-                <li>
-                    <a href="{{route('expense-list')}}">
-                        <span class="glyphicon glyphicon-modal-window"></span> Expense Listings </a>
                 </li>
             </ul>
         </li>
@@ -312,50 +251,7 @@
             </ul>
         </li>
 
-        <li>
-            <a class="accordion-toggle" href="#">
-                <span class="fa fa-tree"></span>
-                <span class="sidebar-title">Holiday</span>
-                <span class="caret"></span>
-            </a>
-            <ul class="nav sub-nav">
-                <li>
-                    <a href="/add-holidays">
-                        <span class="glyphicon glyphicon-book"></span> Add Holiday </a>
-                </li>
-                <li>
-                    <a href="/holiday-listing">
-                        <span class="glyphicon glyphicon-modal-window"></span> Holiday Listings </a>
-                </li>
-            </ul>
-        </li>
-
     @endif
-
-    {{--<li class="sidebar-label pt30"> Extras</li>--}}
-    <li>
-        <a href="/create-meeting">
-            <span class="fa fa-calendar-o"></span>
-            <span class="sidebar-title"> Meeting  &nbsp Invitation </span>
-        </a>
-    </li>
-
-    @if(Auth::user()->isCoordinator() ||  Auth::user()->isHR())
-        <li>
-            <a href="/create-event">
-                <span class="fa fa-calendar-o"></span>
-                <span class="sidebar-title"> Event  &nbsp Invitation </span>
-            </a>
-        </li>
-    @endif
-    <li>
-
-        <a href="/download-forms">
-            <span class="fa fa-book"></span>
-            <span class="sidebar-title">Download Forms</span>
-
-        </a>
-    </li>
 
     <li>
         <a href="/hr-policy">

@@ -14,7 +14,14 @@
                         </div>
                         <div class="panel-body pn pb5 text-center">
                             <hr class="short br-lighter">
-                            <img src="{{isset($details->photo) ? $details->photo : '/assets/img/avatars/profile_pic.png'}}" width="80px" height="80px" class="img-circle img-thumbnail" alt="User Image">
+
+                            @if (!isset($details->photo)) 
+                            <img src="{{$details->photo}}" width="80px" height="80px" class="img-circle img-thumbnail" alt="User Image">
+
+                            @else
+                            <img src="{{'/assets/img/avatars/profile_pic.png'}}" width="80px" height="80px" class="img-circle img-thumbnail" alt="User Image">
+
+                            @endif
 
                         </div>
                         <p class="text-center no-margin">{{isset($details->userrole->role->name)?$details->userrole->role->name:''}}</p>

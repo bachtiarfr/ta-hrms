@@ -24,87 +24,72 @@ class ImportAttendanceData
      */
     public function Import($filename)
     {
-        Excel::load(storage_path('attendance/' . $filename), function ($reader)
-        {
+
+        Excel::load(storage_path('attendance/' . $filename), function ($reader) {
             $rows = $reader->get(['name', 'code', 'date', 'days', 'in_time', 'out_time', 'hours_worked', 'over_time', 'status']);
 
             $counter = 0;
             $saturdays = 0;
             $totalSaturdaysBetweenDates = 0;
             $saturdayWithoutNotice = 0;
-            foreach($rows as $row)
-            {
+
+            foreach($rows as $row) {
                 $date = $this->validateDate($row->date);
-                if(!$date)
-                {
+                if(!$date) {
                    echo $myDateTime = \DateTime::createFromFormat('Y/m/d', $row->date);
                     //$row->date = $myDateTime->format('d-m-y');
                 }
-                if($row->status == 'A')
-                {
+                if($row->status == 'A') {
                     //check if user has applied for leave on this day
                     $user = Employee::where('code', $row->code)->first();
-                    if($user)
-                    {
-                        $employeeLeave = EmployeeLeaves::where('user_id', $user->user_id)->where('date_from', '<=', $row->date)->where('date_to', '>=', $row->date)->first();
 
-                        if($employeeLeave)
-                        {
-                            if($employeeLeave->status == '1')
-                            {
+                    if($user) {
+                        $employeeLeave = EmployeeLeaves::where('user_id', $user->user_id)->where('date_from', '<=', $row->date)->where('date_to', '>=', $row->date)->first();
+                        if($employeeLeave) {
+                            if($employeeLeave->status == '1') {
                                 $row->leave_status = 'Approved';
                             }
-                            elseif ($employeeLeave->status == '2')
-                            {
+                            elseif ($employeeLeave->status == '2') {
                                 //set the leave_status column of this date as unapproved
                                 $row->leave_status = 'Unapproved';
                             }
-                            else
-                            {
+                            else {
                                 $row->leave_status = 'Pending';
                             }
                         }
                     }
 
-                    if(!$row->leave_status)
-                    {
-                        if($row->days == 'Sat')
-                        {
-                            if($saturdays < 2)
-                            {
+                    if(!$row->leave_status) {
+                        if($row->days == 'Sat') {
+                            if($saturdays < 2) {
                                 $saturdays++;
                                 $row->leave_status = 'Weekly Off';
                             }
                         }
                     }
 
-                    if(!$row->leave_status)
-                    {
+                    if(!$row->leave_status) {
                         $holidays = Holiday::get();
 
-                        foreach($holidays as $holiday)
-                        {
+                        foreach($holidays as $holiday) {
                             $dates = $this->createDateRangeArray($holiday->date_from, $holiday->date_to);
-                            if(in_array($row->date, $dates))
-                            {
+                            if(in_array($row->date, $dates)) {
                                 $row->leave_status = $holiday->occasion. ' holiday';
                             }
                         }
                     }
 
-                    if(!$row->leave_status)
-                    {
+                    if(!$row->leave_status) {
                         $row->leave_status = 'Unplanned leave';
                     }
                 }
-                elseif($row->status == 'MIS')
-                {
+                elseif($row->status == 'MIS') {
                     $row->leave_status = 'Missed punching';
                 }
-                elseif($row->status == 'WO')
-                {
+                elseif($row->status == 'WO') {
                     $row->leave_status = 'Sunday';
                 }
+                
                 AttendanceManager::saveExcelData($row, $row->hours_worked, 0);
             }
             \Session::flash('success', ' Uploaded successfully.');

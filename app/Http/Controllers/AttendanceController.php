@@ -45,7 +45,7 @@
     public function uploadFile(Request $request) {
       if (Input::hasFile('upload_file')) {
         $file = Input::file('upload_file');
-          $filename = $this->upload->File($file, $request->description, $request->date);
+        $filename = $this->upload->File($file, $request->description, $request->date);
 
         try {
           if($filename) {

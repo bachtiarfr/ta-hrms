@@ -88,14 +88,14 @@
             </ul>
         </li>
 
-        <li>
+        {{-- <li>
 
             <a href="/bank-account-details">
                 <span class="fa fa-bank"></span>
                 <span class="sidebar-title">Bank Account</span>
 
             </a>
-        </li>
+        </li> --}}
 
         <li>
             <a class="accordion-toggle" href="/dashboard">
@@ -215,7 +215,7 @@
     @endif
 
 
-    <li>
+    {{-- <li>
         <a class="accordion-toggle" href="#">
             <span class="fa fa fa-gavel"></span>
             <span class="sidebar-title">Trainings</span>
@@ -243,7 +243,9 @@
                     <span class="fa fa-clipboard"></span> Invitation Listings </a>
             </li>
         </ul>
-    </li>
+    </li> --}}
+
+
     @if(Auth::user()->isHR())
         <li>
             <a class="accordion-toggle" href="#">

@@ -13,6 +13,9 @@
   padding-bottom: 0;
 }
 
+.fa-rupee:before, .fa-inr:before {
+  content: 'IDR' !important;
+}
 
 
 html {

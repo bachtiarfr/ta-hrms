@@ -24,7 +24,6 @@ class CreateEmployeesTable extends Migration
             $table->string('number');
             $table->string('qualification');
             $table->string('emergency_number');
-            $table->string('pan_number');
             $table->string('father_name');
             $table->string('current_address');
             $table->string('permanent_address');
@@ -36,10 +35,6 @@ class CreateEmployeesTable extends Migration
             $table->string('salary');
             $table->string('account_number');
             $table->string('bank_name');
-            $table->string('ifsc_code');
-            $table->string('pf_account_number');
-            $table->string('un_number');
-            $table->tinyInteger('pf_status');
             $table->date('date_of_resignation');
             $table->string('notice_period');
             $table->date('last_working_day');

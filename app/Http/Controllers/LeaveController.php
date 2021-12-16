@@ -129,19 +129,19 @@
 
       $leave = new EmployeeLeaves;
 
-      $team = Team::where('member_id', \Auth::user()->employee->id)->first();
-      if($team) {
-        $tl_id = $team->leader_id;
-        $manager_id = $team->manager_id;
+      // $team = Team::where('member_id', \Auth::user()->employee->id)->first();
+      // if($team) {
+      //   $tl_id = $team->leader_id;
+      //   $manager_id = $team->manager_id;
 
-        $manager = Employee::where('id', $manager_id)->with('user')->first();
-        $teamLead = Employee::where('id', $tl_id)->with('user')->first();
-        $leave->tl_id = $tl_id;
-        $leave->manager_id = $manager_id;
+      //   $manager = Employee::where('id', $manager_id)->with('user')->first();
+      //   $teamLead = Employee::where('id', $tl_id)->with('user')->first();
+      //   $leave->tl_id = $tl_id;
+      //   $leave->manager_id = $manager_id;
 
-        $emails[] = ['email' => $manager->user->email, 'name' => $manager->user->name];
-        $emails[] = ['email' => $teamLead->user->email, 'name' => $teamLead->user->name];
-      }
+      //   $emails[] = ['email' => $manager->user->email, 'name' => $manager->user->name];
+      //   $emails[] = ['email' => $teamLead->user->email, 'name' => $teamLead->user->name];
+      // }
 
       $leave->user_id = \Auth::user()->id;
       $leave->date_from = date_format(date_create($request->dateFrom), 'Y-m-d');

@@ -97,7 +97,7 @@
             </a>
         </li> --}}
 
-        <li>
+        {{-- <li>
             <a class="accordion-toggle" href="/dashboard">
                 <span class="fa fa-group"></span>
                 <span class="sidebar-title">Teams</span>
@@ -113,7 +113,7 @@
                         <span class="glyphicon glyphicon-modal-window"></span> Team Listings </a>
                 </li>
             </ul>
-        </li>
+        </li> --}}
 
         <li>
             <a class="accordion-toggle" href="/dashboard">
@@ -187,7 +187,7 @@
             </ul>
         </li>
 
-        <li>
+        {{-- <li>
             <a class="accordion-toggle" href="/dashboard">
                 <span class="fa fa fa-trophy"></span>
                 <span class="sidebar-title">Awards</span>
@@ -211,7 +211,7 @@
                         <span class="fa fa-clipboard"></span> Awardees Listings </a>
                 </li>
             </ul>
-        </li>
+        </li> --}}
     @endif
 
 
@@ -257,6 +257,10 @@
                 <li>
                     <a href="{{route('attendance-upload')}}">
                         <span class="glyphicon glyphicon-book"></span> Upload Sheets</a>
+                </li>
+                <li>
+                    <a href="{{route('attendance-manager')}}">
+                        <span class="glyphicon glyphicon-book"></span> Attendance Lists</a>
                 </li>
 
             </ul>

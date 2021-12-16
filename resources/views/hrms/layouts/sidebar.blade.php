@@ -1,15 +1,6 @@
 <!-- -------------- Sidebar - Author -------------- -->
 <div class="sidebar-widget author-widget">
     <div class="media">
-        <a href="/profile" class="media-left">
-            @if(isset(Auth::user()->employee->photo))
-                <img src="{{asset('photos/'.Auth::user()->employee->photo)}}" width="40px" height="30px" class="img-responsive">
-            @else
-                <img src="/assets/img/avatar/profile_pic.png" class="img-responsive">
-            @endif
-
-        </a>
-
         <div class="media-body">
             <div class="media-author"><a href="/profile">{{Auth::user()->name}}</a></div>
         </div>

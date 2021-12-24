@@ -47,50 +47,57 @@
         <section id="content">
 
             <!-- -------------- Login Form -------------- -->
-            <div class="allcp-form theme-primary mw320" id="login">
-                <div class="bg-primary text-center mb20 br3 pv15">
+            <div class="allcp-form theme-primary" id="login" style="max-width: 100%; margin-top: 0">
+                <div class="bg-primary text-center mb20 br3 pv15" style="display: none">
                 <span style="color:#FFFFFF"><strong><u>H</u>uman <u>R</u>esource <u>M</u>anagement <u>S</u>ystem</strong></span>
                 </div>
-                <div class="panel mw320">
+                <div class="panel" style="display: flex; padding: 0; align-items: center">
 
-                    {!! Form::open() !!}
-                        <div class="panel-body pn mv10">
-                                @if (session('message'))
-                                    <div class="alert {{session('class')}}">
-                                        {{ session('message') }}
-                                    </div>
-                                @endif
-                            <div class="section">
-                                <label for="username" class="field prepend-icon">
-                                    <input type="text" name="email" id="email" class="gui-input" placeholder="Email">
-                                    <label for="email" class="field-icon">
-                                        <i class="fa fa-user"></i>
+                    <div class="image-section" style="flex: 0 0 65%">
+                        <img src="https://madeindonesia.com/wp-content/uploads/2021/05/3-moz-30-scaled.jpg" alt="" style="width: 100%; height: 600px; object-fit: cover">
+                    </div>
+
+                    <div class="form" style="flex: 0 0 35%; padding: 50px">
+                        {!! Form::open() !!}
+                            <div class="panel-body pn mv10">
+                                    @if (session('message'))
+                                        <div class="alert {{session('class')}}">
+                                            {{ session('message') }}
+                                        </div>
+                                    @endif
+                                <div class="section">
+                                    <label for="username" class="field prepend-icon">
+                                        <input type="text" name="email" id="email" class="gui-input" placeholder="Email">
+                                        <label for="email" class="field-icon">
+                                            <i class="fa fa-user"></i>
+                                        </label>
                                     </label>
-                                </label>
-                            </div>
-                            <!-- -------------- /section -------------- -->
-
-                            <div class="section">
-                                <label for="password" class="field prepend-icon">
-                                    <input type="password" name="password" id="password" class="gui-input" placeholder="Password">
-                                    <label for="password" class="field-icon">
-                                        <i class="fa fa-lock"></i>
-                                    </label>
-                                </label>
-                            </div>
-                            <!-- -------------- /section -------------- -->
-
-                            <div class="section">
-                                <div class="pull-left pt5">
-                                        <a href="/reset-password">Reset Password</a>
                                 </div>
-                                <button type="submit" class="btn btn-bordered btn-primary pull-right">Log in</button>
+                                <!-- -------------- /section -------------- -->
+    
+                                <div class="section">
+                                    <label for="password" class="field prepend-icon">
+                                        <input type="password" name="password" id="password" class="gui-input" placeholder="Password">
+                                        <label for="password" class="field-icon">
+                                            <i class="fa fa-lock"></i>
+                                        </label>
+                                    </label>
+                                </div>
+                                <!-- -------------- /section -------------- -->
+    
+                                <div class="section">
+                                    <div class="pull-left pt5">
+                                            <a href="/reset-password">Reset Password</a>
+                                    </div>
+                                    <button type="submit" class="btn btn-bordered btn-primary pull-right">Log in</button>
+                                </div>
+                                <!-- -------------- /section -------------- -->
+    
                             </div>
-                            <!-- -------------- /section -------------- -->
+                            <!-- -------------- /Form -------------- -->
+                        {!! Form::close() !!}
 
-                        </div>
-                        <!-- -------------- /Form -------------- -->
-                    {!! Form::close() !!}
+                    </div>
                 </div>
                 <!-- -------------- /Panel -------------- -->
             </div>

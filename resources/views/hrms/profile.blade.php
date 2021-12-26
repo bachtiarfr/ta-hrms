@@ -15,8 +15,8 @@
                         <div class="panel-body pn pb5 text-center">
                             <hr class="short br-lighter">
 
-                            @if (!isset($details->photo)) 
-                            <img src="{{$details->photo}}" width="80px" height="80px" class="img-circle img-thumbnail" alt="User Image">
+                            @if ($details->photo !== null) 
+                            <img src="{{'/photos/'.$details->photo}}" style="max-width: 200px; max-height: 200px; min-height: 200px; min-width: 200px; object-fit: cover" class="img-circle img-thumbnail" alt="User Image">
 
                             @else
                             <img src="{{'/assets/img/avatars/profile_pic.png'}}" width="80px" height="80px" class="img-circle img-thumbnail" alt="User Image">
@@ -59,16 +59,6 @@
                                         <td style="width: 10px" class="text-center"><i class="fa fa-bank"></i></td>
                                         <td><strong>Bank Name</strong></td>
                                         <td>{{isset($details->bank_name) ? $details->bank_name: ''}}</td>
-                                    </tr>
-                                    <tr>
-                                        <td style="width: 10px" class="text-center"><i class="fa fa-code"></i></td>
-                                        <td><strong>Ifsc Code</strong></td>
-                                        <td>{{isset($details->ifsc_code) ? $details->ifsc_code: ''}} </td>
-                                    </tr>
-                                    <tr>
-                                        <td style="width: 10px" class="text-center"><i class="fa fa-tags"></i></td>
-                                        <td><strong>Un Number</strong></td>
-                                        <td>{{isset($details->un_number) ? $details->un_number:''}}</td>
                                     </tr>
                                     </tbody>
                                 </table>
@@ -210,11 +200,6 @@
                                         <td class="text-center"><i class="fa fa-briefcase"></i></td>
                                         <td><strong>Department</strong></td>
                                         <td>{{$details->department}}</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-center"><i class="fa fa-cubes"></i></td>
-                                        <td><strong>Designation</strong></td>
-                                        <td>{{$details->userrole->role->name}}</td>
                                     </tr>
                                     <tr>
                                         <td class="text-center"><i class="fa fa-calendar"></i></td>

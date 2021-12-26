@@ -37,7 +37,7 @@ class EmpController extends Controller
 
         if ($request->file('photo')) {
             $file             = $request->file('photo');
-            $filename         = str_random(12);
+            $filename         = "photo_".$request->emp_name;
             $fileExt          = $file->getClientOriginalExtension();
             $allowedExtension = ['jpg', 'jpeg', 'png'];
             $destinationPath  = public_path('photos');

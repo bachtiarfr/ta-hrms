@@ -97,7 +97,7 @@
             </a>
         </li> --}}
 
-        {{-- <li>
+        <li>
             <a class="accordion-toggle" href="/dashboard">
                 <span class="fa fa-group"></span>
                 <span class="sidebar-title">Teams</span>
@@ -113,7 +113,7 @@
                         <span class="glyphicon glyphicon-modal-window"></span> Team Listings </a>
                 </li>
             </ul>
-        </li> --}}
+        </li>
 
         <li>
             <a class="accordion-toggle" href="/dashboard">

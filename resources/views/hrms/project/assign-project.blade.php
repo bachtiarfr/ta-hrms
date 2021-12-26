@@ -65,20 +65,7 @@
                                                     {{Session::get('flash_message')}}
                                                 </div>
                                             @endif
-                                            {!! Form::open(['class' => 'form-horizontal']) !!}
-                                            <div class="form-group">
-                                                <label class="col-md-3 control-label"> Select Employee </label>
-                                                <div class="col-md-6">
-                                                    <select class="select2-multiple form-control select-primary"
-                                                            name="emp_id" required>
-                                                        <option value="" selected>Select One</option>
-                                                        @foreach($emps as $emp)
-                                                            <option value="{{$emp->id}}">{{$emp->name}}</option>
-                                                        @endforeach
-                                                    </select>
-                                                </div>
-                                            </div>
-
+                                            {!! Form::open(['class' => 'form-horizontal']) !!}                                            
 
                                             <div class="form-group">
                                                 <label class="col-md-3 control-label"> Select Project </label>
@@ -88,6 +75,18 @@
                                                         <option value="" selected>Select One</option>
                                                         @foreach($projects as $project)
                                                             <option value="{{$project->id}}">{{$project->name}}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="multiselect2" class="col-md-3 control-label"> Select Team Members </label>
+                                                <div class="col-md-6">
+                                                    <select id="done" class="selectpicker form-control" multiple data-done-button="true"
+                                                      name="member_id[]" required>
+                                                        @foreach($emps as $emp)
+                                                            <option value="{{$emp->id}}">{{$emp->name}}</option>
                                                         @endforeach
                                                     </select>
                                                 </div>
@@ -180,4 +179,10 @@
 @push('scripts')
     <script src="/assets/js/pages/forms-widgets.js"></script>
     <script src="/assets/js/custom.js"></script>
+@endpush
+@push('styles')
+<link rel="stylesheet" type="text/css" href="/assets/allcp/forms/css/bootstrap-select.css">
+@endpush
+@push('scripts')
+<script src="/assets/allcp/forms/js/bootstrap-select.js"></script>
 @endpush

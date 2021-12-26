@@ -139,8 +139,9 @@ class ProjectController extends Controller
 
         foreach ($employees as $emp) {
             $assignment = new AssignProject();
-            $assignment->user_id = $emp;
             $assignment->project_id = $request->project_id;
+            $assignment->user_id = $emp;
+            $assignment->project_leader_id = $request->project_leader_id;
             $assignment->authority_id = $request->authority_id;
             $assignment->date_of_assignment = date_format(date_create($request->doa), 'Y-m-d');
             $assignment->date_of_release = date_format(date_create($request->dor), 'Y-m-d');

@@ -16,6 +16,7 @@ class CreateAssignProjectsTable extends Migration
             $table->increments('id');
             $table->integer('project_id')->unsigned();
             $table->integer('user_id')->unsigned();
+            $table->integer('project_leader_id')->unsigned();
             $table->integer('authority_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('project_id')->references('id')->on('projects')->onDelete('cascade');

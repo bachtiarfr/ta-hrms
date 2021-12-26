@@ -36,6 +36,7 @@ class TeamController extends Controller
             $team_id = $team_id + 1;
         }
         foreach ($request->member_id as $memberId) {
+            dd($memberId);
             $addTeam = new Team();
             $addTeam->name = $request->team_name;
             $addTeam->team_id = $team_id;

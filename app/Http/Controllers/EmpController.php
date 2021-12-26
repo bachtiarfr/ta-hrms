@@ -9,6 +9,7 @@ use App\Models\Role;
 use App\Models\UserRole;
 use App\Promotion;
 use App\User;
+use App\RemainingLeaves;
 use Carbon\Carbon;
 use Illuminate\Http\Response;
 use Illuminate\Http\Request;
@@ -30,11 +31,10 @@ class EmpController extends Controller
     {
         $filename = public_path('photos');
 
-        if ($request->hasFile('photo')) {
-            dd($request->photo);
-        }
+        // if ($request->hasFile('photo')) {
+        //     dd($request->photo);
+        // }
 
-        dd('haha');
         if ($request->file('photo')) {
             $file             = $request->file('photo');
             $filename         = str_random(12);
@@ -50,7 +50,7 @@ class EmpController extends Controller
 
         $user           = new User;
         $user->name     = $request->emp_name;
-        $user->email    = str_replace(' ', '_', $request->emp_name) . '@sipi-ip.sg';
+        $user->email    = $request->emp_name . '@demo.test';
         $user->password = bcrypt('123456');
         $user->save();
 
@@ -65,7 +65,6 @@ class EmpController extends Controller
         $emp->number               = $request->number;
         $emp->qualification        = $request->qualification;
         $emp->emergency_number     = $request->emergency_number;
-        $emp->pan_number           = $request->pan_number;
         $emp->father_name          = $request->father_name;
         $emp->current_address      = $request->current_address;
         $emp->permanent_address    = $request->permanent_address;
@@ -77,16 +76,17 @@ class EmpController extends Controller
         $emp->salary               = $request->salary;
         $emp->account_number       = $request->account_number;
         $emp->bank_name            = $request->bank_name;
-        $emp->ifsc_code            = $request->ifsc_code;
-        $emp->pf_account_number    = $request->pf_account_number;
-        $emp->un_number            = $request->un_number;
-        $emp->pf_status            = $request->pf_status;
         $emp->date_of_resignation  = date_format(date_create($request->date_of_resignation), 'Y-m-d');
         $emp->notice_period        = $request->notice_period;
         $emp->last_working_day     = date_format(date_create($request->last_working_day), 'Y-m-d');
         $emp->full_final           = $request->full_final;
         $emp->user_id              = $user->id;
         $emp->save();
+
+        // set leaver to
+        $leaveRemaining = new RemainingLeaves();
+        $leaveRemaining->user_id = $user->id;
+        $leaveRemaining->save();
 
         $userRole          = new UserRole();
         $userRole->role_id = $request->role;

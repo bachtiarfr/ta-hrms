@@ -746,13 +746,13 @@
                                                 <input type="text" name="salary" id="salary" class="gui-input"
                                                        value="@if($emps && $emps->employee->salary){{$emps->employee->salary}}@endif" readonly>
                                                 <label for="input002" class="field-icon">
-                                                    <i class="fa fa-inr"></i>
+                                                    IDR
                                                 </label>
                                             @else
                                                 <input type="text" placeholder="e.g IDR 3000000" name="salary"
                                                        id="salary" class="gui-input">
                                                 <label for="input002" class="field-icon">
-                                                    <i class="fa fa-inr"></i>
+                                                    IDR
                                                 </label>
                                             @endif
                                         </label>

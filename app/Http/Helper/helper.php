@@ -66,7 +66,8 @@ function convertStatusBack($emp_status)
         '1' => 'Present',
         '0' => 'Ex'
     ];
-    return $data[$emp_status];
+
+    return $data;
 }
 
 function getLeaveType($leave_id)

@@ -43,32 +43,7 @@
                                 {{ Session::get('failed') }}
                             </div>
                         @endif
-                        <div class="panel-menu allcp-form theme-primary mtn">
-                        <div class="row">
-                            {!! Form::open() !!}
-                            <div class="col-md-3">
-                                <input type="text" class="field form-control" placeholder="query string" style="height:40px" value="{{$string}}" name="string">
-                            </div>
-                            <div class="col-md-3">
-                                <label class="field select">
-                                    {!! Form::select('column', getEmployeeDropDown(),$column) !!}
-                                    <i class="arrow double"></i>
-                                </label>
-                            </div>
-                            <div class="col-md-2">
-                                <input type="submit" value="Search" name="button" class="btn btn-primary">
-                            </div>
-
-                            <div class="col-md-2">
-                                <input type="submit" value="Export" name="button" class="btn btn-success">
-                            </div>
-                            {!! Form::close() !!}
-                            <div class="col-md-2">
-                                <a href="/employee-manager" >
-                                    <input type="submit" value="Reset" class="btn btn-warning"></a>
-                            </div>
-                        </div>
-                            </div>
+                       
 
                         <div class="panel-body pn">
                             @if(Session::has('flash_message'))
@@ -99,7 +74,7 @@
                                         <td class="text-center">{{$i+=1}}</td>
                                         <td class="text-center">{{$emp->employee['code']}}</td>
                                         <td class="text-center">{{$emp->name}}</td>
-                                        <td class="text-center">{{convertStatusBack($emp->employee['status'])}}</td>
+                                        <td class="text-center">{{$emp->status}}</td>
                                         <td class="text-center">{{isset($emp->role->role->name)?$emp->role->role->name:''}}</td>
                                         <td class="text-center">{{date('Y-m-d', strtotime($emp->employee['date_of_joining']))}}</td>
                                         <td class="text-center">{{$emp->employee['current_address']}}</td>

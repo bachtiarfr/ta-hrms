@@ -456,13 +456,14 @@
       $userId = $request->userId;
 
       $count = EmployeeLeaves::where(['user_id' => $userId, 'leave_type_id' => $leaveTypeId, 'status' => '1'])->get();
-      $day='';
+      $day = 0;
       foreach($count as $days)
       {
         $day += $days->days;
       }
       $totalLeaves = totalLeaves($leaveTypeId);
       $remainingLeaves = $totalLeaves - $day;
+
       return json_encode($remainingLeaves);
 
     }

@@ -168,7 +168,6 @@ function toWords(s) {
     return str.replace(/\s+/g, ' ');
 }
 
-
 $(document).on('change', '.leave_type', function () {
     var showLeaveCount = $('#show-leave-count');
     var leaveTypeId = $('.leave_type').val();

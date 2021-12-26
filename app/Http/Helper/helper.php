@@ -3,17 +3,9 @@
 function totalLeaves($leaveType)
 {
     $result = [
-        '1' => '24',//casual leave
-        '2' => '6',//sick leave
-        '3' => '15',//marriage leave
-        '4' => '10',//bereavement leave
-        '6' => '15',//paternity leave
-        '12' => '90',//maternity leave
-        '7' => '0',
-        '8' => '0',
-        '9' => '0',
-        '10' => '0',
-        '11' => '0'
+        '1' => '6',//sick leave
+        '2' => '12',//casual leave
+        '3' => '30'//maternity leave
     ];
 
     return $result[$leaveType];

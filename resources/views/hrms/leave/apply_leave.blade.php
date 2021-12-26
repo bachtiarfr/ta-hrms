@@ -56,7 +56,7 @@
                                                     name="leave_type" required>
                                                 <option value="" selected>Select One</option>
                                                 @foreach($leaves as $leave)
-                                                    <option value="{{$leave->id}}">{{$leave->leave_type}}</option>
+                                                    <option value="{{$leave->id}}">{{$leave->description}}</option>
                                                 @endforeach
                                             </select>
                                         </div>

@@ -79,6 +79,9 @@
       $dateFrom = '';
       $dateTo = '';
       $attendances = AttendanceManager::paginate(20);
+
+      // dd($attendances);
+
       return view('hrms.attendance.show_attendance_sheet_details', compact('attendances', 'column', 'string', 'dateFrom', 'dateTo'));
     }
 

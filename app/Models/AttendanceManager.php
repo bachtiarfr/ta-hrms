@@ -30,6 +30,19 @@ class AttendanceManager extends Model
     }
 
     public static function saveExcelData($row, $hoursWorked, $difference) {
+
+        $point = 0;
+
+        if ($row->hours_worked == "8:00") {
+            $point = 5;
+        } elseif ($row->hours_worked == "7:00" || $row->hours_worked == "7:30") {
+            $point = 4;
+        } elseif ($row->hours_worked == "6:00" || $row->hours_worked == "6:30") {
+            $point = 3;
+        } else {
+            $point = 2;
+        }
+
         $user = Employee::where('code', $row->code)->first();
         $attendance = new AttendanceManager();
         $attendance->name = $row->name;
@@ -39,7 +52,7 @@ class AttendanceManager extends Model
         \Log::info('inTime='.$row->in_time);
         $attendance->in_time = isset($row->in_time)? $row->in_time : 'H:i:s' ;
         $attendance->out_time = isset($row->out_time)? $row->out_time : 'H:i:s';
-        $attendance->status = convertAttendanceTo(preg_replace('/\s+/', '', $row->status));
+        $attendance->status = $point;
         $attendance->leave_status = $row->leave_status;
         $attendance->user_id = $user->user_id;
         $attendance->hours_worked = $hoursWorked;

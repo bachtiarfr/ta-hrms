@@ -33,10 +33,10 @@
                         <div class="panel-heading">
                             <span class="panel-title hidden-xs"> Apply for Leave</span>
                         </div>
-                    <div class="text-center" id="show-leave-count"></div>
-                        <div class="panel-body pn">
-                            <div class="table-responsive">
-                                <div class="panel-body p25 pb10">
+                    <div class="text-center" id="show-leave-count" style="display: flex"></div>
+                        <div class="panel-body" style="margin: 0">
+                            <div class="table-responsive" style="width: 100%">
+                                <div class="panel-body" style="margin: 0">
                                     @if(session('message'))
                                         {{session('message')}}
                                     @endif

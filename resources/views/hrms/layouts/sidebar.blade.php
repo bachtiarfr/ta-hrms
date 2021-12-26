@@ -167,6 +167,23 @@
             @endif
         </ul>
     </li>
+    {{-- <li>
+        <a class="accordion-toggle" href="/dashboard">
+            <span class="fa fa-envelope"></span>
+            <span class="sidebar-title">Holiday</span>
+            <span class="caret"></span>
+        </a>
+        <ul class="nav sub-nav">
+            <li>
+                <a href="/holiday-listing">
+                    <span class="glyphicon glyphicon-shopping-cart"></span> Holiday Listing </a>
+            </li>
+            <li>
+                <a href="/add-holidays">
+                    <span class="glyphicon glyphicon-calendar"></span> Add Holiday </a>
+            </li>
+        </ul>
+    </li> --}}
 
     @if(Auth::user()->isHR())
         <li>

@@ -11140,7 +11140,7 @@ select[multiple] .input-group-sm > .input-group-btn > .btn {
 .nav > li > a:hover,
 .nav > li > a:focus {
   text-decoration: none;
-  background-color: #eeeeee;
+  background-color: transparent !important;
 }
 .nav > li > a name {
   color: #67d3e0;
@@ -17356,7 +17356,7 @@ body.sidebar-collapsed #sidebar:before {
   line-height: 20px;
   padding-top: 0;
   padding-bottom: 0;
-  height: 65px;
+  height: 50px;
   max-height: 65px;
 }
 .navbar .nav > li > a.dropdown-toggle {
@@ -17366,12 +17366,13 @@ body.sidebar-collapsed #sidebar:before {
 .navbar .nav > li > a.dropdown-toggle > .fa {
   font-size: 12px;
   position: relative;
-  top: -2px;
+  top: -4px;
   text-align: center;
   width: 34px;
 }
 .navbar .nav > li > a.dropdown-toggle > .fa:before {
   content: '\f078';
+  font-size: 5px;
 }
 .navbar .nav > li.open > a.dropdown-toggle > .fa:before {
   content: '\f077';
@@ -17706,8 +17707,8 @@ body.sidebar-collapsed #sidebar:before {
 }
 .navbar-logo-wrapper .navbar-logo-text {
   color: #666;
-  height: 66px;
-  line-height: 64px;
+  height: 50px;
+  line-height: 50px;
   padding: 0;
   padding-left: 27px;
   font-size: 16px;
@@ -18111,7 +18112,7 @@ body.sb-top #sidebar_top_toggle {
 .navbar.bg-dark .nav > li > a:hover,
 .navbar.bg-dark .nav > li > a:focus {
   color: #FFF;
-  background-color: #2a2f43;
+  background-color: #fff;
 }
 .navbar.bg-dark .nav > li.dropdown.open .dropdown-menu,
 .navbar.bg-dark .nav > li.dropdown .open .dropdown-menu {
@@ -18466,7 +18467,7 @@ body.sb-top #sidebar_top_toggle {
 #content.table-layout > div,
 #content.table-layout > section {
   vertical-align: top;
-  padding: 45px 32px 50px;
+  padding: 0 50px;
 }
 #content.table-layout > aside {
   vertical-align: top;
@@ -18919,9 +18920,10 @@ body.chute-rescale .chute.chute-right:hover {
   top: 0;
   line-height: 35px;
   width: 100%;
-  font-size: 13px;
+  font-weight: 500;
+  font-size: 14px;
   text-align: center;
-  padding-left: 20px;
+  color: #636b6f;
 }
 .sidebar-menu > li > a > span:nth-child(2) {
   font-weight: 700;
@@ -19074,19 +19076,21 @@ body.chute-rescale .chute.chute-right:hover {
   border: 0;
 }
 .sidebar-menu li > a > span.caret:after {
-  content: "\f067";
+  content: "\f078";
   font-family: FontAwesome;
   font-style: normal;
   font-weight: normal;
   text-decoration: inherit;
-  font-size: 10px;
+  font-size: 5px;
   display: inline-block;
   padding-right: 3px;
   float: right;
+  margin-top: 4px;
   right: 0;
+  color: #636b6f;
 }
 .sidebar-menu li > a.menu-open > span.caret:after {
-  content: "\f068";
+  content: "\f077";
 }
 .sidebar-menu li > ul > li > a > span.caret,
 .sidebar-menu li > ul > li > a.menu-open > span.caret {
@@ -20194,7 +20198,6 @@ body.sb-r-o #sidebar_right_toggle span.glyphicons {
   font: 700 16px 'Open Sans';
   min-height: 72px;
   padding: 17px 45px;
-  background: #ffffff;
   border-bottom: 0;
 }
 #topbar.alt .breadcrumb {

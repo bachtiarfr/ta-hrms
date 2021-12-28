@@ -40,7 +40,7 @@ Route::group(['middleware' => ['auth']], function ()
 
     Route::get('logout', 'AuthController@doLogout');
 
-    Route::get('welcome', 'AuthController@welcome');
+    Route::get('welcome', 'AuthController@dashboard');
 
     Route::get('not-found', 'AuthController@notFound');
 

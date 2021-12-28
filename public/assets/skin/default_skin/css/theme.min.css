@@ -20191,7 +20191,7 @@ body.sb-top #sidebar_top_toggle {
 
 #content.table-layout > div, #content.table-layout > section {
     vertical-align: top;
-    padding: 45px 32px 50px
+    padding: 45px 32px 50px;
 }
 
 #content.table-layout > aside {

@@ -1,5 +1,17 @@
-<header class="navbar navbar-fixed-top bg-system" style="display: flex; justify-content: space-between;">
-    <div class="navbar-logo-wrapper bg-system" style="width: 105px">
+<style>
+
+.navbar-fixed-top {
+    background: white !important;
+    box-shadow: 0 1px 4px 0 rgb(0 21 41 / 8%) !important;
+    color: #636b6f;
+    font-weight: 500;
+    font-size: 14px;
+}
+
+</style>
+
+<header class="navbar navbar-fixed-top" style="display: flex; justify-content: space-between; height: 50px">
+    <div class="navbar-logo-wrapper dark" style="width: 105px; height: 50px">
         <a class="navbar-logo-text" href="welcome">
             <b> HRMS</b>
         </a>

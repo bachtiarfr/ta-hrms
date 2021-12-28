@@ -25,7 +25,7 @@
         </div>
     </header>
     <!-- -------------- Content -------------- -->
-    <section id="content" class="table-layout animated fadeIn">
+    <section id="content" class="table-layout animated fadeIn" style="padding: 0 50px">
 
         <!-- -------------- Column Left -------------- -->
         <aside class="chute chute-left chute290 bg-primary" data-chute-height="match">
@@ -67,7 +67,7 @@
 
 
                     <!-- -------------- Upload Form -------------- -->
-                    <div class="allcp-form theme-primary tab-pane active mw320" id="login" role="tabpanel">
+                    <div class="allcp-form theme-primary tab-pane active" id="login" role="tabpanel">
                         <div class="box box-success">
                         <div class="panel fluid-width">
 

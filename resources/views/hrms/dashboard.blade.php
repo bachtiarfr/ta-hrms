@@ -2,6 +2,39 @@
 
 @section('content')
 
+<style>
+
+.username-wrap {
+    font-size: 20px;
+    font-weight: 600;
+    color: #000;
+}
+
+.shortcut h3 {
+    font-size: 12px;
+    color: #000;
+    font-weight: bold;
+}
+
+.shortcut-list a {
+    padding: 8px 24px;
+    border: 1px solid #e2e2e2;
+    border-radius: 20px;
+    font-weight: 500;
+    text-decoration: none;
+    font-size: 15px;
+    line-height: 20px;
+    color: #000;
+}
+
+.panel-shortcut {
+    background-repeat: no-repeat;
+    background-position: right 50px bottom;
+    background-size: contain;
+}
+
+</style>
+
         <!-- -------------- Topbar -------------- -->
 <header id="topbar" class="alt">
     <div class="topbar-left">
@@ -33,7 +66,31 @@
         <!-- -------------- Quick Links -------------- -->
         <div class="row">
             @if(Auth::user()->isHR())
-            <div class="col-sm-6 col-xl-3">
+            <div class="col-sm-12 col-xl-12">
+                <div class="panel panel-tile">
+                    <div class="panel-body panel-shortcut" style="background-image: url('/assets/img/avatars/people-worked.jpg');">
+                        <div class="row pv10" style="margin: 0">
+                            <div class="col-xs-5 ph10">
+                                <div class="username-wrap">
+                                    Good morning, Bachtiar Fatur Rohim!
+                                </div>
+                                <div class="date">It’s Wednesday, 29 December 2021</div>
+                                <div class="shortcut">
+                                    <h3>Shortcut</h3>
+                                    <div class="shortcut-list">
+                                        <a href="#" class="attendance">Upload attendance</a>
+                                        <a href="#" class="apply-leaves">Apply leaves</a>
+                                        <a href="#" class="projects">Projects</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-7 pl5">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-3 col-xl-3">
                 <div class="panel panel-tile">
                     <div class="panel-body">
                         <div class="row pv10">
@@ -47,7 +104,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-sm-6 col-xl-3">
+            <div class="col-sm-3 col-xl-3">
                 <div class="panel panel-tile">
                     <div class="panel-body">
                         <div class="row pv10">
@@ -60,7 +117,7 @@
                     </div>
                 </div>
             </div>
-                <div class="col-sm-6 col-xl-3">
+                <div class="col-sm-3 col-xl-3">
                     <div class="panel panel-tile">
                         <div class="panel-body">
                             <div class="row pv10">
@@ -73,7 +130,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-6 col-xl-3">
+                <div class="col-sm-3 col-xl-3">
                     <div class="panel panel-tile">
                         <div class="panel-body">
                             <div class="row pv10">
@@ -86,7 +143,7 @@
                         </div>
                     </div>
                 </div>
-            <div class="col-sm-6 col-xl-3">
+            <div class="col-sm-3 col-xl-3">
                 <div class="panel panel-tile">
                     <div class="panel-body">
                         <div class="row pv10">
@@ -103,7 +160,7 @@
 
             @endif
                 @if(!Auth::user()->isHR())
-                <div class="col-sm-6 col-xl-3">
+                <div class="col-sm-3 col-xl-3">
                     <div class="panel panel-tile">
                         <div class="panel-body">
                             <div class="row pv10">
@@ -118,7 +175,7 @@
                 </div>
                 @endif
 
-            <div class="col-sm-6 col-xl-3">
+            <div class="col-sm-3 col-xl-3">
                 <div class="panel panel-tile">
                     <div class="panel-body">
                         <div class="row pv10">

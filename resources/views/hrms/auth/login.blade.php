@@ -60,6 +60,7 @@
                     <div class="form" style="flex: 0 0 35%; padding: 50px">
                         {!! Form::open() !!}
                             <div class="panel-body pn mv10">
+                                <img src="https://i.ytimg.com/vi/NIYvjOZ-HHg/maxresdefault.jpg" alt="" style="width: 100%; object-fit: cover">
                                     @if (session('message'))
                                         <div class="alert {{session('class')}}">
                                             {{ session('message') }}

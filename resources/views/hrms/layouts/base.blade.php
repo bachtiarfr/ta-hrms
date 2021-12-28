@@ -245,7 +245,7 @@
     <!-- -------------- /Header  -------------- -->
 
     <!-- -------------- Sidebar  -------------- -->
-    <aside id="sidebar_left" class="nano nano-light affix">
+    <aside id="sidebar_left" class="nano nano-light affix" style="display: none">
 
         <!-- -------------- Sidebar Left Wrapper  -------------- -->
         <div class="sidebar-left-content nano-content">
@@ -272,7 +272,7 @@
     <!-- -------------- /Sidebar -------------- -->
 
     <!-- -------------- Main Wrapper -------------- -->
-    <section id="content_wrapper">
+    <section id="content_wrapper" style="margin-left: 0">
 
         <!-- -------------- Topbar Menu Wrapper -------------- -->
         <div id="topbar-dropmenu-wrapper">
@@ -479,7 +479,7 @@
         @if(\Route::getFacadeRoot()->current()->uri() == 'dashboard' || \Route::getFacadeRoot()->current()->uri() == 'welcome' || \Route::getFacadeRoot()->current()->uri() == 'change-password' ||
         \Route::getFacadeRoot()->current()->uri() == 'not-found' )
         <!-- -------------- Page Footer -------------- -->
-        <footer id="content-footer" class="affix">
+        <footer id="content-footer" class="affix" style="margin-left: 0">
             <div class="row">
                 <div class="col-md-6">
                     <span class="footer-legal">Copyright © 2021 All rights reserved. By <a href="https://bachtiarfr.github.io/" target="_blank">Bachtiar Fatur Rohim</a></span>

@@ -219,7 +219,7 @@
             <!-- -------------- /Header  -------------- -->
 
     <!-- -------------- Sidebar  -------------- -->
-    <aside id="sidebar_left" class="nano nano-light affix">
+    <aside id="sidebar_left" class="nano nano-light affix" style="display: none;">
 
         <!-- -------------- Sidebar Left Wrapper  -------------- -->
         <div class="sidebar-left-content nano-content">
@@ -245,7 +245,7 @@
     </aside>
 
     <!-- -------------- Main Wrapper -------------- -->
-    <section id="content_wrapper">
+    <section id="content_wrapper" style="margin-left: 0">
 
         <!-- -------------- Topbar -------------- -->
         <header id="topbar" class="alt">

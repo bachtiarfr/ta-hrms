@@ -17351,9 +17351,9 @@ body.sidebar-collapsed #sidebar:before {
 }
 .navbar .nav > li > a {
   color: #2a2f43;
-  font-size: 13px;
-  font-weight: 600;
-  line-height: 65px;
+  font-size: 10px;
+  font-weight: 400;
+  line-height: 20px;
   padding-top: 0;
   padding-bottom: 0;
   height: 65px;
@@ -18906,7 +18906,7 @@ body.chute-rescale .chute.chute-right:hover {
   margin: 0;
 }
 .sidebar-menu > li:first-child {
-  padding-top: 4px;
+  padding-top: 0;
 }
 .sidebar-menu > li > a {
   padding: 0;
@@ -18918,7 +18918,7 @@ body.chute-rescale .chute.chute-right:hover {
   float: left;
   top: 0;
   line-height: 35px;
-  width: 52px;
+  width: 100%;
   font-size: 13px;
   text-align: center;
   padding-left: 20px;
@@ -18951,13 +18951,13 @@ body.chute-rescale .chute.chute-right:hover {
   display: none;
   height: auto;
   padding: 6px 0;
-  width: 296px;
+  width: 140px;
 }
 .sidebar-menu li > a.menu-open + ul {
-  display: block;
+  display: grid;
 }
 .sidebar-menu > li > ul > li > a {
-  padding: 0 52px 0 55px;
+  padding: 10px;
   line-height: 36px;
 }
 .sidebar-menu > li > ul > li:first-child > a {

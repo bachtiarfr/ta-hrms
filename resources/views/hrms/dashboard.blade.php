@@ -50,7 +50,7 @@
             <li class="breadcrumb-link">
                 <a href="/dashboard">Home</a>
             </li>
-            <li class="breadcrumb-current-item">Dashboard</li>
+            <li class="breadcrumb-current-item">Dashboards</li>
         </ol>
     </div>
 

@@ -338,4 +338,11 @@ Route::group(['middleware' => ['auth']], function ()
 
     //Route::get('assign-project', 'ProjectController@assignProject')->name('assign-project');
 
+
+    // Get Json Day
+    Route::get('/get-json-data-user', 'AuthController@getJsonDataUser');
+    Route::get('/get-json-data-role', 'AuthController@getJsonDataRole');
+    Route::get('/get-json-data-gender', 'AuthController@getJsonDataGender');
+
+
 });

@@ -1,0 +1,18 @@
+.panel-body canvas {
+    width: 220px !important;
+    height: 220px !important;
+    margin: auto;
+}
+
+.panel-body .panel-content {
+    color: #212121;
+    margin-top: 10px;
+    border-top: 1px solid #e2e2e2;
+    position: relative;
+    padding: 15px 15px 0;
+}
+
+.panel-body .panel-content span {
+    position: absolute;
+    right: 15px
+}

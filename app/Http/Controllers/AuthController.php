@@ -5,6 +5,8 @@
     use App\Models\Event;
     use App\Models\Meeting;
     use App\Models\Role;
+    use App\Models\Employee;
+    use App\Models\UserRole;
     use App\User;
     use Carbon\Carbon;
     use Illuminate\Http\Request;
@@ -83,13 +85,50 @@
                 $greetings = "Good night";
             }
 
+            $roles = Role::get();
+            $maleEmployee = Employee::where('gender', 0)->get();
+            $femaleEmployee = Employee::where('gender', 1)->get();
 
             $dateNow = \Carbon\Carbon::now()->format('l, jS \\of F Y');
             $user     = User::where('id', \Auth::user()->id)->first();
             $events   = $this->convertToArray(Event::where('date', '>', Carbon::now())->orderBy('date', 'desc')->take(3)->get());
             $meetings = $this->convertToArray(Meeting::where('date', '>', Carbon::now())->orderBy('date', 'desc')->take(3)->get());
+            
+            return view('hrms.dashboard', compact('events', 'meetings', 'user', 'greetings', 'dateNow', 'maleEmployee', 'femaleEmployee', 'roles'));
+        }
 
-            return view('hrms.dashboard', compact('events', 'meetings', 'user', 'greetings', 'dateNow'));
+        public function getJsonDataUser()
+        {
+            $record = User::get();
+            $userData = [];
+            foreach($record as $row) {
+                $userData['name'][] = $row->name;
+                $userData['email'][] = $row->email;
+            }        
+            return $userData;
+        }
+        
+        public function getJsonDataRole()
+        {
+            $roleAdmin = UserRole::where('role_id', 1)->get();
+            $roleHR = UserRole::where('role_id', 2)->get();
+            $rolePM = UserRole::where('role_id', 3)->get();
+            $roleFE = UserRole::where('role_id', 4)->get();
+            $roleBE = UserRole::where('role_id', 5)->get();
+
+            $dataRoles = [count($roleAdmin), count($roleHR), count($rolePM), count($roleFE), count($roleBE)];
+
+            return $dataRoles;
+        }
+
+        public function getJsonDataGender()
+        {
+            $maleEmployee = Employee::where('gender', 0)->get();
+            $femaleEmployee = Employee::where('gender', 1)->get();
+
+            $dataGender = [ count($maleEmployee), count($femaleEmployee) ];
+
+            return $dataGender;
         }
 
         public function welcome()

@@ -45,6 +45,8 @@
 
     {{-- App css --}}
     <link rel="stylesheet" type="text/css" href="/css/app.css">
+    <link rel="stylesheet" type="text/css" href="/css/chart.css">
+    <link rel="stylesheet" type="text/css" href="/css/dashboard.css">
 @stack('styles')
 
     <!-- -------------- IE8 HTML5 support  -------------- -->

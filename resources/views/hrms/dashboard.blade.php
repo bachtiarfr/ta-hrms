@@ -64,7 +64,7 @@
     <div class="chute chute-center">
 
         <!-- -------------- Quick Links -------------- -->
-        <div class="row">
+        <div class="row" id="dashboard-page">
             @if(Auth::user()->isHR())
             <div class="col-sm-12 col-xl-12">
                 <div class="panel panel-tile">
@@ -90,15 +90,57 @@
                     </div>
                 </div>
             </div>
+
+            {{-- role chart --}}
+            <div class="col-sm-3 col-xl-3">
+                <div class="panel panel-tile">
+                    <div class="panel-body">
+                        {{-- <canvas id="roleChart"></canvas> --}}
+                        <div class="title">Job Level</div>
+                        <?php $i = 0; ?>
+                        <div class="progress">
+                        @foreach ($roles as $role)
+                        <?php $i++; ?>
+                            <div class="progress-bar {{ $i = 0 ? 'progress-bar-success' : $i == 1 ? 'progress-bar-warning' : 'progress-bar-danger'}}" role="progressbar" style="width:40%">Free Space</div>                            
+                        @endforeach
+                        </div>
+
+                        <div class="panel-content">
+                            @foreach ($roles as $role)
+                            <div class="inner-content">
+                                {{ $role["name"] }}
+                            </div>
+                            @endforeach
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {{-- gender chart --}}
+            <div class="col-sm-3 col-xl-3">
+                <div class="panel panel-tile">
+                    <div class="panel-body">
+                        <canvas id="genderChart"></canvas>
+                        <div class="panel-content">
+                            <div class="inner-content">
+                                Male <span class="total"><?= count($maleEmployee); ?></span>
+                            </div>
+                            <div class="inner-content">
+                                Female <span class="total"><?= count($femaleEmployee); ?></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <div class="col-sm-3 col-xl-3">
                 <div class="panel panel-tile">
                     <div class="panel-body">
                         <div class="row pv10">
-                            <div class="col-xs-5 ph10">
-                                <img src="/assets/img/pages/clipart2.png" class="img-responsive mauto" alt=""/></div>
+                            <div class="col-xs-5 ph10"><img src="/assets/img/pages/Laptop Sketch-64x64"
+                                                            class="img-responsive mauto" style="height: 100px; width: 100px;" alt=""/></div>
                             <div class="col-xs-7 pl5">
-                                <h3 class="text-muted"><a href="{{route('employee-manager')}}"> EMPLOYEE MANAGER</a></h3>
-                                {{--<h2 class="fs50 mt5 mbn">385</h2>--}}
+                                <h3 class="text-muted"> <a href="{{route('asset-listing')}}"> ASSET <br /> MANAGER </a></h3>
                             </div>
                         </div>
                     </div>
@@ -108,41 +150,15 @@
                 <div class="panel panel-tile">
                     <div class="panel-body">
                         <div class="row pv10">
-                            <div class="col-xs-5 ph10"><img src="/assets/img/pages/clipart0.png"
-                                                            class="img-responsive mauto" alt=""/></div>
+                            <div class="col-xs-5 ph10"><img src="/assets/img/pages/dollar.jpg"
+                                                            class="img-responsive mauto" style="height: 100px; width: 100px;" alt=""/></div>
                             <div class="col-xs-7 pl5">
-                                <h3 class="text-muted"> <a href="{{route('total-leave-list')}}"> LEAVE <br/> MANAGER </a></h3>
+                                <h3 class="text-muted"> <a href="{{route('expense-list')}}"> EXPENSE <br /> MANAGER </a></h3>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-                <div class="col-sm-3 col-xl-3">
-                    <div class="panel panel-tile">
-                        <div class="panel-body">
-                            <div class="row pv10">
-                                <div class="col-xs-5 ph10"><img src="/assets/img/pages/Laptop Sketch-64x64"
-                                                                class="img-responsive mauto" style="height: 100px; width: 100px;" alt=""/></div>
-                                <div class="col-xs-7 pl5">
-                                    <h3 class="text-muted"> <a href="{{route('asset-listing')}}"> ASSET <br /> MANAGER </a></h3>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-3 col-xl-3">
-                    <div class="panel panel-tile">
-                        <div class="panel-body">
-                            <div class="row pv10">
-                                <div class="col-xs-5 ph10"><img src="/assets/img/pages/dollar.jpg"
-                                                                class="img-responsive mauto" style="height: 100px; width: 100px;" alt=""/></div>
-                                <div class="col-xs-7 pl5">
-                                    <h3 class="text-muted"> <a href="{{route('expense-list')}}"> EXPENSE <br /> MANAGER </a></h3>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             <div class="col-sm-3 col-xl-3">
                 <div class="panel panel-tile">
                     <div class="panel-body">
@@ -319,4 +335,124 @@
              </div>
            </div>
          </section>
+
+         <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script> 
+         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.js"></script>
+         <script>
+
+            // load role chart
+            $.ajax({ 
+                type: 'GET', 
+                url: '/get-json-data-role', 
+                data: { get_param: 'value' }, 
+                dataType: 'json',
+                success: function (value) { 
+                    var cData = value;
+
+                    console.log('role : ', cData);
+
+                    var ctx = $("#roleChart");
+                    var ctx = document.getElementById('roleChart'); // node
+                    var ctx = document.getElementById('roleChart').getContext('2d'); // 2d context
+                    var ctx = $('#roleChart'); // jQuery instance
+                    var ctx = 'roleChart'; // element id
+                    
+                    const dataRoles = {
+                        labels: ['Admin', 'Human Resource', 'Project Manager', 'Front End', 'Back End'],
+                        datasets: [{
+                            data: cData,
+                            backgroundColor: [
+                            'red',
+                            'green',
+                            'blue',
+                            'gray',
+                            'yellow'
+                            ],
+                            hoverOffset: 4
+                        }]
+                    };
+            
+                    //create Pie Chart class object
+                    var roleChart = new Chart(ctx, {
+                        type: "polarArea",
+                        data: dataRoles,
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            legend: {
+                                position: 'top',
+                            },
+                            title: {
+                                display: true,
+                                text: 'Job Roles',
+                                fontSize: 20
+                            },
+                            animation: {
+                                animateScale: true,
+                                animateRotate: true
+                            }
+                        }
+                    // options: options
+                    });
+                    
+                }
+            });
+            
+            // load gender chart
+            $.ajax({ 
+                type: 'GET', 
+                url: '/get-json-data-gender', 
+                data: { get_param: 'value' }, 
+                dataType: 'json',
+                success: function (value) { 
+                    var cData = value;
+
+                    var ctx = $("#genderChart");
+                    var ctx = document.getElementById('genderChart'); // node
+                    var ctx = document.getElementById('genderChart').getContext('2d'); // 2d context
+                    var ctx = $('#genderChart'); // jQuery instance
+                    var ctx = 'genderChart'; // element id
+                    
+                    const dataGender = {
+                        labels: ['Male', 'Female'],
+                        datasets: [{
+                            data: cData,
+                            backgroundColor: [
+                            '#1357ff',
+                            '#6610f2'
+                            ],
+                            hoverOffset: 4
+                        }]
+                    };
+            
+                    //create Pie Chart class object
+                    var genderChart = new Chart(ctx, {
+                        type: "doughnut",
+                        data: dataGender,
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            legend: {
+                                position: 'top',
+                            },
+                            title: {
+                                display: true,
+                                text: 'Gender Diversity',
+                                fontSize: 20
+                            },
+                            animation: {
+                                animateScale: true,
+                                animateRotate: true
+                            }
+                        }
+                    // options: options
+                    });
+                    
+                }
+            });
+            
+
+
+         </script>
+
     @endsection

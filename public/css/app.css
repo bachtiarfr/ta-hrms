@@ -6449,8 +6449,9 @@ a.thumbnail.active {
 }
 
 .progress {
-  height: 22px;
-  margin-bottom: 22px;
+  width: 90%;
+  margin: auto;
+  height: 17px;
   overflow: hidden;
   background-color: #f5f5f5;
   border-radius: 4px;
@@ -6462,8 +6463,8 @@ a.thumbnail.active {
   float: left;
   width: 0%;
   height: 100%;
-  font-size: 12px;
-  line-height: 22px;
+  font-size: 10px;
+  line-height: 18px;
   color: #fff;
   text-align: center;
   background-color: #3097D1;

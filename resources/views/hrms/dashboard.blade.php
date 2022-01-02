@@ -488,8 +488,8 @@
                         datasets: [{
                             data: cData,
                             backgroundColor: [
-                            'orange',
-                            'green'
+                            'green',
+                            'orange'
                             ],
                             hoverOffset: 4
                         }]

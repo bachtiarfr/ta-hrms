@@ -481,7 +481,7 @@
         @if(\Route::getFacadeRoot()->current()->uri() == 'dashboard' || \Route::getFacadeRoot()->current()->uri() == 'welcome' || \Route::getFacadeRoot()->current()->uri() == 'change-password' ||
         \Route::getFacadeRoot()->current()->uri() == 'not-found' )
         <!-- -------------- Page Footer -------------- -->
-        <footer id="content-footer" class="affix" style="margin-left: 0">
+        <footer id="content-footer" class="affix" style="margin-left: 0; display: none">
             <div class="row">
                 <div class="col-md-6">
                     <span class="footer-legal">Copyright © 2021 All rights reserved. By <a href="https://bachtiarfr.github.io/" target="_blank">Bachtiar Fatur Rohim</a></span>

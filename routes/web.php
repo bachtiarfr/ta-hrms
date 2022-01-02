@@ -282,7 +282,7 @@ Route::group(['middleware' => ['auth']], function ()
 
     Route::get('delete-training-invite/{id}',['uses'=>'TrainingController@deleteTrainingInvite']);
 
-    Route::post('status-update', 'UpdateController@index');
+    Route::get('status-update', 'UpdateController@index');
 
     Route::post('post-reply', 'UpdateController@reply');
 

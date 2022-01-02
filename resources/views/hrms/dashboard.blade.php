@@ -11,6 +11,7 @@
 }
 
 .shortcut h3 {
+    margin-bottom: 15px;
     font-size: 12px;
     color: #000;
     font-weight: bold;
@@ -69,8 +70,8 @@
             <div class="col-sm-12 col-xl-12">
                 <div class="panel panel-tile">
                     <div class="panel-body panel-shortcut" style="background-image: url('/assets/img/avatars/people-worked.jpg');">
-                        <div class="row pv10" style="margin: 0">
-                            <div class="col-xs-5 ph10">
+                        <div class="row p15" style="margin: 0">
+                            <div class="col-xs-7 ph10">
                                 <div class="username-wrap">
                                     <?= $greetings . ', ' . $user['name']; ?>!
                                 </div>
@@ -79,8 +80,8 @@
                                     <h3>Shortcut</h3>
                                     <div class="shortcut-list">
                                         <a href="/attendance-upload" class="attendance">Upload attendance</a>
-                                        <a href="#" class="apply-leaves">Apply leaves</a>
-                                        <a href="#" class="projects">Projects</a>
+                                        <a href="/add-project" class="projects">Add new projects</a>
+                                        <a href="#" class="apply-leaves">Export all reports</a>
                                     </div>
                                 </div>
                             </div>
@@ -92,32 +93,16 @@
             </div>
 
             {{-- role chart --}}
-            <div class="col-sm-3 col-xl-3">
+            <div class="col-sm-3 col-xl-3 panel-card">
                 <div class="panel panel-tile">
                     <div class="panel-body">
-                        {{-- <canvas id="roleChart"></canvas> --}}
-                        <div class="title">Job Level</div>
-                        <?php $i = 0; ?>
-                        <div class="progress">
-                        @foreach ($roles as $role)
-                        <?php $i++; ?>
-                            <div class="progress-bar {{ $i = 0 ? 'progress-bar-success' : $i == 1 ? 'progress-bar-warning' : 'progress-bar-danger'}}" role="progressbar" style="width:40%">Free Space</div>                            
-                        @endforeach
-                        </div>
-
-                        <div class="panel-content">
-                            @foreach ($roles as $role)
-                            <div class="inner-content">
-                                {{ $role["name"] }}
-                            </div>
-                            @endforeach
-                        </div>
+                        <canvas id="roleChart" style="width: 288px !important; height: 291px !important"></canvas>
                     </div>
                 </div>
             </div>
 
             {{-- gender chart --}}
-            <div class="col-sm-3 col-xl-3">
+            <div class="col-sm-3 col-xl-3 panel-card">
                 <div class="panel panel-tile">
                     <div class="panel-body">
                         <canvas id="genderChart"></canvas>
@@ -134,7 +119,7 @@
             </div>
 
             {{-- gender chart --}}
-            <div class="col-sm-3 col-xl-3">
+            <div class="col-sm-3 col-xl-3 panel-card">
                 <div class="panel panel-tile">
                     <div class="panel-body">
                         <canvas id="projectChart"></canvas>
@@ -150,45 +135,42 @@
                 </div>
             </div>
 
-            <div class="col-sm-3 col-xl-3">
+            <div class="col-sm-3 col-xl-3 panel-card">
                 <div class="panel panel-tile">
-                    <div class="panel-body">
-                        <div class="row pv10">
-                            <div class="col-xs-5 ph10"><img src="/assets/img/pages/Laptop Sketch-64x64"
-                                                            class="img-responsive mauto" style="height: 100px; width: 100px;" alt=""/></div>
-                            <div class="col-xs-7 pl5">
-                                <h3 class="text-muted"> <a href="{{route('asset-listing')}}"> ASSET <br /> MANAGER </a></h3>
+                    <div class="panel-body projects-card">
+                        <div class="title">Projects Detail</div>
+                        <ul class="nav nav-tabs" id="projectsTab" role="tablist">
+                            <li class="nav-item">
+                              <a class="nav-link active" id="finished-projects-tab" data-toggle="tab" href="#finished-projects" role="tab" aria-controls="finished-projects" aria-selected="true">Finished projects</a>
+                            </li>
+                            <li class="nav-item">
+                              <a class="nav-link" id="running-projects-tab" data-toggle="tab" href="#running-projects" role="tab" aria-controls="running-projects" aria-selected="false">Running projects</a>
+                            </li>
+                          </ul>
+                          <div class="tab-content" id="projectsTabContent">
+                            <div class="tab-pane fade active in" id="finished-projects" role="tabpanel" aria-labelledby="finished-projects-tab">
+                                <div class="project-name">
+                                    <ol type="1">
+                                        @foreach ($dataFinishedProject as $data)
+                                        <li>{{$data}}</li>
+                                        @endforeach
+                                    </ol>
+                                </div>
                             </div>
-                        </div>
+                            <div class="tab-pane fade" id="running-projects" role="tabpanel" aria-labelledby="running-projects-tab">
+                                <div class="project-name">
+                                    <ol type="1">
+                                        @foreach ($dataRuningProject as $data)
+                                        <li>{{$data}}</li>
+                                        @endforeach
+                                    </ol>
+                                </div>
+                            </div>
+                          </div>
                     </div>
                 </div>
             </div>
-            <div class="col-sm-3 col-xl-3">
-                <div class="panel panel-tile">
-                    <div class="panel-body">
-                        <div class="row pv10">
-                            <div class="col-xs-5 ph10"><img src="/assets/img/pages/dollar.jpg"
-                                                            class="img-responsive mauto" style="height: 100px; width: 100px;" alt=""/></div>
-                            <div class="col-xs-7 pl5">
-                                <h3 class="text-muted"> <a href="{{route('expense-list')}}"> EXPENSE <br /> MANAGER </a></h3>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-3 col-xl-3">
-                <div class="panel panel-tile">
-                    <div class="panel-body">
-                        <div class="row pv10">
-                            <div class="col-xs-5 ph10"><img src="/assets/img/pages/clipart5.png"
-                                                            class="img-responsive mauto" alt=""/></div>
-                            <div class="col-xs-7 pl5">
-                                <h3 class="text-muted"><a href="{{route('attendance-manager')}}"> ATTENDANCE MANAGER </a></h3>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            
 
 
             @endif
@@ -196,7 +178,7 @@
                 <div class="col-sm-12 col-xl-12">
                     <div class="panel panel-tile">
                         <div class="panel-body panel-shortcut" style="background-image: url('/assets/img/avatars/people-worked.jpg');">
-                            <div class="row pv10" style="margin: 0">
+                            <div class="row p15" style="margin: 0">
                                 <div class="col-xs-5 ph10">
                                     <div class="username-wrap">
                                         <?= $greetings . ', ' . $user['name']; ?>!
@@ -286,7 +268,7 @@
     
                 @endif
 
-            <div class="col-sm-3 col-xl-3">
+            {{-- <div class="col-sm-3 col-xl-3">
                 <div class="panel panel-tile">
                     <div class="panel-body">
                         <div class="row pv10">
@@ -298,7 +280,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> --}}
 
                 @if($events)
                 <div class="col-md-12">
@@ -401,6 +383,7 @@
                             },
                             title: {
                                 display: true,
+                                fontFamily: 'Roboto',
                                 text: 'Job Roles',
                                 fontSize: 20
                             },
@@ -454,6 +437,7 @@
                             },
                             title: {
                                 display: true,
+                                fontFamily: 'Roboto',
                                 text: 'Gender Diversity',
                                 fontSize: 20
                             },
@@ -507,6 +491,7 @@
                             },
                             title: {
                                 display: true,
+                                fontFamily: 'Roboto',
                                 text: 'Project Report',
                                 fontSize: 20
                             },

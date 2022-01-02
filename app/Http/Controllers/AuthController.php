@@ -116,13 +116,18 @@
                 foreach ($dataProjectStatus as $i) {
                     if ($i['finished_status'] == true) {
                         $finishedProject++;
-                    } elseif ($i['finished_status'] == false) {
+                        $dataFinishedProject[] = $i['project_name'];
+                    } else {
                         $runningProject++; 
+                        $dataRuningProject[] = $i['project_name'];
                     }
                 }    
             }
+            $dataFinishedProject = array_unique($dataFinishedProject);
+            $dataRuningProject = array_unique($dataRuningProject);
+            // dd($dataRuningProject);
 
-            return view('hrms.dashboard', compact('events', 'meetings', 'user', 'greetings', 'dateNow', 'maleEmployee', 'femaleEmployee', 'roles', 'dataProjectStatus', 'runningProject', 'finishedProject'));
+            return view('hrms.dashboard', compact('events', 'meetings', 'user', 'greetings', 'dateNow', 'maleEmployee', 'femaleEmployee', 'roles', 'dataProjectStatus', 'runningProject', 'finishedProject', 'dataRuningProject', 'dataFinishedProject'));
         }
 
         public function getJsonDataUser()

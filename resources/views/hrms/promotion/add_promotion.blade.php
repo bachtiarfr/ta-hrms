@@ -51,19 +51,19 @@
                                                     <select class="select2-single form-control select-primary"
                                                             name="emp_id" id="promotion_emp_id" required>
                                                         <option value="" selected>Select One</option>
-                                                        @foreach($emps as $emp)
-                                                            <option value="{{$emp->id}}">{{$emp->name}}</option>
+                                                        @foreach($dataEmps as $emp)
+                                                            <option value="{{$emp['id']}}">{{$emp['name']}}</option>
                                                         @endforeach
                                                     </select>
                                                 </div>
                                             </div>
 
-                                                <div class="form-group">
-                                                    <label class="col-md-3 control-label"> Old Designation </label>
-                                                    <div class="col-md-6">
-                                                            <input type="text" id="old_designation" class="form-control" name="old_designation" readonly required>
-                                                    </div>
+                                            <div class="form-group">
+                                                <label class="col-md-3 control-label"> Old Designation </label>
+                                                <div class="col-md-6">
+                                                        <input type="text" id="old_designation" class="form-control" name="old_designation" readonly required>
                                                 </div>
+                                            </div>
 
 
 

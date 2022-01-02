@@ -17,6 +17,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use Illuminate\Support\Facades\Input;
 use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Facades\DB;
 
 class EmpController extends Controller
 {
@@ -573,10 +574,42 @@ class EmpController extends Controller
 
     public function doPromotion()
     {
-        $emps  = User::get();
+        $emps  = Employee::get();
         $roles = Role::get();
+        foreach ($emps as $emp) {
+            $joiningDate = $emp['date_of_joining'];
+            $currentDate = Carbon::now();
+    
+            $ts1 = strtotime($joiningDate);
+            $ts2 = strtotime($currentDate);
+    
+            $year1 = date('Y', $ts1);
+            $year2 = date('Y', $ts2);
+    
+            $month1 = date('m', $ts1);
+            $month2 = date('m', $ts2);
+    
+            $totalDiffMonth = (($year2 - $year1) * 12) + ($month2 - $month1);
 
-        return view('hrms.promotion.add_promotion', compact('emps', 'roles'));
+            $dataEmployee[] = [
+                'employee_id' => $emp['id'],
+                'employee_name' => $emp['name'],
+                'date_of_joining' => $emp['date_of_joining'],
+                'lenght_of_working' => $totalDiffMonth
+            ];
+
+            $dataEmps = [];
+            foreach ($dataEmployee as $employee) {
+                if ($employee['lenght_of_working'] >= 6) {
+                    $dataEmps[] = [
+                        'id' => $employee['employee_id'],
+                        'name' => $employee['employee_name']
+                    ];
+                }
+            }
+        }
+
+        return view('hrms.promotion.add_promotion', compact('dataEmps', 'roles'));
     }
 
     public function getPromotionData(Request $request)

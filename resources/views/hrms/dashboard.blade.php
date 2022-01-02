@@ -133,6 +133,23 @@
                 </div>
             </div>
 
+            {{-- gender chart --}}
+            <div class="col-sm-3 col-xl-3">
+                <div class="panel panel-tile">
+                    <div class="panel-body">
+                        <canvas id="projectChart"></canvas>
+                        <div class="panel-content">
+                            <div class="inner-content">
+                                Finished Project <span class="total">{{ $finishedProject }}</span>
+                            </div>
+                            <div class="inner-content">
+                                Running Project <span class="total">{{ $runningProject }}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <div class="col-sm-3 col-xl-3">
                 <div class="panel panel-tile">
                     <div class="panel-body">
@@ -438,6 +455,59 @@
                             title: {
                                 display: true,
                                 text: 'Gender Diversity',
+                                fontSize: 20
+                            },
+                            animation: {
+                                animateScale: true,
+                                animateRotate: true
+                            }
+                        }
+                    // options: options
+                    });
+                    
+                }
+            });
+            
+            // load project chart
+            $.ajax({ 
+                type: 'GET', 
+                url: '/get-json-data-projects', 
+                data: { get_param: 'value' }, 
+                dataType: 'json',
+                success: function (value) { 
+                    var cData = value;
+
+                    var ctx = $("#projectChart");
+                    var ctx = document.getElementById('projectChart'); // node
+                    var ctx = document.getElementById('projectChart').getContext('2d'); // 2d context
+                    var ctx = $('#projectChart'); // jQuery instance
+                    var ctx = 'projectChart'; // element id
+                    
+                    const dataGender = {
+                        labels: ['Finished Projects', 'Running Projects'],
+                        datasets: [{
+                            data: cData,
+                            backgroundColor: [
+                            'orange',
+                            'green'
+                            ],
+                            hoverOffset: 4
+                        }]
+                    };
+            
+                    //create Pie Chart class object
+                    var projectChart = new Chart(ctx, {
+                        type: "pie",
+                        data: dataGender,
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            legend: {
+                                position: 'top',
+                            },
+                            title: {
+                                display: true,
+                                text: 'Project Report',
                                 fontSize: 20
                             },
                             animation: {

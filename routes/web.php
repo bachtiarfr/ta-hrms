@@ -343,6 +343,7 @@ Route::group(['middleware' => ['auth']], function ()
     Route::get('/get-json-data-user', 'AuthController@getJsonDataUser');
     Route::get('/get-json-data-role', 'AuthController@getJsonDataRole');
     Route::get('/get-json-data-gender', 'AuthController@getJsonDataGender');
+    Route::get('/get-json-data-projects', 'AuthController@getJsonDataProjects');
 
 
 });

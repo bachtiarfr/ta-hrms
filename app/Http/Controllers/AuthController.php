@@ -7,12 +7,14 @@
     use App\Models\Role;
     use App\Models\Employee;
     use App\Models\UserRole;
+    use App\Models\AssignProject;
     use App\User;
     use Carbon\Carbon;
     use Illuminate\Http\Request;
     use Illuminate\Contracts\Mail\Mailer;
     use App\Http\Requests;
     use Illuminate\Support\Facades\Hash;
+    use Illuminate\Support\Facades\DB;
 
     class AuthController extends Controller
     {
@@ -93,8 +95,34 @@
             $user     = User::where('id', \Auth::user()->id)->first();
             $events   = $this->convertToArray(Event::where('date', '>', Carbon::now())->orderBy('date', 'desc')->take(3)->get());
             $meetings = $this->convertToArray(Meeting::where('date', '>', Carbon::now())->orderBy('date', 'desc')->take(3)->get());
-            
-            return view('hrms.dashboard', compact('events', 'meetings', 'user', 'greetings', 'dateNow', 'maleEmployee', 'femaleEmployee', 'roles'));
+
+            $dataProjects = DB::table('projects')
+                ->select('name', 'date_of_release')
+                ->join('assign_projects', 'projects.id', '=', 'assign_projects.project_id')
+                ->orderBy('projects.name')
+                ->distinct()
+                ->get();
+
+            foreach ($dataProjects as $row) {
+                $date = new Carbon($row->date_of_release);
+                $dateStatus = $date->isPast();
+                $dataProjectStatus[] = [ 
+                    'project_name' => $row->name,
+                    'release_date' => $row->date_of_release,
+                    'finished_status' => $dateStatus
+                ];
+                $runningProject = 0;
+                $finishedProject = 0;
+                foreach ($dataProjectStatus as $i) {
+                    if ($i['finished_status'] == true) {
+                        $finishedProject++;
+                    } elseif ($i['finished_status'] == false) {
+                        $runningProject++; 
+                    }
+                }    
+            }
+
+            return view('hrms.dashboard', compact('events', 'meetings', 'user', 'greetings', 'dateNow', 'maleEmployee', 'femaleEmployee', 'roles', 'dataProjectStatus', 'runningProject', 'finishedProject'));
         }
 
         public function getJsonDataUser()
@@ -119,6 +147,39 @@
             $dataRoles = [count($roleAdmin), count($roleHR), count($rolePM), count($roleFE), count($roleBE)];
 
             return $dataRoles;
+        }
+        
+        public function getJsonDataProjects()
+        {
+            $dataProjects = DB::table('projects')
+                ->select('name', 'date_of_release')
+                ->join('assign_projects', 'projects.id', '=', 'assign_projects.project_id')
+                ->orderBy('projects.name')
+                ->distinct()
+                ->get();
+
+            foreach ($dataProjects as $row) {
+                $date = new Carbon($row->date_of_release);
+                $dateStatus = $date->isPast();
+                $dataProjectStatus[] = [ 
+                    'project_name' => $row->name,
+                    'release_date' => $row->date_of_release,
+                    'finished_status' => $dateStatus
+                ];
+
+                $runningProject = 0;
+                $finishedProject = 0;
+                foreach ($dataProjectStatus as $i) {
+                    if ($i['finished_status'] == true) {
+                        $finishedProject++;
+                    } elseif ($i['finished_status'] == false) {
+                        $runningProject++; 
+                    }
+                }
+            }
+
+            $dataProject = [ $finishedProject, $runningProject ];            
+            return $dataProject;
         }
 
         public function getJsonDataGender()

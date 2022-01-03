@@ -151,7 +151,7 @@
                             <div class="tab-pane fade active in" id="finished-projects" role="tabpanel" aria-labelledby="finished-projects-tab">
                                 <div class="project-name">
                                     <ol type="1">
-                                        @foreach ($dataProjectFinishedName as $data)
+                                        @foreach ($dataFinishedProject as $data)
                                         <li>{{$data}}</li>
                                         @endforeach
                                     </ol>
@@ -160,7 +160,7 @@
                             <div class="tab-pane fade" id="running-projects" role="tabpanel" aria-labelledby="running-projects-tab">
                                 <div class="project-name">
                                     <ol type="1">
-                                        @foreach ($dataProjectRuningName as $data)
+                                        @foreach ($dataRuningProject as $data)
                                         <li>{{$data}}</li>
                                         @endforeach
                                     </ol>

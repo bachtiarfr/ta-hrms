@@ -97,8 +97,9 @@
             $meetings = $this->convertToArray(Meeting::where('date', '>', Carbon::now())->orderBy('date', 'desc')->take(3)->get());
 
             $dataProjects = DB::table('projects')
-                ->select('name', 'date_of_release')
+                ->select('projects.name as project_name','users.name as employee_name', 'assign_projects.date_of_release')
                 ->join('assign_projects', 'projects.id', '=', 'assign_projects.project_id')
+                ->join('users', 'assign_projects.user_id', '=', 'users.id')
                 ->orderBy('projects.name')
                 ->distinct()
                 ->get();
@@ -107,27 +108,34 @@
                 $date = new Carbon($row->date_of_release);
                 $dateStatus = $date->isPast();
                 $dataProjectStatus[] = [ 
-                    'project_name' => $row->name,
+                    'employee_name' => $row->employee_name,
+                    'project_name' => $row->project_name,
                     'release_date' => $row->date_of_release,
                     'finished_status' => $dateStatus
                 ];
+                
                 $runningProject = 0;
                 $finishedProject = 0;
                 foreach ($dataProjectStatus as $i) {
                     if ($i['finished_status'] == true) {
                         $finishedProject++;
-                        $dataFinishedProject[] = $i['project_name'];
+                        $dataProjectFinishedName[] = $i['project_name'];
+                        $dataAssignmentFinishedName[] = $i['employee_name'];
                     } else {
                         $runningProject++; 
-                        $dataRuningProject[] = $i['project_name'];
+                        $dataProjectRuningName[] = $i['project_name'];
+                        $dataAssignmentRuningName[] = $i['employee_name'];
                     }
                 }    
             }
-            $dataFinishedProject = array_unique($dataFinishedProject);
-            $dataRuningProject = array_unique($dataRuningProject);
-            // dd($dataRuningProject);
 
-            return view('hrms.dashboard', compact('events', 'meetings', 'user', 'greetings', 'dateNow', 'maleEmployee', 'femaleEmployee', 'roles', 'dataProjectStatus', 'runningProject', 'finishedProject', 'dataRuningProject', 'dataFinishedProject'));
+            $dataProjectFinishedName = array_unique($dataProjectFinishedName);
+            $dataProjectRuningName = array_unique($dataProjectRuningName);
+
+            $dataAssignmentFinishedName = array_unique($dataAssignmentFinishedName);
+            $dataAssignmentRuningName = array_unique($dataAssignmentRuningName);
+
+            return view('hrms.dashboard', compact('events', 'meetings', 'user', 'greetings', 'dateNow', 'maleEmployee', 'femaleEmployee', 'roles', 'dataProjectStatus', 'runningProject', 'finishedProject', 'dataProjectRuningName', 'dataProjectFinishedName'));
         }
 
         public function getJsonDataUser()

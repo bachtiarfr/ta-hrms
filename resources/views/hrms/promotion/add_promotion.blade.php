@@ -51,7 +51,7 @@
                                                     <select class="select2-single form-control select-primary"
                                                             name="emp_id" id="promotion_emp_id" required>
                                                         <option value="" selected>Select One</option>
-                                                        @foreach($dataEmps as $emp)
+                                                        @foreach($avaliableEmps as $emp)
                                                             <option value="{{$emp['id']}}">{{$emp['name']}}</option>
                                                         @endforeach
                                                     </select>

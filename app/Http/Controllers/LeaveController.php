@@ -45,6 +45,7 @@
       $leave = new LeaveType;
       $leave->leave_type = $request->leave_type;
       $leave->description = $request->description;
+      $leave->number_of_days = $request->number_of_days;
       $leave->save();
 
       \Session::flash('flash_message', 'Leave Type successfully added!');
@@ -111,7 +112,13 @@
      */
     public function doApply()
     {
+
       $leaves = LeaveType::get();
+      $user = Employee::where('id', \Auth::user()->id)->first();
+      // dd($user->gender);
+      if($user['gender'] == 1) {
+        unset($leaves[2]);
+      }
       return view('hrms.leave.apply_leave', compact('leaves'));
     }
 
@@ -159,7 +166,7 @@
 
       $emails[] = ['email' => env('HR_EMAIL'), 'name' => env('HR_NAME')];
 
-       $leaveDraft = LeaveDraft::where('leave_type_id', $request->leave_type)->first();
+      $leaveDraft = LeaveDraft::where('leave_type_id', $request->leave_type)->first();
 
       $subject = isset($leaveDraft->subject)? $leaveDraft->subject : '' ;
       $user = \Auth::user();
@@ -168,12 +175,18 @@
       $body = str_replace($toReplace, $replaceWith, '');
 
       //now send a mail
-     /* $this->mailer->send('emails.leave_approval', ['body' => $body], function ($message) use ($emails, $user, $subject) {
+      $this->mailer->send('emails.leave_approval', ['body' => $body], function ($message) use ($emails, $user, $subject) {
         foreach ($emails as $email) {
           $message->from($user->email, $user->name);
           $message->to($email['email'], $email['name'])->subject($subject);
         }
-      });*/
+      });
+      
+      $this->mailer->send('emails.leave_status', ['user' => $user, 'status' => 'disapproved', 'remarks' => $remarks,'leave' => $employeeLeave], function($message) use($user)
+      {
+        $message->from('Born Digital Yogyakarta', 'hr@demo.test');
+        $message->to($user->email,$user->name)->subject('Your leave has been disapproved');
+      });
 
 
       \Session::flash('flash_message', 'Leave successfully applied!');
@@ -480,12 +493,10 @@
       $employeeLeave = EmployeeLeaves::where('id', $leaveId)->first();
       $user = User::where('id', $employeeLeave->user_id)->first();
       
-      // $mail = $this->mailer->send('emails.leave_status', ['user' => $user, 'status' => 'approved', 'remarks' => $remarks ,'leave' => $employeeLeave], function($message) use($user) {
-      //   $message->from('no-reply@dipi-ip.com', 'Digital IP Insights');
-      //   $message->to($user->email,$user->name)->subject('Your leave has been approved');
-      // });
-      // dd($mail);
-
+      $mail = $this->mailer->send('emails.leave_status', ['user' => $user, 'status' => 'approved', 'remarks' => $remarks ,'leave' => $employeeLeave], function($message) use($user) {
+        $message->from('Born Digital Yogyakarta', 'hr@demo.test');
+        $message->to($user->email,$user->name)->subject('Your leave has been approved');
+      });
 
       \DB::table('employee_leaves')->where('id', $leaveId)->update(['status' => '1', 'remarks' => $remarks]);
       return json_encode('success');
@@ -504,7 +515,7 @@
       $user = User::where('id', $employeeLeave->user_id)->first();
       $this->mailer->send('emails.leave_status', ['user' => $user, 'status' => 'disapproved', 'remarks' => $remarks,'leave' => $employeeLeave], function($message) use($user)
       {
-        $message->from('no-reply@dipi-ip.com', 'Digital IP Insights');
+        $message->from('Born Digital Yogyakarta', 'hr@demo.test');
         $message->to($user->email,$user->name)->subject('Your leave has been disapproved');
       });
       \DB::table('employee_leaves')->where('id', $leaveId)->update(['status'=> '2', 'remarks' => $remarks]);

@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class AttendanceManager extends Model
 {
@@ -44,6 +45,7 @@ class AttendanceManager extends Model
         }
 
         $user = Employee::where('code', $row->code)->first();
+        $currentAttendancePoints = $user->attendance_points;
         $attendance = new AttendanceManager();
         $attendance->name = $row->name;
         $attendance->code = $row->code;
@@ -57,6 +59,11 @@ class AttendanceManager extends Model
         $attendance->user_id = $user->user_id;
         $attendance->hours_worked = $hoursWorked;
         $attendance->difference = $difference;
-        $attendance->save();
+        // $attendance->save();
+        $userPoint = DB::table('employees')
+            ->where('code', $row->code)
+            ->update([
+                'attendance_points' => $point + $currentAttendancePoints
+            ]);
     }
 }

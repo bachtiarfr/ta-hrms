@@ -31,7 +31,6 @@ function convertRole($role)
         'Senior Software Developer' => '14',
         'Accounts Executive' => '15',
         'Manager' => '16'
-        //bharo baki
     ];
     if($role){
         return $data[$role];

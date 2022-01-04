@@ -576,7 +576,7 @@ class EmpController extends Controller
     {
         $emps  = Employee::get();
         $roles = Role::get();
-
+        
         // get data lenght of working
         foreach ($emps as $emp) {
             $joiningDate = $emp['date_of_joining'];
@@ -600,48 +600,59 @@ class EmpController extends Controller
                 'lenght_of_working' => $totalDiffMonth
             ];
 
-            $avaliableEmps = [];
-            foreach ($dataEmployee as $employee) {
-                // get data finished project
-                $dataProjects = DB::table('projects')
-                    ->select('projects.name as project_name','users.name as employee_name', 'assign_projects.date_of_release')
-                    ->join('assign_projects', 'projects.id', '=', 'assign_projects.project_id')
-                    ->join('users', 'assign_projects.user_id', '=', 'users.id')
-                    ->orderBy('projects.name')
-                    ->distinct()
-                    ->get();
-        
-                foreach ($dataProjects as $row) {
-                    $date = new Carbon($row->date_of_release);
-                    $dateStatus = $date->isPast();
-                    $dataProjectStatus[] = [ 
-                        'employee_name' => $row->employee_name,
-                        'finished_status' => $dateStatus
-                    ];
-                    
-                    foreach ($dataProjectStatus as $i) {
-                        if ($i['finished_status'] == true) {
-                            $dataAssignmentFinishedName[] = $i['employee_name'];
-                        }
-                    }    
-                }
+            if($emp['attendance_points'] >= 600) {
+                $avaliableEmps = [];
+                foreach ($dataEmployee as $employee) {
+                    // get data finished project
+                    $dataProjects = DB::table('projects')
+                        ->select('projects.name as project_name','users.name as employee_name', 'assign_projects.date_of_release')
+                        ->join('assign_projects', 'projects.id', '=', 'assign_projects.project_id')
+                        ->join('users', 'assign_projects.user_id', '=', 'users.id')
+                        ->orderBy('projects.name')
+                        ->distinct()
+                        ->get();
 
-                // data employee that already finished some projects
-                $dataAssignmentFinishedName = array_unique($dataAssignmentFinishedName);
-
-                foreach ($dataAssignmentFinishedName as $name) {
-                    // doing filtering employee
-                    if ($employee['lenght_of_working'] >= 6 && $employee['employee_name'] == $name) {
-                        // data employee that work for more than 6 months
-                        $avaliableEmps[] = [
-                            'id' => $employee['employee_id'],
-                            'name' => $employee['employee_name']
+                    foreach ($dataProjects as $row) {
+                        $date = new Carbon($row->date_of_release);
+                        $dateStatus = $date->isPast();
+                        $dataProjectStatus[] = [ 
+                            'employee_name' => $row->employee_name,
+                            'finished_status' => $dateStatus
                         ];
+                        
+                        foreach ($dataProjectStatus as $i) {
+
+                            if ($i['finished_status'] == true) {
+                                $dataAssignmentFinishedName[] = $i['employee_name'];
+                            }
+                        }    
+                    }
+    
+                    // data employee that already finished some projects
+                    $dataAssignmentFinishedName = array_unique($dataAssignmentFinishedName);
+    
+                    foreach ($dataAssignmentFinishedName as $name) {
+
+                        $dataProjectPerUser = DB::table('projects')
+                            ->select('projects.name as project_name','users.name as employee_name', 'assign_projects.date_of_release')
+                            ->join('assign_projects', 'projects.id', '=', 'assign_projects.project_id')
+                            ->join('users', 'assign_projects.user_id', '=', 'users.id')
+                            ->orderBy('projects.name')
+                            ->where('users.name', '=', $name)
+                            ->get();
+                            
+                        if ($employee['lenght_of_working'] >= 6 && $employee['employee_name'] == $name && $emp['attendance_points'] >= 1 && count($dataProjectPerUser) >= 3) {
+                            $avaliableEmps[] = [
+                                'id' => $employee['employee_id'],
+                                'name' => $employee['employee_name'],
+                                'attendance_points' =>$emp['attendance_points']
+                            ];
+                        }
                     }
                 }
             }
         }
-    
+
         return view('hrms.promotion.add_promotion', compact('avaliableEmps', 'roles'));
     }
 

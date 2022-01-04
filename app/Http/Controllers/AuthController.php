@@ -59,6 +59,9 @@
 
         public function dashboard()
         {
+            
+            $dataFinishedProject = [];
+            $dataRuningProject = [];
 
             $greetings = "";
             /* This sets the $time variable to the current hour in the 24 hour clock format */
@@ -103,29 +106,38 @@
                 ->distinct()
                 ->get();
 
-            foreach ($dataProjects as $row) {
-                $date = new Carbon($row->date_of_release);
-                $dateStatus = $date->isPast();
-                $dataProjectStatus[] = [ 
-                    'project_name' => $row->name,
-                    'release_date' => $row->date_of_release,
-                    'finished_status' => $dateStatus
-                ];
-                $runningProject = 0;
-                $finishedProject = 0;
-                foreach ($dataProjectStatus as $i) {
-                    if ($i['finished_status'] == true) {
-                        $finishedProject++;
-                        $dataFinishedProject[] = $i['project_name'];
-                    } else {
-                        $runningProject++; 
-                        $dataRuningProject[] = $i['project_name'];
-                    }
-                }    
+            if (count($dataProjects) > 0) {
+                foreach ($dataProjects as $row) {
+                    $date = new Carbon($row->date_of_release);
+                    // dd($date);
+                    $dateStatus = $date->isPast();
+                    $dataProjectStatus[] = [ 
+                        'project_name' => $row->name,
+                        'release_date' => $row->date_of_release,
+                        'finished_status' => $dateStatus
+                    ];
+                    
+                    $countRunningProject = 0;
+                    $countFinishedProject = 0;
+
+                    foreach ($dataProjectStatus as $i) {
+                        if ($i['finished_status'] == true) {
+                            $countFinishedProject++;
+                            $dataFinishedProject[] = $i['project_name'];
+                        } else {
+                            $countRunningProject++; 
+                            $dataRuningProject[] = $i['project_name'];
+                        }
+                    }    
+                }
+                $dataFinishedProject = array_unique($dataFinishedProject);
+                $dataRuningProject = array_unique($dataRuningProject);
             }
-            $dataFinishedProject = array_unique($dataFinishedProject);
-            $dataRuningProject = array_unique($dataRuningProject);
-            // dd($dataRuningProject);
+
+            $dataProjectStatus[] = [];
+
+            $runningProject = $countRunningProject;
+            $finishedProject = $countFinishedProject;
 
             return view('hrms.dashboard', compact('events', 'meetings', 'user', 'greetings', 'dateNow', 'maleEmployee', 'femaleEmployee', 'roles', 'dataProjectStatus', 'runningProject', 'finishedProject', 'dataRuningProject', 'dataFinishedProject'));
         }

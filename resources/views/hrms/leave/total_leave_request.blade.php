@@ -42,7 +42,7 @@
                             <div class="row">
                                 {!! Form::open() !!}
                                 <div class="col-md-3">
-                                    <input type="text" class="field form-control" placeholder="query string" style="height:40px" name="string" value="{{$string}}">
+                                    <input type="text" class="field form-control" placeholder="" style="height:40px" name="string" value="{{$string}}">
                                 </div>
                                 <div class="col-md-3">
                                     <label class="field select">
@@ -199,9 +199,6 @@
                         <input type="hidden" id="leave_id">
                         <input type="hidden" id="type">
 
-                    <div id="loader" class="hidden text-center">
-                        <img src="/photos/76.gif" />
-                    </div>
                     <div id="status-message" class="hidden">
 
                     </div>
@@ -223,6 +220,7 @@
 {{--<script src="/assets/js/jquery/jquery-2.2.4.min.js"></script>--}}
 <script src="/assets/js/jquery/jquery_ui/jquery-ui.min.js"></script>
 <script src="/assets/js/custom.js"></script>
+<script src="/assets/js/function.js"></script>
 <script>
     
 $('.approveClick').click(function () {

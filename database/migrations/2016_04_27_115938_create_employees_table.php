@@ -39,6 +39,7 @@ class CreateEmployeesTable extends Migration
             $table->string('notice_period');
             $table->date('last_working_day');
             $table->tinyInteger('full_final');
+            $table->integer('attendance_points');
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();

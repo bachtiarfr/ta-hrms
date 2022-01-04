@@ -56,9 +56,10 @@
                                     <tr class="bg-light">
                                         <th class="text-center">Id</th>
                                         <th class="text-center">Leave Type</th>
-                                    <th class="text-center">Description</th>
-                                    <th class="text-center">Actions</th>
-                                </tr>
+                                        <th class="text-center">Description</th>
+                                        <th class="text-center">Number of days</th>
+                                        <th class="text-center">Actions</th>
+                                    </tr>
                                 </thead>
                                 <tbody>
                                 <?php $i =0;?>
@@ -67,6 +68,7 @@
                                         <td class="text-center">{{$i+=1}}</td>
                                         <td class="text-center">{{$leave->leave_type}}</td>
                                         <td class="text-center">{{$leave->description}}</td>
+                                        <td class="text-center">{{$leave->number_of_days}}</td>
                                         <td class="text-center">
                                             <div class="btn-group text-right">
                                                 <button type="button"

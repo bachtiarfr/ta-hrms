@@ -6,6 +6,19 @@ datepicker4.on('change', function () {
     var new_date_from = new Date(date_from);
     var date_to = datepicker4.val();
     var new_date_to = new Date(date_to);
+    
+    var showLeaveCount = $('#show-leave-count');
+    var leaveTypeId = $('.leave_type').val();
+    var token = $('#token').val();
+    var userId = $('#user_id').val();
+    $.post('/get-leave-count', {'leaveTypeId': leaveTypeId, '_token': token, 'userId': userId}, function (data) {
+        parsed = JSON.parse(data);
+        showLeaveCount.empty();
+    });
+
+    var timeDiff = Math.abs(new_date_to.getTime() - new_date_from.getTime());
+    var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
+
     if (date_from > date_to) {
         alert('To Date cannot be smaller than From Date');
         datepicker4.val('');
@@ -33,13 +46,15 @@ datepicker4.on('change', function () {
         }
         else {
             if (diffDays > 1) {
-                $('#total_days').val(toWords(diffDays) + 'days leave');
+                $('#total_days').val(diffDays + ' days leave');
             }
             else {
-                $('#total_days').val(toWords(diffDays) + 'day leave');
+                $('#total_days').val(diffDays + ' day leave');
             }
         }
     }
+
+
 });
 
 datepicker1.on('change', function () {
@@ -115,13 +130,6 @@ $('#timepicker4').on('change', function () {
     }
 });
 
-
-// Convert numbers to words
-// copyright 25th July 2006, by Stephen Chapman http://javascript.about.com
-// permission to use this Javascript on your web page is granted
-// provided that all of the code (including this copyright notice) is
-// used exactly as shown (you can change the numbering system if you wish)
-
 // American Numbering System
 var th = ['', 'thousand', 'million', 'billion', 'trillion'];
 // uncomment this line for English Number System
@@ -176,9 +184,8 @@ $(document).on('change', '.leave_type', function () {
     $.post('/get-leave-count', {'leaveTypeId': leaveTypeId, '_token': token, 'userId': userId}, function (data) {
         parsed = JSON.parse(data);
         showLeaveCount.empty();
-        var html = "<div class=' col-md-5 alert alert-dark center-block '>Leaves &nbsp Remaining : " + parsed + "</div>";
+        var html = "<div class=' col-md-5 alert alert-dark center-block '>Leaves Remaining : " + parsed + "</div>";
         showLeaveCount.append(html);
-
     });
 
 });
@@ -242,6 +249,7 @@ $('#proceed-button').click(function () {
 });
 
 $('.disapproveClick').click(function () {
+    console.log('disapprove clicked');
     var leaveId = $(this).data('id');
     var token = $('#token').val();
     $('#leave_id').val(leaveId);

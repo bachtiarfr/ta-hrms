@@ -122,13 +122,27 @@
             <div class="col-sm-3 col-xl-3 panel-card">
                 <div class="panel panel-tile">
                     <div class="panel-body">
+                        @if($finishedProject > 0 || $runningProject > 0)
                         <canvas id="projectChart"></canvas>
+                        @else
+                        <canvas>
+                            No data yet
+                        </canvas>
+                        @endif
                         <div class="panel-content">
                             <div class="inner-content">
+                                @if($finishedProject > 0)
                                 Finished Project <span class="total">{{ $finishedProject }}</span>
+                                @else
+                                No finished project yet
+                                @endif
                             </div>
                             <div class="inner-content">
+                                @if($runningProject > 0)
                                 Running Project <span class="total">{{ $runningProject }}</span>
+                                @else
+                                No running project yet
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -150,20 +164,32 @@
                           <div class="tab-content" id="projectsTabContent">
                             <div class="tab-pane fade active in" id="finished-projects" role="tabpanel" aria-labelledby="finished-projects-tab">
                                 <div class="project-name">
-                                    <ol type="1">
-                                        @foreach ($dataFinishedProject as $data)
-                                        <li>{{$data}}</li>
-                                        @endforeach
-                                    </ol>
+                                    @if(count($dataFinishedProject) > 0)
+                                        <ol type="1">
+                                            @foreach ($dataFinishedProject as $data)
+                                            <li>{{$data}}</li>
+                                            @endforeach
+                                        </ol>
+                                    @else
+                                        <ol style="list-style: none">
+                                            <li>No data yet</li>
+                                        </ol>
+                                    @endif
                                 </div>
                             </div>
                             <div class="tab-pane fade" id="running-projects" role="tabpanel" aria-labelledby="running-projects-tab">
                                 <div class="project-name">
-                                    <ol type="1">
-                                        @foreach ($dataRuningProject as $data)
-                                        <li>{{$data}}</li>
-                                        @endforeach
-                                    </ol>
+                                    @if(count($dataRuningProject) > 0)
+                                        <ol type="1">
+                                            @foreach ($dataRuningProject as $data)
+                                            <li>{{$data}}</li>
+                                            @endforeach
+                                        </ol>
+                                    @else
+                                        <ol style="list-style: none">
+                                            <li>No data yet</li>
+                                        </ol>
+                                    @endif
                                 </div>
                             </div>
                           </div>

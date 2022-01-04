@@ -191,13 +191,15 @@
                                         <label for="input002"><h6 class="mb20 mt40"> Gender </h6></label>
                                         <div class="option-group field">
                                             <label class="field option mb5">
-                                                <input type="radio" value="0" name="gender" id="gender"
-                                                       @if(isset($emps))@if($emps->employee->gender == '0')checked @endif @endif>
-                                                <span class="radio"></span>Male</label>
-                                            <label class="field option mb5">
                                                 <input type="radio" value="1" name="gender" id="gender"
                                                        @if(isset($emps))@if($emps->employee->gender == '1')checked @endif @endif>
-                                                <span class="radio"></span>Female</label>
+                                                <span class="radio"></span>Female
+                                            </label>
+                                            <label class="field option mb5">
+                                                <input type="radio" value="0" name="gender" id="gender"
+                                                       @if(isset($emps))@if($emps->employee->gender == '0')checked @endif @endif>
+                                                <span class="radio"></span>Female
+                                            </label>
                                         </div>
                                     </div>
 

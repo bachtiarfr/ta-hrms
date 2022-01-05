@@ -162,6 +162,7 @@ return [
         Maatwebsite\Excel\ExcelServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
         //\App\Providers\ViewShareServiceProvider::class,
+        Barryvdh\DomPDF\ServiceProvider::class,
 
 
         /*
@@ -223,7 +224,8 @@ return [
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
-	    'Manipulator' => TheStringlerLaravel\Manipulator\ManipultaorFacade::class
+	    'Manipulator' => TheStringlerLaravel\Manipulator\ManipultaorFacade::class,
+        'PDF' => Barryvdh\DomPDF\Facade::class
 
     ],
 

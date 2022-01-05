@@ -7,6 +7,22 @@
     padding: 15px;
 }
 
+#dashboard-page .panel-body.projects-card .leaves-content {
+    padding: 15px;
+}
+
+#dashboard-page .panel-body.projects-card .leaves-content .inner-content {
+    margin-bottom: 10px;
+}
+
+#dashboard-page .panel-body.projects-card .leaves-content .inner-content .subtitle {
+    font-size: 15px;
+}
+
+#dashboard-page .panel-body.projects-card .leaves-content .inner-content .amount {
+    font-size: 23px;
+}
+
 #dashboard-page .panel-body.projects-card .title {
     font-size: 15px;
     font-weight: bold;

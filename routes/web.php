@@ -345,5 +345,8 @@ Route::group(['middleware' => ['auth']], function ()
     Route::get('/get-json-data-gender', 'AuthController@getJsonDataGender');
     Route::get('/get-json-data-projects', 'AuthController@getJsonDataProjects');
 
+    // export pdf
+    Route::get('/export-pdf', 'AuthController@exportPDF');
+
 
 });

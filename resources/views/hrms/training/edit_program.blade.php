@@ -8,14 +8,7 @@
             <div class="topbar-left">
 
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-icon">
-                        <a href="/dashboard">
-                            <span class="fa fa-home"></span>
-                        </a>
-                    </li>
-                    <li class="breadcrumb-active">
-                        <a href="/dashboard"> Dashboard </a>
-                    </li>
+                     
                     <li class="breadcrumb-link">
                         <a href=""> Assets </a>
                     </li>

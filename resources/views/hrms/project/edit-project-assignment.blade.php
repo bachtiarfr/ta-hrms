@@ -8,14 +8,7 @@
             <div class="topbar-left">
                 @if(\Route::getFacadeRoot()->current()->uri() == 'edit-project-assignment/{id}')
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-icon">
-                            <a href="/dashboard">
-                                <span class="fa fa-home"></span>
-                            </a>
-                        </li>
-                        <li class="breadcrumb-active">
-                            <a href="/dashboard"> Dashboard </a>
-                        </li>
+                          
                         <li class="breadcrumb-link">
                             <a href=""> Projects </a>
                         </li>
@@ -25,14 +18,7 @@
 
                 @else
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-icon">
-                            <a href="/dashboard">
-                                <span class="fa fa-home"></span>
-                            </a>
-                        </li>
-                        <li class="breadcrumb-active">
-                            <a href="/dashboard"> Dashboard </a>
-                        </li>
+                          
                         <li class="breadcrumb-link">
                             <a href=""> Projects </a>
                         </li>

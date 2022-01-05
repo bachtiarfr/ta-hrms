@@ -8,13 +8,16 @@
     use App\Models\Employee;
     use App\Models\UserRole;
     use App\Models\AssignProject;
+    use App\Models\LeaveType;
     use App\User;
+    use App\EmployeeLeaves;
     use Carbon\Carbon;
     use Illuminate\Http\Request;
     use Illuminate\Contracts\Mail\Mailer;
     use App\Http\Requests;
     use Illuminate\Support\Facades\Hash;
     use Illuminate\Support\Facades\DB;
+    use PDF;
 
     class AuthController extends Controller
     {
@@ -138,8 +141,237 @@
 
             $runningProject = $countRunningProject;
             $finishedProject = $countFinishedProject;
+            
+            // get who's take a leave
+            // $offEmps = EmployeeLeaves::where('status', 1)->get();
+            $offEmps = DB::table('users')
+                ->select('users.name', 'employee_leaves.date_from', 'employee_leaves.date_to', 'employee_leaves.status')
+                ->join('employee_leaves', 'users.id', '=', 'employee_leaves.user_id')
+                ->where('employee_leaves.status', '=', 1)
+                ->get();
+            // dd($offEmps);
 
-            return view('hrms.dashboard', compact('events', 'meetings', 'user', 'greetings', 'dateNow', 'maleEmployee', 'femaleEmployee', 'roles', 'dataProjectStatus', 'runningProject', 'finishedProject', 'dataRuningProject', 'dataFinishedProject'));
+            // get who's take a leave
+            $dateRange = [];
+            $dataUserWhoOff = [];
+            foreach ($offEmps as $emp) {
+                $date_now = Carbon::now()->format('Y-m-d');
+                $date_from = Carbon::parse($emp->date_from)->format('Y-m-d');
+                $date_to = Carbon::parse($emp->date_to)->format('Y-m-d');
+                if ($date_from == $date_now) {
+                    $iDateFrom = mktime(1, 0, 0, substr($date_from, 5, 2), substr($date_from, 8, 2), substr($date_from, 0, 4));
+                    $iDateTo = mktime(1, 0, 0, substr($date_to, 5, 2), substr($date_to, 8, 2), substr($date_to, 0, 4));
+                    
+                    if ($iDateTo >= $iDateFrom) {
+                        array_push($dateRange, date('Y-m-d', $iDateFrom)); // first entry
+                        while ($iDateFrom<$iDateTo) {
+                            $iDateFrom += 86400; // add 24 hours
+                            array_push($dateRange, date('Y-m-d', $iDateFrom));
+                        }
+                    }
+                    
+                    array_push($dataUserWhoOff, $emp->name);
+                }                
+            }
+
+            // get leave balance
+           $dataSickLeaves = DB::table('employee_leaves')
+                ->select('employee_leaves.days', 'leave_types.number_of_days')
+                ->join('leave_types', 'employee_leaves.leave_type_id', 'leave_types.id')
+                ->where('employee_leaves.user_id', $user->id)
+                ->where('employee_leaves.leave_type_id', 1)
+                ->first();
+
+           $dataCasualLeaves = DB::table('employee_leaves')
+                ->select('employee_leaves.days', 'leave_types.number_of_days')
+                ->join('leave_types', 'employee_leaves.leave_type_id', 'leave_types.id')
+                ->where('employee_leaves.user_id', $user->id)
+                ->where('employee_leaves.leave_type_id', 2)
+                ->first();
+
+           $dataMaternityLeaves = DB::table('employee_leaves')
+                ->select('employee_leaves.days', 'leave_types.number_of_days')
+                ->join('leave_types', 'employee_leaves.leave_type_id', 'leave_types.id')
+                ->where('employee_leaves.user_id', $user->id)
+                ->where('employee_leaves.leave_type_id', 3)
+                ->first();
+
+            if($dataSickLeaves == null) {
+                $remainingSickLeave = 0;
+            } else {
+                $remainingSickLeave = $dataSickLeaves->number_of_days - $dataSickLeaves->days;
+            }
+
+            if($dataCasualLeaves == null) {
+                $remainingCasualLeave = 0;
+            } else {
+                $remainingCasualLeave = $dataCasualLeaves->number_of_days - $dataCasualLeaves->days;
+            }
+            
+            if($dataMaternityLeaves == null) {
+                $remainingMaternityLeave = 0;
+            } else {
+                $remainingMaternityLeave = $dataMaternityLeaves->number_of_days - $dataMaternityLeaves->days;
+            }
+            // $dataUserWhoOff = [];
+            return view('hrms.dashboard', compact('events', 'meetings', 'user', 'greetings', 'dateNow', 'maleEmployee', 'femaleEmployee', 'roles', 'dataProjectStatus', 'runningProject', 'finishedProject', 'dataRuningProject', 'dataFinishedProject', 'dataUserWhoOff', 'remainingSickLeave', 'remainingCasualLeave', 'remainingMaternityLeave'));
+        }
+
+        public function exportPDF()
+        {
+            $dataFinishedProject = [];
+            $dataRuningProject = [];
+
+            $greetings = "";
+            /* This sets the $time variable to the current hour in the 24 hour clock format */
+            $time = date("H");
+        
+            /* Set the $timezone variable to become the current timezone */
+            $timezone = date("e");
+        
+            /* If the time is less than 1200 hours, show good morning */
+            if ($time < "12") {
+                $greetings = "Good morning";
+            } else
+        
+            /* If the time is grater than or equal to 1200 hours, but less than 1700 hours, so good afternoon */
+            if ($time >= "12" && $time < "17") {
+                $greetings = "Good afternoon";
+            } else
+        
+            /* Should the time be between or equal to 1700 and 1900 hours, show good evening */
+            if ($time >= "17" && $time < "19") {
+                $greetings = "Good evening";
+            } else
+        
+            /* Finally, show good night if the time is greater than or equal to 1900 hours */
+            if ($time >= "19") {
+                $greetings = "Good night";
+            }
+
+            $roles = Role::get();
+            $maleEmployee = Employee::where('gender', 1)->get();
+            $femaleEmployee = Employee::where('gender', 0)->get();
+
+            $dateNow = \Carbon\Carbon::now()->format('l, jS \\of F Y');
+            $user     = User::where('id', \Auth::user()->id)->first();
+            $events   = $this->convertToArray(Event::where('date', '>', Carbon::now())->orderBy('date', 'desc')->take(3)->get());
+            $meetings = $this->convertToArray(Meeting::where('date', '>', Carbon::now())->orderBy('date', 'desc')->take(3)->get());
+
+            $dataProjects = DB::table('projects')
+                ->select('name', 'date_of_release')
+                ->join('assign_projects', 'projects.id', '=', 'assign_projects.project_id')
+                ->orderBy('projects.name')
+                ->distinct()
+                ->get();
+
+            if (count($dataProjects) > 0) {
+                foreach ($dataProjects as $row) {
+                    $date = new Carbon($row->date_of_release);
+                    // dd($date);
+                    $dateStatus = $date->isPast();
+                    $dataProjectStatus[] = [ 
+                        'project_name' => $row->name,
+                        'release_date' => $row->date_of_release,
+                        'finished_status' => $dateStatus
+                    ];
+                    
+                    $countRunningProject = 0;
+                    $countFinishedProject = 0;
+
+                    foreach ($dataProjectStatus as $i) {
+                        if ($i['finished_status'] == true) {
+                            $countFinishedProject++;
+                            $dataFinishedProject[] = $i['project_name'];
+                        } else {
+                            $countRunningProject++; 
+                            $dataRuningProject[] = $i['project_name'];
+                        }
+                    }    
+                }
+                $dataFinishedProject = array_unique($dataFinishedProject);
+                $dataRuningProject = array_unique($dataRuningProject);
+            }
+
+            $dataProjectStatus[] = [];
+
+            $runningProject = $countRunningProject;
+            $finishedProject = $countFinishedProject;
+            
+            // get who's take a leave
+            // $offEmps = EmployeeLeaves::where('status', 1)->get();
+            $offEmps = DB::table('users')
+                ->select('users.name', 'employee_leaves.date_from', 'employee_leaves.date_to', 'employee_leaves.status')
+                ->join('employee_leaves', 'users.id', '=', 'employee_leaves.user_id')
+                ->where('employee_leaves.status', '=', 1)
+                ->get();
+            // dd($offEmps);
+
+            // get who's take a leave
+            $dateRange = [];
+            $dataUserWhoOff = [];
+            foreach ($offEmps as $emp) {
+                $date_now = Carbon::now()->format('Y-m-d');
+                $date_from = Carbon::parse($emp->date_from)->format('Y-m-d');
+                $date_to = Carbon::parse($emp->date_to)->format('Y-m-d');
+                if ($date_from == $date_now) {
+                    $iDateFrom = mktime(1, 0, 0, substr($date_from, 5, 2), substr($date_from, 8, 2), substr($date_from, 0, 4));
+                    $iDateTo = mktime(1, 0, 0, substr($date_to, 5, 2), substr($date_to, 8, 2), substr($date_to, 0, 4));
+                    
+                    if ($iDateTo >= $iDateFrom) {
+                        array_push($dateRange, date('Y-m-d', $iDateFrom)); // first entry
+                        while ($iDateFrom<$iDateTo) {
+                            $iDateFrom += 86400; // add 24 hours
+                            array_push($dateRange, date('Y-m-d', $iDateFrom));
+                        }
+                    }
+                    
+                    array_push($dataUserWhoOff, $emp->name);
+                }                
+            }
+
+            // get leave balance
+           $dataSickLeaves = DB::table('employee_leaves')
+                ->select('employee_leaves.days', 'leave_types.number_of_days')
+                ->join('leave_types', 'employee_leaves.leave_type_id', 'leave_types.id')
+                ->where('employee_leaves.user_id', $user->id)
+                ->where('employee_leaves.leave_type_id', 1)
+                ->first();
+
+           $dataCasualLeaves = DB::table('employee_leaves')
+                ->select('employee_leaves.days', 'leave_types.number_of_days')
+                ->join('leave_types', 'employee_leaves.leave_type_id', 'leave_types.id')
+                ->where('employee_leaves.user_id', $user->id)
+                ->where('employee_leaves.leave_type_id', 2)
+                ->first();
+
+           $dataMaternityLeaves = DB::table('employee_leaves')
+                ->select('employee_leaves.days', 'leave_types.number_of_days')
+                ->join('leave_types', 'employee_leaves.leave_type_id', 'leave_types.id')
+                ->where('employee_leaves.user_id', $user->id)
+                ->where('employee_leaves.leave_type_id', 3)
+                ->first();
+
+            if($dataSickLeaves == null) {
+                $remainingSickLeave = 0;
+            } else {
+                $remainingSickLeave = $dataSickLeaves->number_of_days - $dataSickLeaves->days;
+            }
+
+            if($dataCasualLeaves == null) {
+                $remainingCasualLeave = 0;
+            } else {
+                $remainingCasualLeave = $dataCasualLeaves->number_of_days - $dataCasualLeaves->days;
+            }
+            
+            if($dataMaternityLeaves == null) {
+                $remainingMaternityLeave = 0;
+            } else {
+                $remainingMaternityLeave = $dataMaternityLeaves->number_of_days - $dataMaternityLeaves->days;
+            }
+            // $dataUserWhoOff = [];
+            $pdf = PDF::loadview('hrms.export-pdf');
+            return $pdf->stream();        
         }
 
         public function getJsonDataUser()

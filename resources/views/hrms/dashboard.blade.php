@@ -40,14 +40,6 @@
 <header id="topbar" class="alt">
     <div class="topbar-left">
         <ol class="breadcrumb">
-            <li class="breadcrumb-icon">
-                <a href="/dashboard">
-                    <span class="fa fa-home"></span>
-                </a>
-            </li>
-            <li class="breadcrumb-active">
-                <a href="/dashboard">Dashboard</a>
-            </li>
             <li class="breadcrumb-link">
                 <a href="/dashboard">Home</a>
             </li>
@@ -80,7 +72,7 @@
                                     <div class="shortcut-list">
                                         <a href="/attendance-upload" class="attendance">Upload attendance</a>
                                         <a href="/add-project" class="projects">Add new projects</a>
-                                        <a href="#" class="apply-leaves">Export all reports</a>
+                                        <a href="/export-pdf" class="apply-leaves">Export all reports</a>
                                     </div>
                                 </div>
                             </div>
@@ -148,10 +140,11 @@
                 </div>
             </div>
 
+            {{-- project detail --}}
             <div class="col-sm-3 col-xl-3 panel-card">
                 <div class="panel panel-tile">
                     <div class="panel-body projects-card">
-                        <div class="title">Projects Detail</div>
+                        <div class="title">Projects detail</div>
                         <ul class="nav nav-tabs" id="projectsTab" role="tablist">
                             <li class="nav-item">
                               <a class="nav-link active" id="finished-projects-tab" data-toggle="tab" href="#finished-projects" role="tab" aria-controls="finished-projects" aria-selected="true">Finished projects</a>
@@ -195,6 +188,102 @@
                     </div>
                 </div>
             </div>   
+
+            {{-- who's off --}}
+            <div class="col-sm-3 col-xl-3 panel-card">
+                <div class="panel panel-tile">
+                    <div class="panel-body projects-card">
+                        <div class="title">Who's off today</div>
+                        
+                        @if(count($dataUserWhoOff) > 0)
+                        <ol type="1" style="margin-top: 15px">
+                            @foreach ($dataUserWhoOff as $data)
+                            <li>{{$data}}</li>
+                            @endforeach
+                        </ol>
+                        @else
+                        <ol style="list-style: none; padding: 0; display: flex; align-items: center; justify-content: center; height: 200px">
+                            <li>No employee off today</li>
+                        </ol>
+                        @endif
+                    </div>
+                </div>
+            </div>   
+
+            {{-- project detail --}}
+            <div class="col-sm-6 col-xl-6 panel-card">
+                <div class="panel panel-tile">
+                    <div class="panel-body projects-card">
+                        <div class="title">Balance anual leave</div>
+                        <ul class="nav nav-tabs" id="projectsTab" role="tablist">
+                            <li class="nav-item">
+                              <a class="nav-link active" id="finished-projects-tab" data-toggle="tab" href="#finished-projects" role="tab" aria-controls="finished-projects" aria-selected="true">Finished projects</a>
+                            </li>
+                            <li class="nav-item">
+                              <a class="nav-link" id="running-projects-tab" data-toggle="tab" href="#running-projects" role="tab" aria-controls="running-projects" aria-selected="false">Running projects</a>
+                            </li>
+                          </ul>
+                          <div class="tab-content" id="projectsTabContent">
+                            <div class="tab-pane fade active in" id="finished-projects" role="tabpanel" aria-labelledby="finished-projects-tab">
+                                <div class="project-name">
+                                    @if(count($dataFinishedProject) > 0)
+                                        <ol type="1">
+                                            @foreach ($dataFinishedProject as $data)
+                                            <li>{{$data}}</li>
+                                            @endforeach
+                                        </ol>
+                                    @else
+                                        <ol style="list-style: none">
+                                            <li>No data yet</li>
+                                        </ol>
+                                    @endif
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="running-projects" role="tabpanel" aria-labelledby="running-projects-tab">
+                                <div class="project-name">
+                                    @if(count($dataRuningProject) > 0)
+                                        <ol type="1">
+                                            @foreach ($dataRuningProject as $data)
+                                            <li>{{$data}}</li>
+                                            @endforeach
+                                        </ol>
+                                    @else
+                                        <ol style="list-style: none">
+                                            <li>No data yet</li>
+                                        </ol>
+                                    @endif
+                                </div>
+                            </div>
+                          </div>
+                    </div>
+                </div>
+            </div>   
+
+            {{-- balance leaves --}}
+            <div class="col-sm-3 col-xl-3 panel-card">
+                <div class="panel panel-tile">
+                    <div class="panel-body projects-card">
+                        <div class="title">Balance annual leave</div>
+                        <div class="leaves-content">
+                            <div class="inner-content">
+                                <div class="subtitle">Sick leave</div>
+                                <div class="amount"><?= $remainingSickLeave ?> Day</div>
+                            </div>
+                            <div class="inner-content">
+                                <div class="subtitle">Casual leave</div>
+                                <div class="amount"><?= $remainingCasualLeave ?> Day</div>
+                            </div>
+                            <div class="inner-content">
+                                <div class="subtitle">Maternity leave</div>
+                                <div class="amount"><?= $remainingMaternityLeave ?> Day</div>
+                            </div>
+                            <a href="/apply-leave" class="btn-request-leave">Request for leave</a>
+                        </div>
+                    </div>
+                </div>
+            </div>   
+
+
         </div>
     </div>
 </section>
@@ -248,7 +337,7 @@
                             title: {
                                 display: true,
                                 fontFamily: 'Roboto',
-                                text: 'Job Roles',
+                                text: 'Job roles',
                                 fontSize: 16
                             },
                             animation: {
@@ -302,7 +391,7 @@
                             title: {
                                 display: true,
                                 fontFamily: 'Roboto',
-                                text: 'Gender Diversity',
+                                text: 'Gender diversity',
                                 fontSize: 20
                             },
                             animation: {
@@ -356,7 +445,7 @@
                             title: {
                                 display: true,
                                 fontFamily: 'Roboto',
-                                text: 'Project Report',
+                                text: 'Project report',
                                 fontSize: 20
                             },
                             animation: {

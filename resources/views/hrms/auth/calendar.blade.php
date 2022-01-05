@@ -56,37 +56,39 @@
 
     <!-- //////////////////////////////////////////////////////////////////////////// -->
 
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script> 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.js"></script>
 
 
     <!-- ================================================
     jQuery Library
     ================================================ -->
-    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="/assets/js/jquery.min.js"></script>
 
     <!-- ================================================
     Bootstrap Core JavaScript File
     ================================================ -->
-    <script src="js/bootstrap/bootstrap.min.js"></script>
+    <script src="/assets/js/bootstrap/bootstrap.min.js"></script>
 
     <!-- ================================================
     Plugin.js - Some Specific JS codes for Plugin Settings
     ================================================ -->
-    <script type="text/javascript" src="js/plugins.js"></script>
+    <script type="text/javascript" src="/assets/js/plugins.js"></script>
 
     <!-- ================================================
     jQuery UI
     ================================================ -->
-    <script type="text/javascript" src="js/jquery-ui/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="/assets/js/jquery-ui/jquery-ui.min.js"></script>
 
     <!-- ================================================
     Moment.js
     ================================================ -->
-    <script type="text/javascript" src="js/moment/moment.min.js"></script>
+    <script type="text/javascript" src="/assets/js/moment/moment.min.js"></script>
 
     <!-- ================================================
     Full Calendar
     ================================================ -->
-    <script type="text/javascript" src="js/full-calendar/fullcalendar.js"></script>
+    <script type="text/javascript" src="/assets/js/full-calendar/fullcalendar.js"></script>
 
 
     <script>

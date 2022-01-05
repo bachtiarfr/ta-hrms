@@ -12769,8 +12769,8 @@ a.list-group-item:focus {
   border-bottom-left-radius: 3px;
 }
 #content .panel {
-  -webkit-box-shadow: 1px 2px 0 #e5eaee;
-  box-shadow: 1px 2px 0 #e5eaee;
+  border: 1px solid #e2e2e2;
+  box-shadow: 0 1px 4px 0 rgb(0 21 41 / 8%);
   padding: 25px;
 }
 #content .panel .panel-heading {
@@ -17373,6 +17373,7 @@ body.sidebar-collapsed #sidebar:before {
 .navbar .nav > li > a.dropdown-toggle > .fa:before {
   content: '\f078';
   font-size: 5px;
+  color: #000;
 }
 .navbar .nav > li.open > a.dropdown-toggle > .fa:before {
   content: '\f077';

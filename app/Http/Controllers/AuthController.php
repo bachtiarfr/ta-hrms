@@ -91,8 +91,8 @@
             }
 
             $roles = Role::get();
-            $maleEmployee = Employee::where('gender', 0)->get();
-            $femaleEmployee = Employee::where('gender', 1)->get();
+            $maleEmployee = Employee::where('gender', 1)->get();
+            $femaleEmployee = Employee::where('gender', 0)->get();
 
             $dateNow = \Carbon\Carbon::now()->format('l, jS \\of F Y');
             $user     = User::where('id', \Auth::user()->id)->first();
@@ -201,8 +201,8 @@
 
         public function getJsonDataGender()
         {
-            $maleEmployee = Employee::where('gender', 0)->get();
-            $femaleEmployee = Employee::where('gender', 1)->get();
+            $maleEmployee = Employee::where('gender', 1)->get();
+            $femaleEmployee = Employee::where('gender', 0)->get();
 
             $dataGender = [ count($maleEmployee), count($femaleEmployee) ];
 

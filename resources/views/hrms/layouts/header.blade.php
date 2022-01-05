@@ -153,6 +153,25 @@
                 @endif
             </ul>
         </li>
+
+        <li>
+            <a class="accordion-toggle" href="/dashboard">
+                <span class="sidebar-title">Projects</span>
+                <span class="caret"></span>
+            </a>
+            <ul class="nav sub-nav">
+                <li>
+                    <a href="{{route('list-project')}}">
+                        <span class="glyphicon glyphicon-tags"></span> List Project</a>
+                </li>
+
+                <li>
+                    <a href="{{route('project-assignment-listing')}}">
+                        <span class="glyphicon glyphicon-tags"></span> Project Assignment Listing</a>
+                </li>
+            </ul>
+        </li>
+
         {{-- <li>
             <a class="accordion-toggle" href="/dashboard">
                 <span class="fa fa-envelope"></span>
@@ -273,7 +292,7 @@
         <li class="dropdown dropdown-fuse">
             <div class="navbar-btn btn-group">
         <li class="dropdown dropdown-fuse">
-            <a href="#" class="dropdown-toggle fw600" data-toggle="dropdown" style="margin-left: 0; width: 170px">
+            <a href="#" class="dropdown-toggle fw600" data-toggle="dropdown" style="margin-left: 0; width: 200px">
                 <span class="hidden-xs"><name>{{\Auth::user()->name}}</name> </span>
                 <span class="fa fa-caret-down hidden-xs mr15"></span>
             </a>

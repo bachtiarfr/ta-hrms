@@ -161,18 +161,21 @@
       $leave->leave_type_id = $request->leave_type;
       $leave->save();
 
-
       $leaveType = LeaveType::where('id', $request->leave_type)->first();
-
-      $emails[] = ['email' => env('HR_EMAIL'), 'name' => env('HR_NAME')];
-
+      // $emails[] = ['email' => env('HR_EMAIL'), 'name' => env('HR_NAME')];
+      $emails[] = ['email' => 'hr@demo.com', 'name' => 'HR Manager'];
       $leaveDraft = LeaveDraft::where('leave_type_id', $request->leave_type)->first();
-
       $subject = isset($leaveDraft->subject)? $leaveDraft->subject : '' ;
       $user = \Auth::user();
       $toReplace = ['%name%', '%leave_type%', '%from_date%', '%to_date%', '%days%'];
       $replaceWith = [$user->name, $leaveType->leave_type, $request->dateFrom, $request->dateTo, $number_of_days];
-      $body = str_replace($toReplace, $replaceWith, '');
+      $subject = 'Notification of leave application';
+      $body = <<<EOD
+        Employee name : $user->name
+        Leave type : $leaveType->description
+        From : $request->dateFrom
+        To : $request->dateTo
+      EOD;
 
       //now send a mail
       $this->mailer->send('emails.leave_approval', ['body' => $body], function ($message) use ($emails, $user, $subject) {
@@ -181,13 +184,6 @@
           $message->to($email['email'], $email['name'])->subject($subject);
         }
       });
-      
-      $this->mailer->send('emails.leave_status', ['user' => $user, 'status' => 'disapproved', 'remarks' => $remarks,'leave' => $employeeLeave], function($message) use($user)
-      {
-        $message->from('Born Digital Yogyakarta', 'hr@demo.test');
-        $message->to($user->email,$user->name)->subject('Your leave has been disapproved');
-      });
-
 
       \Session::flash('flash_message', 'Leave successfully applied!');
       return redirect()->back();
@@ -494,7 +490,7 @@
       $user = User::where('id', $employeeLeave->user_id)->first();
       
       $mail = $this->mailer->send('emails.leave_status', ['user' => $user, 'status' => 'approved', 'remarks' => $remarks ,'leave' => $employeeLeave], function($message) use($user) {
-        $message->from('Born Digital Yogyakarta', 'hr@demo.test');
+        $message->from('bachtiar.faturrohim@gmail.com', 'HR Manager');
         $message->to($user->email,$user->name)->subject('Your leave has been approved');
       });
 

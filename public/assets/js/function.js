@@ -22,6 +22,9 @@ datepicker4.on('change', function () {
     if (date_from > date_to) {
         alert('To Date cannot be smaller than From Date');
         datepicker4.val('');
+    } else if (parsed < diffDays) {
+        alert('Your leave allowance is not enough');
+        datepicker4.val('');
     }
     else {
         var timeDiff = Math.abs(new_date_to.getTime() - new_date_from.getTime());

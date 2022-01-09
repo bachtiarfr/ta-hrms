@@ -637,22 +637,23 @@ class EmpController extends Controller
                             ->select('projects.name as project_name','users.name as employee_name', 'assign_projects.date_of_release')
                             ->join('assign_projects', 'projects.id', '=', 'assign_projects.project_id')
                             ->join('users', 'assign_projects.user_id', '=', 'users.id')
+                            ->join('employees', 'users.id', 'employees.id')
                             ->orderBy('projects.name')
                             ->where('users.name', '=', $name)
                             ->get();
                             
-                        if ($employee['lenght_of_working'] >= 6 && $employee['employee_name'] == $name && $emp['attendance_points'] >= 1 && count($dataProjectPerUser) >= 3) {
+                        if ($employee['lenght_of_working'] >= 6 && $employee['employee_name'] == $name && $emp['attendance_points'] >= 600 && count($dataProjectPerUser) >= 3) {
                             $avaliableEmps[] = [
                                 'id' => $employee['employee_id'],
                                 'name' => $employee['employee_name'],
-                                'attendance_points' =>$emp['attendance_points']
+                                'attendance_points' => $emp['attendance_points'],
+                                'old_salary' => $emp['salary']
                             ];
                         }
                     }
                 }
             }
         }
-
         return view('hrms.promotion.add_promotion', compact('avaliableEmps', 'roles'));
     }
 
@@ -662,7 +663,7 @@ class EmpController extends Controller
         if ($result) {
             $result = ['salary' => $result->salary, 'designation' => $result->userrole->role->name];
         }
-
+        // dd($result);
         return json_encode(['status' => 'success', 'data' => $result]);
     }
 

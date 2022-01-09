@@ -154,6 +154,7 @@
             </ul>
         </li>
 
+        @if(!Auth::user()->isHR())
         <li>
             <a class="accordion-toggle" href="/dashboard">
                 <span class="sidebar-title">Projects</span>
@@ -171,6 +172,7 @@
                 </li>
             </ul>
         </li>
+        @endif
 
         {{-- <li>
             <a class="accordion-toggle" href="/dashboard">
@@ -298,12 +300,12 @@
             </a>
             </a>
                 <ul class="dropdown-menu list-group keep-dropdown w250" role="menu">
-                    @if(\Route::getFacadeRoot()->current()->uri() != 'change-password')
+                    {{-- @if(\Route::getFacadeRoot()->current()->uri() != 'change-password')
                     <li class="dropdown-footer text-center">
                         <a href="/change-password" class="btn btn-primary btn-sm btn-bordered">
                             <span class="fa fa-lock pr5"></span> Change Password </a>
                     </li>
-                    @endif
+                    @endif --}}
                     <li class="dropdown-footer text-center">
                         <a href="/logout" class="btn btn-primary btn-sm btn-bordered">
                             <span class="fa fa-power-off pr5"></span> Logout </a>

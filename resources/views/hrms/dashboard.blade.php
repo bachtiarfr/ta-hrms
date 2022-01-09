@@ -69,11 +69,18 @@
                                 <div class="date">It’s <?= $dateNow; ?></div>
                                 <div class="shortcut">
                                     <h3>Shortcut</h3>
+                                    @if(Auth::user()->isHR())
                                     <div class="shortcut-list">
                                         <a href="/attendance-upload" class="attendance">Upload attendance</a>
                                         <a href="/add-project" class="projects">Add new projects</a>
                                         <a href="/export-pdf" class="apply-leaves">Export all reports</a>
                                     </div>
+                                    @else
+                                    <div class="shortcut-list">
+                                        <a href="/project-assign-listing" class="attendance">Project assign listing</a>
+                                        <a href="/apply-leave" class="projects">Request for leave</a>
+                                    </div>
+                                    @endif
                                 </div>
                             </div>
                             <div class="col-xs-7 pl5">
@@ -213,48 +220,8 @@
             {{-- project detail --}}
             <div class="col-sm-6 col-xl-6 panel-card">
                 <div class="panel panel-tile">
-                    <div class="panel-body projects-card">
-                        <div class="title">Balance anual leave</div>
-                        <ul class="nav nav-tabs" id="projectsTab" role="tablist">
-                            <li class="nav-item">
-                              <a class="nav-link active" id="finished-projects-tab" data-toggle="tab" href="#finished-projects" role="tab" aria-controls="finished-projects" aria-selected="true">Finished projects</a>
-                            </li>
-                            <li class="nav-item">
-                              <a class="nav-link" id="running-projects-tab" data-toggle="tab" href="#running-projects" role="tab" aria-controls="running-projects" aria-selected="false">Running projects</a>
-                            </li>
-                          </ul>
-                          <div class="tab-content" id="projectsTabContent">
-                            <div class="tab-pane fade active in" id="finished-projects" role="tabpanel" aria-labelledby="finished-projects-tab">
-                                <div class="project-name">
-                                    @if(count($dataFinishedProject) > 0)
-                                        <ol type="1">
-                                            @foreach ($dataFinishedProject as $data)
-                                            <li>{{$data}}</li>
-                                            @endforeach
-                                        </ol>
-                                    @else
-                                        <ol style="list-style: none">
-                                            <li>No data yet</li>
-                                        </ol>
-                                    @endif
-                                </div>
-                            </div>
-                            <div class="tab-pane fade" id="running-projects" role="tabpanel" aria-labelledby="running-projects-tab">
-                                <div class="project-name">
-                                    @if(count($dataRuningProject) > 0)
-                                        <ol type="1">
-                                            @foreach ($dataRuningProject as $data)
-                                            <li>{{$data}}</li>
-                                            @endforeach
-                                        </ol>
-                                    @else
-                                        <ol style="list-style: none">
-                                            <li>No data yet</li>
-                                        </ol>
-                                    @endif
-                                </div>
-                            </div>
-                          </div>
+                    <div class="panel-body" style="display: flex; align-items: center; justify-content: center">
+                        <div class="title">No content yet</div>
                     </div>
                 </div>
             </div>   

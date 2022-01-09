@@ -127,6 +127,29 @@
         </section>
 
     </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script> 
+    <script>
+        $(document).on('change', '#promotion_emp_id', function () {
+
+        var oldDesignation = $('#old_designation');
+        var oldSalary = $('#old_salary');
+        var emp_id = $('#promotion_emp_id').val();
+        var token = $('#token').val();
+
+        $.post('/get-promotion-data', {'employee_id': emp_id, '_token': token}, function (data) {
+            var parsed = JSON.parse(data);
+            if (parsed.status == 'success') {
+                oldDesignation.val('');
+                oldDesignation.val(parsed.data.designation);
+                oldSalary.val('');
+                oldSalary.val(parsed.data.salary);
+            }
+            else {
+
+            }
+        });
+        });
+    </script>
 @endsection
 @push('scripts')
     <script src="/assets/js/pages/forms-widgets.js"></script>

@@ -64,7 +64,7 @@
                                                     <i class="fa fa-calendar text-alert pr10"></i>
                                                 </div>
                                                 <input type="text" id="datepicker1" class="select2-single form-control"
-                                                       name="dateFrom" required>
+                                                       name="dateFrom" required disabled>
                                             </div>
                                         </div>
                                         <label for="date_to" class="col-md-2 control-label"> Date To </label>
@@ -74,7 +74,7 @@
                                                     <i class="fa fa-calendar text-alert pr10"></i>
                                                 </div>
                                                 <input type="text" id="datepicker4" class="select2-single form-control"
-                                                       name="dateTo" required>
+                                                       name="dateTo" required disabled>
                                             </div>
 
                                         </div>

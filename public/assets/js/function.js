@@ -13,7 +13,6 @@ datepicker4.on('change', function () {
     var userId = $('#user_id').val();
     $.post('/get-leave-count', {'leaveTypeId': leaveTypeId, '_token': token, 'userId': userId}, function (data) {
         parsed = JSON.parse(data);
-        showLeaveCount.empty();
     });
 
     var timeDiff = Math.abs(new_date_to.getTime() - new_date_from.getTime());
@@ -189,6 +188,8 @@ $(document).on('change', '.leave_type', function () {
         showLeaveCount.empty();
         var html = "<div class=' col-md-5 alert alert-dark center-block '>Leaves Remaining : " + parsed + "</div>";
         showLeaveCount.append(html);
+        $('#datepicker1').prop('disabled', false)
+        $('#datepicker4').prop('disabled', false)
     });
 
 });

@@ -56,8 +56,7 @@
                                             <div class="form-group">
                                                 <label class="col-md-3 control-label"> Select Project </label>
                                                 <div class="col-md-6">
-                                                    <select class="select2-multiple form-control select-primary"
-                                                            name="project_id" required>
+                                                    <select class="select2-multiple form-control select-primary" name="project_id" required>
                                                         <option value="" selected>Select One</option>
                                                         @foreach($projects as $project)
                                                             <option value="{{$project->id}}">{{$project->name}}</option>
@@ -65,24 +64,20 @@
                                                     </select>
                                                 </div>
                                             </div>
-
                                             <div class="form-group">
                                                 <label for="multiselect2" class="col-md-3 control-label"> Select Team Members </label>
                                                 <div class="col-md-6">
-                                                    <select id="done" class="selectpicker form-control" multiple data-done-button="true"
-                                                      name="member_id[]" required>
+                                                    <select id="done" class="selectpicker form-control" multiple data-done-button="true" name="member_id[]" required>
                                                         @foreach($emps as $emp)
                                                             <option value="{{$emp->id}}">{{$emp->name}}</option>
                                                         @endforeach
                                                     </select>
                                                 </div>
                                             </div>
-
                                             <div class="form-group">
                                                 <label class="col-md-3 control-label"> Select Project Leader </label>
                                                 <div class="col-md-6">
-                                                    <select class="select2-multiple form-control select-primary"
-                                                            name="project_leader_id" required>
+                                                    <select class="select2-multiple form-control select-primary" name="project_leader_id" required>
                                                         <option value="" selected>Select One</option>
                                                         @foreach($emps as $emp)
                                                             <option value="{{$emp->id}}">{{$emp->name}}</option>
@@ -90,77 +85,46 @@
                                                     </select>
                                                 </div>
                                             </div>
-
                                             <div class="form-group">
-                                                <label class="col-md-3 control-label"> Select Issuing Authority </label>
+                                                <label for="datepicker1" class="col-md-3 control-label"> Date of Assignment </label>
                                                 <div class="col-md-6">
-                                                    <select class="select2-multiple form-control select-primary"
-                                                            name="authority_id" required>
-                                                        <option value="" selected>Select One</option>
-                                                        @foreach($emps as $emp)
-                                                            <option value="{{$emp->id}}">{{$emp->name}}</option>
-                                                        @endforeach
-                                                    </select>
+                                                    <div class="input-group">
+                                                        <div class="input-group-addon">
+                                                            <i class="fa fa-calendar text-alert pr11"></i>
+                                                        </div>
+                                                        @if(\Route::getFacadeRoot()->current()->uri() == 'edit-project-assignment/{id}')
+                                                            <input type="text" id="datepicker1" class="select2-single form-control" name="doa" value="@if($emps && $emps->date_of_assignment){{$emps->date_of_assignment}}@endif" required>
+                                                        @else
+                                                            <input type="text" id="datepicker1" class="select2-single form-control" name="doa" required>
+                                                        @endif
+                                                    </div>
                                                 </div>
                                             </div>
-
-
-                                                <div class="form-group">
-                                                    <label for="datepicker1" class="col-md-3 control-label"> Date of Assignment </label>
-                                                    <div class="col-md-6">
-                                                        <div class="input-group">
-                                                            <div class="input-group-addon">
-                                                                <i class="fa fa-calendar text-alert pr11"></i>
-                                                            </div>
-                                                            @if(\Route::getFacadeRoot()->current()->uri() == 'edit-project-assignment/{id}')
-                                                                <input type="text" id="datepicker1" class="select2-single form-control" name="doa" value="@if($emps && $emps->date_of_assignment){{$emps->date_of_assignment}}@endif" required>
-                                                            @else
-                                                                <input type="text" id="datepicker1" class="select2-single form-control" name="doa" required>
-                                                            @endif
+                                            <div class="form-group">
+                                                <label for="datepicker4" class="col-md-3 control-label"> Date of Release </label>
+                                                <div class="col-md-6">
+                                                    <div class="input-group">
+                                                        <div class="input-group-addon">
+                                                            <i class="fa fa-calendar text-alert pr11"></i>
                                                         </div>
-                                                    </div>
-                                                </div>
-
-
-
-                                                <div class="form-group">
-                                                    <label for="datepicker4" class="col-md-3 control-label"> Date of Release </label>
-                                                    <div class="col-md-6">
-                                                        {{--@if(\Route::getFacadeRoot()->current()->uri() == 'edit-assignment/{id}')
-
-                                                            <input type="date" id="datepicker1" class="select2-single form-control" name="dor" value="@if($emps && $emps->dor){{$emps->dor}}@endif"/>
-
+                                                        @if(\Route::getFacadeRoot()->current()->uri() == 'edit-project-assignment/{id}')
+                                                            <input type="text" id="datepicker4" class="select2-single form-control" name="dor" value="@if($emps && $emps->date_of_assignment){{$emps->date_of_assignment}}@endif" required>
                                                         @else
-
-                                                            <input type="date" id="datepicker1" class="select2-single form-control" name="dor"/>
-
-                                                        @endif--}}
-                                                        <div class="input-group">
-                                                            <div class="input-group-addon">
-                                                                <i class="fa fa-calendar text-alert pr11"></i>
-                                                            </div>
-                                                            @if(\Route::getFacadeRoot()->current()->uri() == 'edit-project-assignment/{id}')
-                                                                <input type="text" id="datepicker4" class="select2-single form-control" name="dor" value="@if($emps && $emps->date_of_assignment){{$emps->date_of_assignment}}@endif" required>
-                                                            @else
-                                                                <input type="text" id="datepicker4" class="select2-single form-control" name="dor" required>
-                                                            @endif
-                                                        </div>
+                                                            <input type="text" id="datepicker4" class="select2-single form-control" name="dor" required>
+                                                        @endif
                                                     </div>
                                                 </div>
-
-
-
+                                            </div>
                                             <div class="form-group">
                                                 <label class="col-md-3 control-label"></label>
                                                 <div class="col-md-2">
-
                                                     <input type="submit" class="btn btn-bordered btn-info btn-block" value="Submit">
                                                 </div>
                                                 <div class="col-md-2"><a href="/assign-project" >
-                                                        <input type="button" class="btn btn-bordered btn-success btn-block" value="Reset"></a></div>
+                                                    <input type="button" class="btn btn-bordered btn-success btn-block" value="Reset"></a>
+                                                </div>
                                             </div>
                                         </div>
-
                                         {!! Form::close() !!}
                                     </div>
                                 </div>

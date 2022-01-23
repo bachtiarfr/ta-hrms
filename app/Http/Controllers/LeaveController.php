@@ -133,23 +133,7 @@
         $days = explode('day leave', $request->number_of_days);
       }
       $number_of_days = $this->wordsToNumber($days[0]);
-
       $leave = new EmployeeLeaves;
-
-      // $team = Team::where('member_id', \Auth::user()->employee->id)->first();
-      // if($team) {
-      //   $tl_id = $team->leader_id;
-      //   $manager_id = $team->manager_id;
-
-      //   $manager = Employee::where('id', $manager_id)->with('user')->first();
-      //   $teamLead = Employee::where('id', $tl_id)->with('user')->first();
-      //   $leave->tl_id = $tl_id;
-      //   $leave->manager_id = $manager_id;
-
-      //   $emails[] = ['email' => $manager->user->email, 'name' => $manager->user->name];
-      //   $emails[] = ['email' => $teamLead->user->email, 'name' => $teamLead->user->name];
-      // }
-
       $leave->user_id = \Auth::user()->id;
       $leave->date_from = date_format(date_create($request->dateFrom), 'Y-m-d');
       $leave->date_to = date_format(date_create($request->dateTo), 'Y-m-d');
@@ -162,7 +146,6 @@
       $leave->save();
 
       $leaveType = LeaveType::where('id', $request->leave_type)->first();
-      // $emails[] = ['email' => env('HR_EMAIL'), 'name' => env('HR_NAME')];
       $emails[] = ['email' => 'hr@demo.com', 'name' => 'HR Manager'];
       $leaveDraft = LeaveDraft::where('leave_type_id', $request->leave_type)->first();
       $subject = isset($leaveDraft->subject)? $leaveDraft->subject : '' ;
@@ -505,15 +488,17 @@
      */
     public function disapproveLeave(Request $request)
     {
+
       $leaveId = $request->leaveId;
       $remarks = $request->remarks;
       $employeeLeave = EmployeeLeaves::where('id', $leaveId)->first();
       $user = User::where('id', $employeeLeave->user_id)->first();
-      $this->mailer->send('emails.leave_status', ['user' => $user, 'status' => 'disapproved', 'remarks' => $remarks,'leave' => $employeeLeave], function($message) use($user)
-      {
-        $message->from('Born Digital Yogyakarta', 'hr@demo.test');
+     
+      $mail = $this->mailer->send('emails.leave_status', ['user' => $user, 'status' => 'disapproved', 'remarks' => $remarks ,'leave' => $employeeLeave], function($message) use($user) {
+        $message->from('hr@demo.test', 'HR Manager');
         $message->to($user->email,$user->name)->subject('Your leave has been disapproved');
       });
+
       \DB::table('employee_leaves')->where('id', $leaveId)->update(['status'=> '2', 'remarks' => $remarks]);
       return json_encode('success');
     }

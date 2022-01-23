@@ -48,11 +48,10 @@
 
             <!-- -------------- Login Form -------------- -->
             <div class="allcp-form theme-primary mw320" id="login">
-                <div class="text-center mb20"><img src="assets/img/logo_login_form.png" class="img-responsive"
-                                                   alt="Logo"/></div>
+                <div class="text-center mb20">
+                    <img src="assets/img/logo_login_form.png" class="img-responsive" alt="Logo"/>
+                </div>
                 <div class="panel mw320">
-
-
                     <form method="post" action="/" id="form-login">
                         <div class="panel-body pn mv10">
                             <div class="section">
@@ -63,7 +62,6 @@
                                     </label>
                                 </label>
                             </div>
-
                             <div class="section">
                                 <label for="username" class="field prepend-icon">
                                     <input type="text" name="email" id="email" class="gui-input" placeholder="Email">
@@ -73,7 +71,6 @@
                                 </label>
                             </div>
                             <!-- -------------- /section -------------- -->
-
                             <div class="section">
                                 <label for="password" class="field prepend-icon">
                                     <input type="text" name="password" id="password" class="gui-input" placeholder="Password">
@@ -83,7 +80,6 @@
                                 </label>
                             </div>
                             <!-- -------------- /section -------------- -->
-
                             <div class="section">
                                 <div class="bs-component pull-left pt5">
                                     <div class="radio-custom radio-primary mb5 lh25">
@@ -94,7 +90,6 @@
                                 <button type="submit" class="btn btn-bordered btn-primary pull-right">Log in</button>
                             </div>
                             <!-- -------------- /section -------------- -->
-
                         </div>
                         <!-- -------------- /Form -------------- -->
                     </form>
@@ -102,13 +97,10 @@
                 <!-- -------------- /Panel -------------- -->
             </div>
             <!-- -------------- /Spec Form -------------- -->
-
         </section>
         <!-- -------------- /Content -------------- -->
-
     </section>
     <!-- -------------- /Main Wrapper -------------- -->
-
 </div>
 <!-- -------------- /Body Wrap  -------------- -->
 

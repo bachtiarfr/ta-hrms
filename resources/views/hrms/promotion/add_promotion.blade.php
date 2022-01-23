@@ -51,7 +51,7 @@
                                                 </div>
                                             </div>
 
-                                            <div class="form-group">
+                                            {{-- <div class="form-group">
                                                 <label class="col-md-3 control-label"> Old Designation </label>
                                                 <div class="col-md-6">
                                                         <input type="text" id="old_designation" class="form-control" name="old_designation" readonly required>
@@ -73,7 +73,7 @@
 
                                                     </select>
                                                 </div>
-                                            </div>
+                                            </div> --}}
 
 
                                                 <div class="form-group">

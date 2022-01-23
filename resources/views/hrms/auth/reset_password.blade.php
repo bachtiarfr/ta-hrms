@@ -1,7 +1,8 @@
 Dear {{$user->name}},
 
 <br/><br/>
-    Congratulations ! Your new password is {!! $string !!} .
+    {{-- Click <a href="{{url()->current()}}/create-new-password">link here</a> to create your new password --}}
+    Congratulations ! Your new password is {!! $string !!}.
 <br />
 <br />
 

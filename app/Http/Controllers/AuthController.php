@@ -143,40 +143,29 @@
             $finishedProject = $countFinishedProject;
             
             // get who's take a leave
-            // $offEmps = EmployeeLeaves::where('status', 1)->get();
+            $offEmps = EmployeeLeaves::where('status', 1)->get();
             $offEmps = DB::table('users')
                 ->select('users.name', 'employee_leaves.date_from', 'employee_leaves.date_to', 'employee_leaves.status')
                 ->join('employee_leaves', 'users.id', '=', 'employee_leaves.user_id')
                 ->where('employee_leaves.status', '=', 1)
                 ->get();
+                
             // dd($offEmps);
-
-            // get who's take a leave
-            $dateRange = [];
             $dataUserWhoOff = [];
-            foreach ($offEmps as $emp) {
-                $date_now = Carbon::now()->format('Y-m-d');
-                $date_from = Carbon::parse($emp->date_from)->format('Y-m-d');
-                $date_to = Carbon::parse($emp->date_to)->format('Y-m-d');
-                
-                $iDateFrom = mktime(1, 0, 0, substr($date_from, 5, 2), substr($date_from, 8, 2), substr($date_from, 0, 4));
-                $iDateTo = mktime(1, 0, 0, substr($date_to, 5, 2), substr($date_to, 8, 2), substr($date_to, 0, 4));
-                
-                if ($iDateTo >= $iDateFrom) {
-                    array_push($dateRange, date('Y-m-d', $iDateFrom)); // first entry
-                    while ($iDateFrom<$iDateTo) {
-                        $iDateFrom += 86400; // add 24 hours
-                        array_push($dateRange, date('Y-m-d', $iDateFrom));
+            foreach ($offEmps as $dataEmp) {
+                $from = $dataEmp->date_from;
+                $to = $dataEmp->date_to;
+                $e = EmployeeLeaves::whereBetween('date_from', [$from, $to])->get();
+                $increments = 0;
+                foreach ($e as $i) {
+                    if($i->date_from == Carbon::now()->format('Y-m-d')) {
+                        // dd($i);
+                        $getUserLeaves = DB::table('users')->where('id', $i->user_id)->get();
+                        array_push($dataUserWhoOff, $getUserLeaves[$increments]->name);
+                        $increments++;
                     }
                 }
-                for ($i = 0; $i < count($dateRange); $i++) { 
-                    if ($date_from == $date_now || $dateRange[$i]) {
-                        array_push($dataUserWhoOff, $emp->name);
-                    }                
-                }
             }
-            $dataUserWhoOff = array_unique($dataUserWhoOff);
-            // dd($dataUserWhoOff);
 
             // get leave balance
            $dataSickLeaves = DB::table('employee_leaves')
@@ -505,6 +494,34 @@
         public function resetPassword()
         {
             return view('hrms.auth.reset');
+        }
+
+        public function createNewPassword()
+        {
+            return view('hrms.auth.create-new-password');
+        }
+        
+        public function processNewPassword(Request $request)
+        {
+            $password = $request->password;
+            $user  = User::where('email', $email)->first();
+
+            if ($user) {
+                $string = strtolower(str_random(6));
+
+
+                $this->mailer->send('hrms.auth.reset_password', ['user' => $user, 'string' => $string], function ($message) use ($user) {
+                    $message->from('no-reply@dipi-ip.com', 'Digital IP Insights');
+                    $message->to($user->email, $user->name)->subject('Your new password');
+                });
+
+                \DB::table('users')->where('email', $email)->update(['password' => bcrypt($string)]);
+
+                return redirect()->to('/')->with('message', 'Login with your new password received on your email');
+            } else {
+                return redirect()->to('/')->with('message', 'Your email is not registered');
+            }
+
         }
 
         public function processPasswordReset(Request $request)

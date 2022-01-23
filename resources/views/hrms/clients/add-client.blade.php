@@ -26,7 +26,6 @@
                                 <div class="panel-heading">
                                     <span class="panel-title hidden-xs"> Add Client </span>
                                 </div>
-
                                 <div class="panel-body pn">
                                     <div class="table-responsive">
                                         <div class="panel-body p25 pb10">
@@ -36,35 +35,30 @@
                                                 </div>
                                             @endif
                                             {!! Form::open(['class' => 'form-horizontal']) !!}
-
                                             <div class="form-group">
                                                 <label class="col-md-3 control-label"> Client </label>
                                                 <div class="col-md-6">
                                                     <input type="text" name="name" id="input002" class="select2-single form-control" placeholder="Name" required>
                                                 </div>
                                             </div>
-
                                             <div class="form-group">
                                                 <label class="col-md-3 control-label"> Address </label>
                                                 <div class="col-md-6">
                                                     <textarea class="select2-single form-control" rows="3" id="address" placeholder="Client Address" name="address"></textarea>
                                                 </div>
                                             </div>
-
-                                                <div class="form-group">
-                                                    <label class="col-md-3 control-label"> Company </label>
-                                                    <div class="col-md-6">
-                                                        <input type="text" name="company" id="input002" class="select2-single form-control" placeholder="Company">
-                                                    </div>
+                                            <div class="form-group">
+                                                <label class="col-md-3 control-label"> Company </label>
+                                                <div class="col-md-6">
+                                                    <input type="text" name="company" id="input002" class="select2-single form-control" placeholder="Company">
                                                 </div>
-
-                                                <div class="form-group code-group">
-                                                    <label class="col-md-3 control-label"> Code </label>
-                                                    <div class="col-md-6">
-                                                        <input type="text" name="code" id="code" class="select2-single form-control" placeholder="Unique Code" required>
-                                                    </div>
+                                            </div>
+                                            <div class="form-group code-group">
+                                                <label class="col-md-3 control-label"> Code </label>
+                                                <div class="col-md-6">
+                                                    <input type="text" name="code" id="code" class="select2-single form-control" placeholder="Unique Code" required>
                                                 </div>
-
+                                            </div>
                                             <div class="form-group">
                                                 <label class="col-md-3 control-label"></label>
                                                 <div class="col-md-2">
@@ -76,7 +70,6 @@
                                                 </div>
                                             </div>
                                             {!! Form::close() !!}
-
                                         </div>
                                     </div>
                                 </div>

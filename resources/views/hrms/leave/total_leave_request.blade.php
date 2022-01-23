@@ -226,12 +226,25 @@ $('.approveClick').click(function () {
 
 });
 
+
+$('.disapproveClick').click(function () {
+    console.log('disapprove clicked');
+    var leaveId = $(this).data('id');
+    var type = $(this).data('name');
+    var token = $('#token').val();
+    $('#leave_id').val(leaveId);
+    $('#type').val(type);
+    $('#remarkModal').modal('show');
+
+});
+
 $('#proceed-button').click(function () {
     $('#loader').removeClass('hidden');
     console.log('please wait processing...');
     var remarks = $('#remark-text').val();
     var type = $('#type').val();
     console.log('remarks ' + remarks);
+    console.log('type ' + type);
     var leave_id = $('#leave_id').val();
     var token = $('#token').val();
     var message = '';
@@ -245,6 +258,7 @@ $('#proceed-button').click(function () {
         message = 'Successfully Approved';
     }
     else {
+        console.log('proces dissaproved');
         message = 'Leave Rejected';
         divClass = 'alert-danger';
         url = '/disapprove-leave';

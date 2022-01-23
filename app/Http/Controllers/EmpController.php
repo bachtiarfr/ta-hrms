@@ -28,14 +28,8 @@ class EmpController extends Controller
         return view('hrms.employee.add', compact('roles'));
     }
 
-    public function processEmployee(Request $request)
-    {
+    public function processEmployee(Request $request) {
         $filename = public_path('photos');
-
-        // if ($request->hasFile('photo')) {
-        //     dd($request->photo);
-        // }
-
         if ($request->file('photo')) {
             $file             = $request->file('photo');
             $filename         = "photo_".$request->emp_name;
@@ -48,7 +42,6 @@ class EmpController extends Controller
             $filename = $filename . '.' . $fileExt;
             $file->move($destinationPath, $filename);
         }
-
         $user           = new User;
         $user->name     = $request->emp_name;
         $user->email    = $request->emp_name . '@demo.test';
@@ -83,7 +76,6 @@ class EmpController extends Controller
         $emp->full_final           = $request->full_final;
         $emp->user_id              = $user->id;
         $emp->save();
-
         // set leaver to
         $leaveRemaining = new RemainingLeaves();
         $leaveRemaining->user_id = $user->id;
@@ -94,10 +86,7 @@ class EmpController extends Controller
         $userRole->user_id = $user->id;
         $userRole->save();
 
-        //$emp->userrole()->create(['role_id' => $request->role]);
-
         return json_encode(['title' => 'Success', 'message' => 'Employee added successfully', 'class' => 'modal-header-success']);
-
     }
 
     public function showEmployee()
@@ -581,25 +570,19 @@ class EmpController extends Controller
         foreach ($emps as $emp) {
             $joiningDate = $emp['date_of_joining'];
             $currentDate = Carbon::now();
-    
             $ts1 = strtotime($joiningDate);
             $ts2 = strtotime($currentDate);
-    
             $year1 = date('Y', $ts1);
             $year2 = date('Y', $ts2);
-    
             $month1 = date('m', $ts1);
             $month2 = date('m', $ts2);
-    
             $totalDiffMonth = (($year2 - $year1) * 12) + ($month2 - $month1);
-
             $dataEmployee[] = [
                 'employee_id' => $emp['id'],
                 'employee_name' => $emp['name'],
                 'date_of_joining' => $emp['date_of_joining'],
                 'lenght_of_working' => $totalDiffMonth
             ];
-
             if($emp['attendance_points'] >= 600) {
                 $avaliableEmps = [];
                 foreach ($dataEmployee as $employee) {
@@ -619,20 +602,15 @@ class EmpController extends Controller
                             'employee_name' => $row->employee_name,
                             'finished_status' => $dateStatus
                         ];
-                        
                         foreach ($dataProjectStatus as $i) {
-
                             if ($i['finished_status'] == true) {
                                 $dataAssignmentFinishedName[] = $i['employee_name'];
                             }
                         }    
                     }
-    
                     // data employee that already finished some projects
                     $dataAssignmentFinishedName = array_unique($dataAssignmentFinishedName);
-    
                     foreach ($dataAssignmentFinishedName as $name) {
-
                         $dataProjectPerUser = DB::table('projects')
                             ->select('projects.name as project_name','users.name as employee_name', 'assign_projects.date_of_release')
                             ->join('assign_projects', 'projects.id', '=', 'assign_projects.project_id')
@@ -641,7 +619,6 @@ class EmpController extends Controller
                             ->orderBy('projects.name')
                             ->where('users.name', '=', $name)
                             ->get();
-                            
                         if ($employee['lenght_of_working'] >= 6 && $employee['employee_name'] == $name && $emp['attendance_points'] >= 600 && count($dataProjectPerUser) >= 3) {
                             $avaliableEmps[] = [
                                 'id' => $employee['employee_id'],

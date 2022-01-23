@@ -143,29 +143,15 @@
             $finishedProject = $countFinishedProject;
             
             // get who's take a leave
-            $offEmps = EmployeeLeaves::where('status', 1)->get();
             $offEmps = DB::table('users')
                 ->select('users.name', 'employee_leaves.date_from', 'employee_leaves.date_to', 'employee_leaves.status')
                 ->join('employee_leaves', 'users.id', '=', 'employee_leaves.user_id')
                 ->where('employee_leaves.status', '=', 1)
-                ->get();
-                
-            // dd($offEmps);
-            $dataUserWhoOff = [];
-            foreach ($offEmps as $dataEmp) {
-                $from = $dataEmp->date_from;
-                $to = $dataEmp->date_to;
-                $e = EmployeeLeaves::whereBetween('date_from', [$from, $to])->get();
-                $increments = 0;
-                foreach ($e as $i) {
-                    if($i->date_from == Carbon::now()->format('Y-m-d')) {
-                        // dd($i);
-                        $getUserLeaves = DB::table('users')->where('id', $i->user_id)->get();
-                        array_push($dataUserWhoOff, $getUserLeaves[$increments]->name);
-                        $increments++;
-                    }
-                }
-            }
+                ->whereDate('employee_leaves.date_from', '=', Carbon::now()->format('Y-m-d'))
+                ->groupBy('users.name')
+                ->get();                
+
+                // dd($offEmps);
 
             // get leave balance
            $dataSickLeaves = DB::table('employee_leaves')
@@ -209,7 +195,7 @@
             } else {
                 $remainingMaternityLeave = $dataMaternityLeaves->number_of_days - $dataMaternityLeaves->days;
             }
-            // $dataUserWhoOff = [];
+            $dataUserWhoOff = $offEmps;
             return view('hrms.dashboard', compact('events', 'meetings', 'user', 'greetings', 'dateNow', 'maleEmployee', 'femaleEmployee', 'roles', 'dataProjectStatus', 'runningProject', 'finishedProject', 'dataRuningProject', 'dataFinishedProject', 'dataUserWhoOff', 'remainingSickLeave', 'remainingCasualLeave', 'remainingMaternityLeave'));
         }
 

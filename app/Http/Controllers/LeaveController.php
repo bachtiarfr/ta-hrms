@@ -179,6 +179,7 @@
     {
 
       $leaves = EmployeeLeaves::where('user_id', \Auth::user()->id)->paginate(15);
+      // dd($leaves);
       return view('hrms.leave.show_my_leaves', compact('leaves'));
     }
 

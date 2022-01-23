@@ -87,7 +87,7 @@
                                         <th class="text-center">Date From</th>
                                         <th class="text-center">Date To</th>
                                         <th class="text-center">Days</th>
-                                        <th class="text-center">Remarks</th>
+                                        <th class="text-center">Reason</th>
                                         <th class="text-center">Status</th>
                                     </tr>
                                     </thead>
@@ -102,7 +102,7 @@
                                             <td class="text-center">{{getFormattedDate($leave->date_from)}}</td>
                                             <td class="text-center">{{getFormattedDate($leave->date_to)}}</td>
                                             <td class="text-center">{{$leave->days}}</td>
-                                            <td class="text-center" id="remark-{{$leave->id}}">{{(isset($leave->remarks)) ? $leave->remarks : 'N/A'}}</td>
+                                            <td class="text-center" id="remark-{{$leave->id}}">{{$leave->reason}}</td>
                                             <input type="hidden" value="{!! csrf_token() !!}" id="token">
                                             <td class="text-center">
                                                 <div class="btn-group text-right" id="button-{{$leave->id}}">
@@ -228,7 +228,6 @@ $('.approveClick').click(function () {
 
 
 $('.disapproveClick').click(function () {
-    console.log('disapprove clicked');
     var leaveId = $(this).data('id');
     var type = $(this).data('name');
     var token = $('#token').val();
@@ -240,11 +239,8 @@ $('.disapproveClick').click(function () {
 
 $('#proceed-button').click(function () {
     $('#loader').removeClass('hidden');
-    console.log('please wait processing...');
     var remarks = $('#remark-text').val();
     var type = $('#type').val();
-    console.log('remarks ' + remarks);
-    console.log('type ' + type);
     var leave_id = $('#leave_id').val();
     var token = $('#token').val();
     var message = '';
@@ -258,7 +254,6 @@ $('#proceed-button').click(function () {
         message = 'Successfully Approved';
     }
     else {
-        console.log('proces dissaproved');
         message = 'Leave Rejected';
         divClass = 'alert-danger';
         url = '/disapprove-leave';

@@ -205,7 +205,7 @@
                         @if(count($dataUserWhoOff) > 0)
                         <ol type="1" style="margin-top: 15px">
                             @foreach ($dataUserWhoOff as $data)
-                            <li>{{$data}}</li>
+                            <li>{{$data->name}}</li>
                             @endforeach
                         </ol>
                         @else

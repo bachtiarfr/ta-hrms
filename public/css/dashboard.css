@@ -1,6 +1,7 @@
 #dashboard-page .panel-card .panel-body {
     padding: 15px 0;
     min-height: 321px;
+    max-height: 321px;
 }
 
 #dashboard-page .panel-body.projects-card {

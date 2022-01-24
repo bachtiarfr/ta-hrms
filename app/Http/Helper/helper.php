@@ -3,9 +3,9 @@
 function totalLeaves($leaveType)
 {
     $result = [
-        '1' => '6',//sick leave
-        '2' => '12',//casual leave
-        '3' => '30'//maternity leave
+        'Sick leave' => '6',//sick leave
+        'Casual leave' => '12',//casual leave
+        'Maternity leave' => '30'//maternity leave
     ];
 
     return $result[$leaveType];

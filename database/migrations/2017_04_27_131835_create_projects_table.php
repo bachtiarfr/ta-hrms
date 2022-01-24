@@ -17,6 +17,7 @@ class CreateProjectsTable extends Migration
             $table->string('name');
             $table->text('description');
             $table->string('code');
+            $table->tinyInteger('status')->default(0)->comment('0 = Running, 1 = Finished, 2 = Delayed');
             $table->integer('client_id')->unsigned();
             $table->foreign('client_id')->references('id')->on('clients')->onDelete('cascade');
             $table->timestamps();

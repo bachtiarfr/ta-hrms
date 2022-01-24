@@ -47,6 +47,7 @@
                                                 <th class="text-center">Description</th>
                                                 <th class="text-center">Project Code</th>
                                                 <th class="text-center">Client Name</th>
+                                                <th class="text-center">Status</th>
                                                 <th class="text-center">Actions</th>
                                             </tr>
                                             </thead>
@@ -59,6 +60,9 @@
                                                     <td class="text-center">{{$project->description}}</td>
                                                     <td class="text-center">{{$project->code}}</td>
                                                     <td class="text-center">{{$project['client']->name}}</td>
+                                                    <td class="text-center">
+                                                        
+                                                    </td>
                                                     <td class="text-center">
                                                         <div class="btn-group text-right">
                                                             <button type="button"

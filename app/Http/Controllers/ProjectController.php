@@ -7,8 +7,9 @@ use App\Models\Employee;
 use App\Models\Project;
 use Illuminate\Http\Request;
 use App\User;
+use App\Models\UserRole;
 use App\Models\AssignProject;
-
+use DB;
 use App\Http\Requests;
 
 class ProjectController extends Controller
@@ -129,8 +130,14 @@ class ProjectController extends Controller
     public function doAssign()
     {
         $emps = User::get();
+        $authority = DB::table('users')
+            ->select('users.id', 'users.name')
+            ->join('user_roles', 'user_roles.user_id', 'users.id')
+            ->where('user_roles.role_id', '=', 1)
+            ->get();
+        // dd($authority);
         $projects = Project::get();
-        return view('hrms.project.assign-project', compact('emps', 'projects'));
+        return view('hrms.project.assign-project', compact('emps', 'projects', 'authority'));
     }
 
     public function processAssign(Request $request)

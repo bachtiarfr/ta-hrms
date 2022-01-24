@@ -13,14 +13,8 @@ class RolesSeeder extends Seeder
     {
         \DB::table('roles')->insert([
             [
-                'name' => 'Admin',
+                'name' => 'Admin | HR',
                 'description' => 'Has all the rights',
-                'created_at' => \Carbon\Carbon::now(),
-                'updated_at' => \Carbon\Carbon::now(),
-            ],
-            [
-                'name' => 'HR Manager',
-                'description' => 'Human Resource Manager',
                 'created_at' => \Carbon\Carbon::now(),
                 'updated_at' => \Carbon\Carbon::now(),
             ],
@@ -38,6 +32,18 @@ class RolesSeeder extends Seeder
             ],
             [
                 'name' => 'Software Developer | Back End',
+                'description' => 'Back End Developer',
+                'created_at' => \Carbon\Carbon::now(),
+                'updated_at' => \Carbon\Carbon::now(),
+            ],
+            [
+                'name' => 'Designer',
+                'description' => 'Designer',
+                'created_at' => \Carbon\Carbon::now(),
+                'updated_at' => \Carbon\Carbon::now(),
+            ],
+            [
+                'name' => 'Data Entry',
                 'description' => 'Back End Developer',
                 'created_at' => \Carbon\Carbon::now(),
                 'updated_at' => \Carbon\Carbon::now(),

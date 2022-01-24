@@ -268,8 +268,6 @@
                 success: function (value) { 
                     var cData = value;
 
-                    console.log('role : ', cData);
-
                     var ctx = $("#roleChart");
                     var ctx = document.getElementById('roleChart'); // node
                     var ctx = document.getElementById('roleChart').getContext('2d'); // 2d context
@@ -277,14 +275,15 @@
                     var ctx = 'roleChart'; // element id
                     
                     const dataRoles = {
-                        labels: ['Admin', 'Human Resource', 'Project Manager', 'Front End', 'Back End'],
+                        labels: cData.names,
                         datasets: [{
-                            data: cData,
+                            data: cData.counts,
                             backgroundColor: [
                             'red',
                             'green',
                             'blue',
                             'gray',
+                            'orange',
                             'yellow'
                             ],
                             hoverOffset: 4

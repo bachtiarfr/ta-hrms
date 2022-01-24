@@ -86,6 +86,17 @@
                                                 </div>
                                             </div>
                                             <div class="form-group">
+                                                <label class="col-md-3 control-label"> Select Authority </label>
+                                                <div class="col-md-6">
+                                                    <select class="select2-multiple form-control select-primary" name="project_leader_id" required>
+                                                        <option value="" selected>Select One</option>
+                                                        @foreach($authority as $emp)
+                                                            <option value="{{$emp->id}}">{{$emp->name}}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
                                                 <label for="datepicker1" class="col-md-3 control-label"> Date of Assignment </label>
                                                 <div class="col-md-6">
                                                     <div class="input-group">

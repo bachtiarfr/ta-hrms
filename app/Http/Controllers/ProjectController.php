@@ -143,7 +143,7 @@ class ProjectController extends Controller
     public function processAssign(Request $request)
     {
         $employees = $request->member_id;
-
+        // dd($request);
         foreach ($employees as $emp) {
             $assignment = new AssignProject();
             $assignment->project_id = $request->project_id;

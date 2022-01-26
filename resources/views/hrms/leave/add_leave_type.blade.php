@@ -65,6 +65,17 @@
                                         </div>
 
                                         <div class="form-group">
+                                            <label class="col-md-3 control-label"> Number Of Days </label>
+                                            <div class="col-md-6">
+                                                @if(\Route::getFacadeRoot()->current()->uri() == 'edit-leave-type/{id}')
+                                                    <input type="number" name="number_of_days" id="input002" class="select2-single form-control" value="@if($result && $result->number_of_days){{$result->number_of_days}}@endif" required>
+                                                @else
+                                                    <input type="number" name="number_of_days" id="input002" class="select2-single form-control" placeholder="Number of days" required>
+                                                @endif
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
                                             <label class="col-md-3 control-label"> Description </label>
                                             <div class="col-md-6">
                                                 @if(\Route::getFacadeRoot()->current()->uri() == 'edit-leave-type/{id}')

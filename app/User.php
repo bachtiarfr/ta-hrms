@@ -42,6 +42,15 @@ class User extends Authenticatable
         return $this->hasOne('App\Models\UserRole', 'user_id', 'id');
     }
 
+    public function isFemale() {
+        $userId = Auth::user()->id;
+        $userGander = Employee::where('id', $userId)->first();
+        if ($userGander->gender == 0) {
+            return true;
+        }
+        return false;
+    }
+
     public function isHR()
     {
         $userId = Auth::user()->id;

@@ -16,6 +16,7 @@ class CreateLeaveTypesTable extends Migration
             $table->increments('id');
             $table->string('leave_type');
             $table->string('description');
+            $table->integer('number_of_days');
             $table->timestamps();
 
         });

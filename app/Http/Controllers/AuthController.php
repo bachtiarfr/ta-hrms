@@ -197,8 +197,43 @@
             } else {
                 $remainingMaternityLeave = $dataMaternityLeaves->number_of_days - $dataMaternityLeaves->days;
             }
+
+            // get role tooltip
+            $renderRoleToolTip = DB::table('user_roles')
+                ->select('users.name as employee_name', 'roles.name as employee_role')
+                ->join('roles', 'roles.id', '=', 'user_roles.role_id')
+                ->join('users', 'users.id', '=', 'user_roles.user_id')
+                ->get();
+
+            // dd($dataUser);
+            $roleTooltipHTML = '';
+            foreach ($renderRoleToolTip as $role) {
+                $roleTooltipHTML .= '<ul>
+                        <li>'. $role->employee_name . ' - ' . $role->employee_role .'</li>
+                    </ul>';
+            }
+
+            // get gender tooltip
+            $renderGenderTooltip = DB::table('employees')
+                ->select('name', 'gender')
+                ->get();
+
+            // dd($dataUser);
+            $genderTooltipHTML = '';
+            foreach ($renderGenderTooltip as $gender) {
+                if ($gender->gender == 1) {
+                    $genderTooltipHTML .= '<ul>
+                            <li>'. $gender->name . ' - Male ' . '</li>
+                        </ul>';
+                } else {
+                    $genderTooltipHTML .= '<ul>
+                            <li>'. $gender->name . ' - Female ' . '</li>
+                        </ul>';
+                }
+            }
+
             $dataUserWhoOff = $offEmps;
-            return view('hrms.dashboard', compact('events', 'meetings', 'user', 'greetings', 'dateNow', 'maleEmployee', 'femaleEmployee', 'roles', 'dataProjectStatus', 'runningProject', 'finishedProject', 'dataRuningProject', 'dataFinishedProject', 'dataUserWhoOff', 'remainingSickLeave', 'remainingCasualLeave', 'remainingMaternityLeave'));
+            return view('hrms.dashboard', compact('events', 'roleTooltipHTML', 'genderTooltipHTML', 'meetings', 'user', 'greetings', 'dateNow', 'maleEmployee', 'femaleEmployee', 'roles', 'dataProjectStatus', 'runningProject', 'finishedProject', 'dataRuningProject', 'dataFinishedProject', 'dataUserWhoOff', 'remainingSickLeave', 'remainingCasualLeave', 'remainingMaternityLeave'));
         }
 
         public function getJsonDataUser()
@@ -291,6 +326,26 @@
             $dataGender = [ count($maleEmployee), count($femaleEmployee) ];
 
             return $dataGender;
+        }
+
+
+        public function getTooltipRole() {
+            $dataUser = DB::table('user_roles')
+                ->select('users.name as employee_name', 'roles.name as employee_role')
+                ->join('roles', 'roles.id', '=', 'user_roles.role_id')
+                ->join('users', 'users.id', '=', 'user_roles.user_id')
+                ->get();
+
+            // dd($dataUser);
+            $renderHRML = '';
+            foreach ($dataUser as $user) {
+                $renderHRML .= '<ul>
+                        <li>Employee Name : '. $user->employee_name .'</li>
+                        <li>Employee Role : '. $user->employee_role .'</li>
+                    </ul>';
+            }
+
+            return $renderHRML;
         }
 
         public function welcome()

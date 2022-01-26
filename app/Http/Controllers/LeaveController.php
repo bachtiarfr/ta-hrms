@@ -44,6 +44,7 @@
     {
       $leave = new LeaveType;
       $leave->leave_type = $request->leave_type;
+      $leave->number_of_days = $request->number_of_days;
       $leave->description = $request->description;
       $leave->number_of_days = $request->number_of_days;
       $leave->save();
@@ -80,6 +81,7 @@
     Public function doEdit(Request $request, $id)
     {
       $leave_type = $request->leave_type;
+      $number_of_days = $request->number_of_days;
       $description = $request->description;
 
       $edit = LeaveType::findOrFail($id);
@@ -88,6 +90,9 @@
       }
       if (!empty($description)) {
         $edit->description = $description;
+      }
+      if (!empty($number_of_days)) {
+        $edit->number_of_days = $number_of_days;
       }
       $edit->save();
 
@@ -447,14 +452,18 @@
     {
       $leaveTypeId = $request->leaveTypeId;
       $userId = $request->userId;
-
+      
       $count = EmployeeLeaves::where(['user_id' => $userId, 'leave_type_id' => $leaveTypeId, 'status' => '1'])->get();
+
       $day = 0;
-      foreach($count as $days)
-      {
+      foreach($count as $days) {
         $day += $days->days;
       }
-      $totalLeaves = totalLeaves($leaveTypeId);
+      // $totalLeaves = totalLeaves($leaveTypeId);
+      $totalLeaves = LeaveType::where('id', $leaveTypeId)->first();
+      $totalLeaves = $totalLeaves->number_of_days;
+      // dd($totalLeaves);
+
       $remainingLeaves = $totalLeaves - $day;
 
       return json_encode($remainingLeaves);

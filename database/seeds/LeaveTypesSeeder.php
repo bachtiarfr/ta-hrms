@@ -15,14 +15,17 @@ class LeaveTypesSeeder extends Seeder
             [
                 'leave_type' => 'Sick leave',
                 'description' => 'Sick leave',
+                'number_of_days' => '6',
             ],
             [
                 'leave_type' => 'Casual leave',
                 'description' => 'Casual leave',
+                'number_of_days' => '12',
             ],
             [
                 'leave_type' => 'Maternity leave',
                 'description' => 'Maternity leave',
+                'number_of_days' => '30',
             ]
         ]);
     }

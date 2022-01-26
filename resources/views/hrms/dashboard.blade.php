@@ -34,6 +34,25 @@
     background-size: contain;
 }
 
+.tooltip-info {
+    border: none;
+    position: absolute;
+    right: 10px;
+    text-transform: none;
+    border-radius: 50%;
+    font-size: 10px;
+    width: 15px;
+    padding: 0;
+    background: #80808096;
+    color: #fff;
+}
+
+body ul {
+    padding: 0;
+    border-bottom: 1px solid #fff;
+    text-align: left;
+}
+
 </style>
 
         <!-- -------------- Topbar -------------- -->
@@ -94,6 +113,9 @@
             <div class="col-sm-3 col-xl-3 panel-card">
                 <div class="panel panel-tile">
                     <div class="panel-body">
+                        <button type="button" id="tooltip-role" class="tooltip-info" data-toggle="tooltip" data-html="true" title="<?= $roleTooltipHTML; ?>" data-placement="bottom">
+                            i
+                        </button>
                         <canvas id="roleChart" style="width: 288px !important; height: 291px !important"></canvas>
                     </div>
                 </div>
@@ -103,6 +125,9 @@
             <div class="col-sm-3 col-xl-3 panel-card">
                 <div class="panel panel-tile">
                     <div class="panel-body">
+                        <button type="button" id="tooltip-gender" class="tooltip-info" data-toggle="tooltip" data-html="true" title="<?= $genderTooltipHTML; ?>" data-placement="bottom">
+                            i
+                        </button>
                         <canvas id="genderChart"></canvas>
                         <div class="panel-content">
                             <div class="inner-content">
@@ -120,7 +145,7 @@
             <div class="col-sm-3 col-xl-3 panel-card">
                 <div class="panel panel-tile">
                     <div class="panel-body">
-                        @if($finishedProject > 0 || $runningProject > 0)
+                        @if(count($dataFinishedProject) > 0 || count($dataRuningProject) > 0)
                         <canvas id="projectChart"></canvas>
                         @else
                         <canvas>
@@ -129,15 +154,15 @@
                         @endif
                         <div class="panel-content">
                             <div class="inner-content">
-                                @if($finishedProject > 0)
-                                Finished Project <span class="total">{{ $finishedProject }}</span>
+                                @if(count($dataFinishedProject) > 0)
+                                Finished Project <span class="total">{{ count($dataFinishedProject) }}</span>
                                 @else
                                 Finished Project <span class="total">0</span>
                                 @endif
                             </div>
                             <div class="inner-content">
-                                @if($runningProject > 0)
-                                Running Project <span class="total">{{ $runningProject }}</span>
+                                @if(count($dataRuningProject) > 0)
+                                Running Project <span class="total">{{ count($dataRuningProject) }}</span>
                                 @else
                                 Running Project <span class="total">0</span>
                                 @endif
@@ -240,10 +265,12 @@
                                 <div class="subtitle">Casual leave</div>
                                 <div class="amount"><?= $remainingCasualLeave ?> Day</div>
                             </div>
+                            @if(Auth::user()->isFemale())
                             <div class="inner-content">
                                 <div class="subtitle">Maternity leave</div>
                                 <div class="amount"><?= $remainingMaternityLeave ?> Day</div>
                             </div>
+                            @endif
                             <a href="/apply-leave" class="btn-request-leave">Request for leave</a>
                         </div>
                     </div>

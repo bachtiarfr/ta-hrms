@@ -152,17 +152,17 @@ body ul {
                             No data yet
                         </canvas>
                         @endif
-                        <div class="panel-content">
+                        <div class="panel-content" style="display: none">
                             <div class="inner-content">
-                                @if(count($dataFinishedProject) > 0)
-                                Finished Project <span class="total">{{ count($dataFinishedProject) }}</span>
+                                @if($finishedProject > 0)
+                                Finished Project <span class="total">{{$finishedProject }}</span>
                                 @else
                                 Finished Project <span class="total">0</span>
                                 @endif
                             </div>
                             <div class="inner-content">
-                                @if(count($dataRuningProject) > 0)
-                                Running Project <span class="total">{{ count($dataRuningProject) }}</span>
+                                @if($runningProject > 0)
+                                Running Project <span class="total">{{$runningProject}}</span>
                                 @else
                                 Running Project <span class="total">0</span>
                                 @endif
@@ -178,11 +178,14 @@ body ul {
                     <div class="panel-body projects-card">
                         <div class="title">Projects detail</div>
                         <ul class="nav nav-tabs" id="projectsTab" role="tablist">
-                            <li class="nav-item">
+                            <li class="nav-item active">
                               <a class="nav-link active" id="finished-projects-tab" data-toggle="tab" href="#finished-projects" role="tab" aria-controls="finished-projects" aria-selected="true">Finished projects</a>
                             </li>
                             <li class="nav-item">
                               <a class="nav-link" id="running-projects-tab" data-toggle="tab" href="#running-projects" role="tab" aria-controls="running-projects" aria-selected="false">Running projects</a>
+                            </li>
+                            <li class="nav-item">
+                              <a class="nav-link" id="delayed-projects-tab" data-toggle="tab" href="#delayed-projects" role="tab" aria-controls="delayed-projects" aria-selected="false">Delayed projects</a>
                             </li>
                           </ul>
                           <div class="tab-content" id="projectsTabContent">
@@ -206,6 +209,21 @@ body ul {
                                     @if(count($dataRuningProject) > 0)
                                         <ol type="1">
                                             @foreach ($dataRuningProject as $data)
+                                            <li>{{$data}}</li>
+                                            @endforeach
+                                        </ol>
+                                    @else
+                                        <ol style="list-style: none">
+                                            <li>No data yet</li>
+                                        </ol>
+                                    @endif
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="delayed-projects" role="tabpanel" aria-labelledby="delayed-projects-tab">
+                                <div class="project-name">
+                                    @if(count($dataDelayedProject) > 0)
+                                        <ol type="1">
+                                            @foreach ($dataDelayedProject as $data)
                                             <li>{{$data}}</li>
                                             @endforeach
                                         </ol>
@@ -414,12 +432,13 @@ body ul {
                     var ctx = 'projectChart'; // element id
                     
                     const dataGender = {
-                        labels: ['Finished Projects', 'Running Projects'],
+                        labels: ['Running Projects', 'Finished Projects', 'Delayed Projects'],
                         datasets: [{
                             data: cData,
                             backgroundColor: [
-                            '#27AE60',
-                            '#d3dc8d'
+                            '#ffa500a3',
+                            '#008000a3',
+                            '#ff0000a3'
                             ],
                             hoverOffset: 4
                         }]

@@ -2,6 +2,34 @@
 
 @section('content')
     <!-- START CONTENT -->
+    <style>
+
+        .project-status {
+            margin-bottom: 10px;
+        }
+
+        .project-status .status-lable.Running {
+            background: #ffa500a3;
+            padding: 5px;
+            border-radius: 5px;
+            color: white;
+        }
+
+        .project-status .status-lable.Finished {
+            background: #008000a3;
+            padding: 5px;
+            border-radius: 5px;
+            color: white;
+        }
+
+        .project-status .status-lable.Delayed {
+            background: #ff0000a3;
+            padding: 5px;
+            border-radius: 5px;
+            color: white;
+        }
+
+    </style>
     <div class="content">
         <header id="topbar" class="alt">
             <div class="topbar-left">
@@ -72,6 +100,34 @@
                                                             <option value="{{$client->id}}">{{$client->name}}</option>
                                                         @endforeach
                                                     </select>--}}
+                                                </div>
+                                            </div>
+
+                                            <?php
+                                                $date = new \Carbon\Carbon($project->date_of_release);
+                                                $dateStatus = $date->isPast();
+
+                                                if($project->status == 0 && $dateStatus == false) {
+                                                    $lable = 'Running';
+                                                } 
+                                                if ($project->status == 1 && $dateStatus == true) {
+                                                    $lable = 'Finished';
+                                                } 
+                                                if ($project->status != 1 && $dateStatus == true) {
+                                                    $lable = 'Delayed';
+                                                }
+                                            ?> 
+
+                                            <div class="form-group">
+                                                <label class="col-md-3 control-label"> Status </label>
+                                                <div class="col-md-6">
+                                                    <div class="project-status">
+                                                        Current status : <span class="status-lable {{ $lable }}">{{ $lable }}</span>
+                                                    </div>
+                                                    <select class="selectpicker form-control" data-done-button="true" name="status" required>
+                                                        <option value="0">Running</option>
+                                                        <option value="1">Finish</option>
+                                                    </select>
                                                 </div>
                                             </div>
 

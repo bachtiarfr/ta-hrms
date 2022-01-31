@@ -2,6 +2,29 @@
 
 @section('content')
     <!-- START CONTENT -->
+    <style>
+        
+        .status-lable.Running {
+            background: #ffa500a3;
+            padding: 5px;
+            border-radius: 5px;
+            color: white;
+        }
+
+        .status-lable.Finished {
+            background: #008000a3;
+            padding: 5px;
+            border-radius: 5px;
+            color: white;
+        }
+
+        .status-lable.Delayed {
+            background: #ff0000a3;
+            padding: 5px;
+            border-radius: 5px;
+            color: white;
+        }
+    </style>
     <div class="content">
 
         <header id="topbar" class="alt">
@@ -54,14 +77,31 @@
 
                                             <tbody>
                                             @foreach($projects as $project)
+
+                                                <?php
+                                                $date = new \Carbon\Carbon($project->date_of_release);
+                                                $dateStatus = $date->isPast();
+
+                                                if($project->status == 0 && $dateStatus == false) {
+                                                    $lable = 'Running';
+                                                } 
+                                                if ($project->status == 1 && $dateStatus == true) {
+                                                    $lable = 'Finished';
+                                                } 
+                                                if ($project->status != 1 && $dateStatus == true) {
+                                                    $lable = 'Delayed';
+                                                }
+                                                ?>                                                
                                                 <tr>
                                                     <td class="text-center">{{$project->id}}</td>
                                                     <td class="text-center">{{$project->name}}</td>
                                                     <td class="text-center">{{$project->description}}</td>
                                                     <td class="text-center">{{$project->code}}</td>
-                                                    <td class="text-center">{{$project['client']->name}}</td>
+                                                    <td class="text-center">{{$project->client_name}}</td>
                                                     <td class="text-center">
-                                                        
+                                                        <span class="status-lable {{ $lable }}">
+                                                            {{ $lable }}
+                                                        </span>
                                                     </td>
                                                     <td class="text-center">
                                                         <div class="btn-group text-right">

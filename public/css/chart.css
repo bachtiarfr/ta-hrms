@@ -2,6 +2,14 @@
     width: 220px !important;
     height: 220px !important;
     margin: auto;
+    object-fit: cover;
+}
+
+.panel-body canvas#projectChart {
+    width: 275px !important;
+    height: 275px !important;
+    margin: auto;
+    object-fit: cover;
 }
 
 .panel-body .panel-content {

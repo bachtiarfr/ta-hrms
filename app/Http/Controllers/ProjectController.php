@@ -11,6 +11,7 @@ use App\Models\UserRole;
 use App\Models\AssignProject;
 use DB;
 use App\Http\Requests;
+use Carbon\Carbon;
 
 class ProjectController extends Controller
 {
@@ -73,17 +74,81 @@ class ProjectController extends Controller
 
     public function listProject()
     {
-        $projects = Project::with('client')->paginate(15);
+
+        $projects = DB::table('projects')
+            ->select(
+                'projects.id',
+                'projects.name',
+                'projects.description',
+                'projects.code',
+                'clients.name as client_name',
+                'assign_projects.date_of_release',
+                'projects.status'
+            )
+            ->join('assign_projects', 'projects.id', '=', 'assign_projects.project_id')
+            ->join('clients', 'clients.id', '=', '.projects.client_id')
+            ->orderBy('projects.name')
+            ->distinct()
+            ->paginate(15);
+            // ->get();
+            
+        // dd($projects);
+        // $dataFinishedProject = [];
+        // $dataRuningProject = [];
+        // $dataDelayedProject = [];
+
+        // $countRunningProject = 0;
+        // $countFinishedProject = 0;
+        // $countDelayedProject = 0;
+
+        // if (count($projects) > 0) {
+        //     foreach ($projects as $row) {
+        //         $date = new Carbon($row->date_of_release);
+        //         $dateStatus = $date->isPast();
+        //         if($row->status == 0 && $dateStatus == false) {
+        //             $countRunningProject++;
+        //             $dataRuningProject[] = $row->name;
+        //         } 
+                
+        //         if ($row->status == 1 && $dateStatus == true) {
+        //             $countFinishedProject++;
+        //             $dataFinishedProject[] = $row->name;
+        //         } 
+                
+        //         if ($row->status != 1 && $dateStatus == true) {
+        //             $countDelayedProject++;
+        //             $dataDelayedProject[] = $row->name;
+        //         }
+        //     }
+        // }
+
+        // $projects = Project::with('client')->paginate(15);
         return view('hrms.projects.list', compact('projects'));
     }
 
 
     public function showEdit($projectId)
     {
+
+        $project = DB::table('projects')
+            ->select(
+                'projects.id',
+                'projects.name',
+                'projects.description',
+                'projects.code',
+                'clients.name as client_name',
+                'clients.id as client_id',
+                'assign_projects.date_of_release',
+                'projects.status'
+            )
+            ->join('assign_projects', 'projects.id', '=', 'assign_projects.project_id')
+            ->join('clients', 'clients.id', '=', '.projects.client_id')
+            ->where('projects.id', '=', $projectId)
+            ->first();
+
         $model = new \stdClass();
-        $project = Project::with('client')->where(['id' => $projectId])->first();
-     //  return $model->project;
-       // $model->description =
+        // $project = Project::with('client')->where(['id' => $projectId])->first();
+        // dd($project);
         $clients = Client::get();
         foreach($clients as $client)
         {
@@ -96,13 +161,16 @@ class ProjectController extends Controller
     public function doEdit(Request $request, $id)
     {
         $name = $request->name;
+        $status = $request->status;
         $description = $request->description;
         $code = $request->code;
         $client_id = $request->client_id;
-
         $edit = project::findOrFail($id);
         if (!empty($name)) {
             $edit->name = $name;
+        }
+        if (!empty($status)) {
+            $edit->status = $status;
         }
         if (!empty($description)) {
             $edit->description = $description;

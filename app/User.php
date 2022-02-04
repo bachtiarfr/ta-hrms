@@ -44,7 +44,7 @@ class User extends Authenticatable
 
     public function isFemale() {
         $userId = Auth::user()->id;
-        $userGander = Employee::where('id', $userId)->first();
+        $userGander = Employee::where('user_id', $userId)->first();
         if ($userGander->gender == 0) {
             return true;
         }

@@ -39,10 +39,6 @@
                         <a href="{{route('employee-manager')}}">
                             <span class="glyphicon glyphicon-tags"></span> Employee Listing </a>
                     </li>
-                    <li>
-                        <a href="{{route('upload-emp')}}">
-                            <span class="glyphicon glyphicon-tags"></span> Upload </a>
-                    </li>
                 </ul>
             </li>
     
@@ -309,6 +305,10 @@
                     <li class="dropdown-footer text-center">
                         <a href="/logout" class="btn btn-primary btn-sm btn-bordered">
                             <span class="fa fa-power-off pr5"></span> Logout </a>
+                    </li>
+                    <li class="dropdown-footer text-center">
+                        <a href="/profile" class="btn btn-primary btn-sm btn-bordered">
+                            <span class="fa fa-user pr5"></span> Profile </a>
                     </li>
                 </ul>
         </li>

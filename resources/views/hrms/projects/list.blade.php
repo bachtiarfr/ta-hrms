@@ -65,17 +65,22 @@
                                         <table class="table allcp-form theme-warning tc-checkbox-1 fs13">
                                             <thead>
                                             <tr class="bg-light">
-                                                <th class="text-center">Id</th>
+                                                <th class="text-center">No</th>
                                                 <th class="text-center">Project Name</th>
                                                 <th class="text-center">Description</th>
                                                 <th class="text-center">Project Code</th>
                                                 <th class="text-center">Client Name</th>
                                                 <th class="text-center">Status</th>
+                                                @if(Auth::user()->isHR())
                                                 <th class="text-center">Actions</th>
+                                                @endif
                                             </tr>
                                             </thead>
 
                                             <tbody>
+                                            <?php
+                                            $i = 1;
+                                            ?>
                                             @foreach($projects as $project)
 
                                                 <?php
@@ -93,7 +98,7 @@
                                                 }
                                                 ?>                                                
                                                 <tr>
-                                                    <td class="text-center">{{$project->id}}</td>
+                                                    <td class="text-center"><?= $i; ?></td>
                                                     <td class="text-center">{{$project->name}}</td>
                                                     <td class="text-center">{{$project->description}}</td>
                                                     <td class="text-center">{{$project->code}}</td>
@@ -103,6 +108,7 @@
                                                             {{ $lable }}
                                                         </span>
                                                     </td>
+                                                    @if(Auth::user()->isHR())
                                                     <td class="text-center">
                                                         <div class="btn-group text-right">
                                                             <button type="button"
@@ -120,7 +126,9 @@
                                                             </ul>
                                                         </div>
                                                     </td>
+                                                    @endif
                                                 </tr>
+                                                <?php $i++; ?>
                                             @endforeach
                                             <tr>
                                                 {!! $projects->render() !!}

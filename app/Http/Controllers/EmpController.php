@@ -42,9 +42,10 @@ class EmpController extends Controller
             $filename = $filename . '.' . $fileExt;
             $file->move($destinationPath, $filename);
         }
+
         $user           = new User;
         $user->name     = $request->emp_name;
-        $user->email    = $request->emp_name . '@demo.test';
+        $user->email    = $request->email;
         $user->password = bcrypt('123456');
         $user->save();
 
@@ -76,6 +77,7 @@ class EmpController extends Controller
         $emp->full_final           = $request->full_final;
         $emp->user_id              = $user->id;
         $emp->save();
+        
         // set leaver to
         $leaveRemaining = new RemainingLeaves();
         $leaveRemaining->user_id = $user->id;

@@ -85,14 +85,14 @@ body ul {
                                 <div class="username-wrap">
                                     <?= $greetings . ', ' . $user['name']; ?>!
                                 </div>
-                                <div class="date">It’s <?= $dateNow; ?></div>
+                                <div class="date">It’s <?= $greetingDays; ?></div>
                                 <div class="shortcut">
                                     <h3>Shortcut</h3>
                                     @if(Auth::user()->isHR())
                                     <div class="shortcut-list">
                                         <a href="/attendance-upload" class="attendance">Upload attendance</a>
                                         <a href="/add-project" class="projects">Add new projects</a>
-                                        <a href="/export-pdf" class="apply-leaves">Export all reports</a>
+                                        <a href="/assign-project" class="apply-leaves">Assign project</a>
                                     </div>
                                     @else
                                     <div class="shortcut-list">

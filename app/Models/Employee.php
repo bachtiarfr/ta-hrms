@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Employee extends Model
 {
     public function userrole() {
-        return $this->hasOne('App\Models\UserRole', 'user_id', 'id');
+        return $this->hasOne('App\Models\UserRole', 'user_id', 'user_id');
     }
 
     public function employeeLeaves() {

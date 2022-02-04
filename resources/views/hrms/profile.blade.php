@@ -24,8 +24,7 @@
                             @endif
 
                         </div>
-                        <p class="text-center no-margin">{{isset($details->userrole->role->name)?$details->userrole->role->name:''}}</p>
-                        <p class="small text-center no-margin"><span class="text-muted">Department:</span> {{isset($details->department) ? $details->department:'' }}</p>
+                        <p class="small text-center no-margin" style="margin-top: 15px"><span class="text-muted">Role:</span> {{isset($details->userrole->role->name)?$details->userrole->role->name:''}} </p>
                         <p class="small text-center no-margin"><span class="text-muted">Employee ID:</span> {{isset($details->code) ? $details->code:''}}</p>
 
 
@@ -48,12 +47,6 @@
                                         <td><strong>Account Number</strong></td>
                                         <td>{{isset($details->account_number) ? $details->account_number:''}}</td>
 
-                                    </tr>
-                                    <tr>
-
-                                        <td style="width: 10px" class="text-center"><i class="fa fa-tags"></i></td>
-                                        <td><strong>Pf Account Number</strong></td>
-                                        <td>{{isset($details->pf_account_number) ? $details->pf_account_number:''}}</td>
                                     </tr>
                                     <tr>
                                         <td style="width: 10px" class="text-center"><i class="fa fa-bank"></i></td>
@@ -198,18 +191,13 @@
                                     </tr>
                                     <tr>
                                         <td class="text-center"><i class="fa fa-briefcase"></i></td>
-                                        <td><strong>Department</strong></td>
-                                        <td>{{$details->department}}</td>
+                                        <td><strong>Role</strong></td>
+                                        <td>{{isset($details->userrole->role->name)?$details->userrole->role->name:''}}</td>
                                     </tr>
                                     <tr>
                                         <td class="text-center"><i class="fa fa-calendar"></i></td>
                                         <td><strong>Date Joined</strong></td>
                                         <td>{{$details->date_of_joining}}</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-center"><i class="fa fa-calendar"></i></td>
-                                        <td><strong>Date Confirmed</strong></td>
-                                        <td>{{$details->date_of_confirmation}}</td>
                                     </tr>
                                     <tr>
                                         <td class="text-center"><i class="fa fa-credit-card"></i></td>

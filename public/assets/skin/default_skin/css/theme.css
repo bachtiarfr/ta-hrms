@@ -7151,7 +7151,7 @@ form.hide-list-label .bootstrap-duallistbox-container label {
   transition: all 0.4s;
 }
 .mfp-fullscale.mfp-removing.mfp-bg {
-  background: #000\A;
+  background: #000;
   opacity: 0;
   -webkit-transition: all 0.4s;
   transition: all 0.4s;
@@ -10662,8 +10662,8 @@ tbody.collapse.in {
   white-space: nowrap;
 }
 .bg-dark .dropdown-menu {
-  background-color: #2a2f43;
-  border: 1px solid #2a2f43;
+  background-color: #a8b81c !important;
+  border: 1px solid #a8b81c !important;
   -webkit-box-shadow: none;
   box-shadow: none;
 }
@@ -18963,6 +18963,11 @@ body.chute-rescale .chute.chute-right:hover {
   padding: 10px;
   line-height: 36px;
 }
+
+.sidebar-menu > li > ul > li > a {
+  justify-content: center;
+}
+
 .sidebar-menu > li > ul > li:first-child > a {
   padding-top: 14px;
 }
@@ -19656,7 +19661,7 @@ body.sb-l-m .navbar-logo-text {
   background: transparent;
 }
 .sidebar-menu > li > ul {
-  background-color: #222636;
+  background-color: #a8b81c !important;
 }
 .sidebar-menu > li > ul > li > a {
   color: #bcbdc0;

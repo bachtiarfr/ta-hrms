@@ -180,7 +180,7 @@
                                             <label class="field option mb5">
                                                 <input type="radio" value="1" name="gender" id="gender"
                                                        @if(isset($emps))@if($emps->employee->gender == '1')checked @endif @endif>
-                                                <span class="radio"></span>Female
+                                                <span class="radio"></span>Male
                                             </label>
                                             <label class="field option mb5">
                                                 <input type="radio" value="0" name="gender" id="gender"
@@ -500,6 +500,19 @@
                                                 <label for="input002" class="field-icon">
                                                     IDR
                                                 </label>
+                                            @endif
+                                        </label>
+                                    </div>
+
+                                    <div class="section">
+                                        <label for="input002"><h6 class="mb20 mt40"> Email </h6></label>
+                                        <label for="input002" class="field prepend-icon">
+                                            @if(\Route::getFacadeRoot()->current()->uri() == 'edit-emp/{id}')
+                                                <input type="text" name="salary" id="salary" class="gui-input"
+                                                       value="@if($emps && $emps->employee->email){{$emps->employee->email}}@endif" readonly>
+                                            @else
+                                                <input type="email" placeholder="input user email" name="email"
+                                                       id="email" class="gui-input">
                                             @endif
                                         </label>
                                     </div>

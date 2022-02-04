@@ -48,7 +48,9 @@
                                                 <th class="text-center">Issuing Authority</th>
                                                 <th class="text-center">Date of Assignment</th>
                                                 <th class="text-center">Date of Release</th>
+                                                @if(Auth::user()->isHR())
                                                 <th class="text-center">Actions</th>
+                                                @endif
                                             </tr>
                                             </thead>
                                             <tbody>
@@ -61,6 +63,7 @@
                                                     <td class="text-center">{{$project->authority->name}}</td>
                                                     <td class="text-center">{{getFormattedDate($project->date_of_assignment)}}</td>
                                                     <td class="text-center">{{getFormattedDate($project->date_of_release)}}</td>
+                                                    @if(Auth::user()->isHR())
                                                     <td class="text-center">
                                                         <div class="btn-group text-right">
                                                             <button type="button"
@@ -78,6 +81,7 @@
                                                             </ul>
                                                         </div>
                                                     </td>
+                                                    @endif
                                                 </tr>
                                             @endforeach
                                             <tr>

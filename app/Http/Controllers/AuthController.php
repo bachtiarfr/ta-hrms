@@ -94,7 +94,7 @@ class AuthController extends Controller
         $maleEmployee = Employee::where('gender', 1)->get();
         $femaleEmployee = Employee::where('gender', 0)->get();
 
-        $dateNow = \Carbon\Carbon::now()->format('l, jS \\of F Y');
+        $greetingDays = \Carbon\Carbon::now()->format('l, jS \\of F Y');
         $user     = User::where('id', \Auth::user()->id)->first();
         $events   = $this->convertToArray(Event::where('date', '>', Carbon::now())->orderBy('date', 'desc')->take(3)->get());
         $meetings = $this->convertToArray(Meeting::where('date', '>', Carbon::now())->orderBy('date', 'desc')->take(3)->get());
@@ -249,7 +249,7 @@ class AuthController extends Controller
             }
         }
 
-        return view('hrms.dashboard', compact('events', 'roleTooltipHTML', 'genderTooltipHTML', 'meetings', 'user', 'greetings', 'dateNow', 'maleEmployee', 'femaleEmployee', 'roles', 'dataProjectStatus', 'runningProject', 'finishedProject', 'delayedProject', 'dataRuningProject', 'dataFinishedProject', 'dataDelayedProject', 'dataUserWhoOff', 'remainingSickLeave', 'remainingCasualLeave', 'remainingMaternityLeave'));
+        return view('hrms.dashboard', compact('events', 'roleTooltipHTML', 'genderTooltipHTML', 'meetings', 'user', 'greetings', 'greetingDays', 'maleEmployee', 'femaleEmployee', 'roles', 'dataProjectStatus', 'runningProject', 'finishedProject', 'delayedProject', 'dataRuningProject', 'dataFinishedProject', 'dataDelayedProject', 'dataUserWhoOff', 'remainingSickLeave', 'remainingCasualLeave', 'remainingMaternityLeave'));
     }
 
     public function getJsonDataUser()

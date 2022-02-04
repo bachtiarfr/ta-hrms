@@ -175,16 +175,11 @@ function qualification()
 {
     $data = [
         '' => 'Select one',
-        'B.Com' => 'B.Com',
-        'B.Sc' => 'B.Sc',
-        'BCA' => 'BCA',
-        'MCA' => 'MCA',
-        'BCA+MCA' => 'BCA+MCA',
-        'BBA' => 'BBA',
-        'MBA' => 'MBA',
-        'BBA+MBA' => 'BBA+MBA',
-        'Engineering(B.Tech)' => 'Engineering(B.Tech)',
-        'Engineering(B.Tech+M.Tech)' => 'Engineering(B.Tech+M.Tech)',
+        'SMA/SMK Sederajat' => 'SMA/SMK Sederajat',
+        'D3' => 'D3',
+        'S1' => 'S1',
+        'S2' => 'S2',
+        'S3' => 'S3',
         'Other' => 'Other'
     ];
 

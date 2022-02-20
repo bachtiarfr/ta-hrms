@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Kode is a Premium Bootstrap Admin Template, It's responsive, clean coded and mobile friendly">
     <meta name="keywords" content="bootstrap, admin, dashboard, flat admin template, responsive," />
-    <title>Digital IP Insights - HRMS</title>
+    <title>Born Digital Yogyakarta - HRMS</title>
 
     <!-- ========== Css Files ========== -->
     <style type="text/css">

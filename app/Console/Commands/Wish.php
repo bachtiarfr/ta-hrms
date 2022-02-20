@@ -54,14 +54,14 @@ class Wish extends Command
             $this->info($user->user->email);
             //send an email
             $subject = " Happy Birthday $user->name";
-            $body= "Dear $user->name, <br /> <br /> Digital IP Insights wishes you a very happy birthday. Have fun and enjoy your day.
+            $body= "Dear $user->name, <br /> <br /> Born Digital Yogyakarta wishes you a very happy birthday. Have fun and enjoy your day.
             <br /> <br />
             <img src='http://shetakesontheworld.com/wp-content/uploads/2012/01/shutterstock_59781901.jpg'>
             <br /><br />
-            Best Wishes, <br /><br /> Digital IP Insights Pvt. Ltd. ";
+            Best Wishes, <br /><br /> Born Digital Yogyakarta Pvt. Ltd. ";
             $this->mailer->send('hrms.wishes.birthday', ['body' => $body], function($message) use($user, $subject)
             {
-                $message->from('hr@dipi-ip.com', 'Digital IP Insights Pvt Ltd');
+                $message->from('hr@dipi-ip.com', 'Born Digital Yogyakarta Pvt Ltd');
 
                 $message->to($user->user->email, $user->name)->subject($subject);
             });
@@ -75,10 +75,10 @@ class Wish extends Command
             <br /> <br />
             <img src='http://ak.imgag.com/imgag/product/postcards/3397536/550x400xgraphic1.jpg.pagespeed.ic.G_VtKZOtwJ.jpg'>
             <br /><br />
-            Best Wishes, <br /><br /> Digital IP Insights Pvt. Ltd. ";
+            Best Wishes, <br /><br /> Born Digital Yogyakarta Pvt. Ltd. ";
             $this->mailer->send('hrms.wishes.anniversary', ['body' => $body], function($message) use($emp, $subject)
             {
-                $message->from('hr@dipi-ip.com', 'Digital IP Insights Pvt Ltd');
+                $message->from('hr@dipi-ip.com', 'Born Digital Yogyakarta Pvt Ltd');
                 $message->to($emp->user->email, $emp->name)->subject($subject);
             });
         }

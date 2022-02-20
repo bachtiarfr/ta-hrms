@@ -91,6 +91,7 @@ class ProjectController extends Controller
             ->distinct()
             ->paginate(15);
             // ->get();
+        // dd($projects);
             
         // dd($projects);
         // $dataFinishedProject = [];
@@ -165,6 +166,7 @@ class ProjectController extends Controller
         $description = $request->description;
         $code = $request->code;
         $client_id = $request->client_id;
+        $status = $request->status;
         $edit = project::findOrFail($id);
         if (!empty($name)) {
             $edit->name = $name;
@@ -180,6 +182,9 @@ class ProjectController extends Controller
         }
         if (!empty($client_id)) {
             $edit->client_id = $client_id;
+        }
+        if (!empty($status)) {
+            $edit->status = $status;
         }
 
         $edit->save();

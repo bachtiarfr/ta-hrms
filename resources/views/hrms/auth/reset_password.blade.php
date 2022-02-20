@@ -10,4 +10,4 @@ Thanks & Regards
 <br />
 Human Resource Department
 <br />
-Digital IP Insights
+Born Digital Yogyakarta

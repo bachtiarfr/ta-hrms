@@ -96,7 +96,7 @@ body ul {
                                     </div>
                                     @else
                                     <div class="shortcut-list">
-                                        <a href="/project-assign-listing" class="attendance">Project assign listing</a>
+                                        <a href="/my-leave-list" class="attendance">My Leave List</a>
                                         <a href="/apply-leave" class="projects">Request for leave</a>
                                     </div>
                                     @endif
@@ -113,7 +113,7 @@ body ul {
             <div class="col-sm-3 col-xl-3 panel-card">
                 <div class="panel panel-tile">
                     <div class="panel-body">
-                        <button type="button" id="tooltip-role" class="tooltip-info" data-toggle="tooltip" data-html="true" title="<?= $roleTooltipHTML; ?>" data-placement="bottom">
+                        <button type="button" id="tooltip-role" class="tooltip-info" data-toggle="tooltip" data-html="true" title="<?= $roleTooltipHTML; ?>" data-placement="right">
                             i
                         </button>
                         <canvas id="roleChart" style="width: 288px !important; height: 291px !important"></canvas>
@@ -125,7 +125,7 @@ body ul {
             <div class="col-sm-3 col-xl-3 panel-card">
                 <div class="panel panel-tile">
                     <div class="panel-body">
-                        <button type="button" id="tooltip-gender" class="tooltip-info" data-toggle="tooltip" data-html="true" title="<?= $genderTooltipHTML; ?>" data-placement="bottom">
+                        <button type="button" id="tooltip-gender" class="tooltip-info" data-toggle="tooltip" data-html="true" title="<?= $genderTooltipHTML; ?>" data-placement="right">
                             i
                         </button>
                         <canvas id="genderChart"></canvas>

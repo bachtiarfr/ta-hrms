@@ -127,6 +127,7 @@
                                                     <select class="selectpicker form-control" data-done-button="true" name="status" required>
                                                         <option value="0">Running</option>
                                                         <option value="1">Finish</option>
+                                                        <option value="2">Delayed</option>
                                                     </select>
                                                 </div>
                                             </div>

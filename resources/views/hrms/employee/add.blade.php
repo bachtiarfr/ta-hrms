@@ -129,7 +129,6 @@
                                         </label>
                                     </div>
 
-
                                     <div class="section">
                                         <label for="input002"><h6 class="mb20 mt40">Employment Status </h6></label>
                                         <div class="option-group field">
@@ -155,7 +154,7 @@
                                         <div class="section">
                                             <label for="input002"><h6 class="mb20 mt40"> Role </h6></label>
                                             @if(\Route::getFacadeRoot()->current()->uri() == 'edit-emp/{id}')
-                                                <select class="select2-single form-control" name="role" id="role" readonly required>
+                                                <select class="select2-single form-control" name="role" id="role" required>
                                                     <option value="">Select role</option>
                                                     @foreach($roles as $role)
                                                         @if($emps->role->role->id == $role->id)
@@ -238,14 +237,14 @@
                                         <label for="input002" class="field prepend-icon">
                                             @if(\Route::getFacadeRoot()->current()->uri() == 'edit-emp/{id}')
                                                 <input type="number" name="mob_number" id="mobile_phone"
-                                                       class="gui-input phone-group" maxlength="10" minlength="10" required
+                                                       class="gui-input phone-group" maxlength="13" minlength="12" required
                                                        value="@if($emps && $emps->employee->number){{$emps->employee->number}}@endif">
                                                 <label for="input002" class="field-icon">
                                                     <i class="fa fa-mobile-phone"></i>
                                                 </label>
                                             @else
                                                 <input type="number" name="mob_number" id="mobile_phone"
-                                                       class="gui-input phone-group" maxlength="10" minlength="10" required
+                                                       class="gui-input phone-group" maxlength="13" minlength="12" required
                                                        placeholder="mobile number...">
                                                 <label for="input002" class="field-icon">
                                                     <i class="fa fa-mobile-phone"></i>
@@ -275,14 +274,14 @@
                                         <label for="input002" class="field prepend-icon">
                                             @if(\Route::getFacadeRoot()->current()->uri() == 'edit-emp/{id}')
                                                 <input type="number" name="emer_number" id="emergency_number"
-                                                       class="gui-input phone-group" maxlength="10" minlength="10"
+                                                       class="gui-input phone-group" maxlength="13" minlength="12"
                                                        value="@if($emps && $emps->employee->emergency_number){{$emps->employee->emergency_number}}@endif">
                                                 <label for="input002" class="field-icon">
                                                     <i class="fa fa-mobile-phone"></i>
                                                 </label>
                                             @else
                                                 <input type="number" name="emer_number" id="emergency_number"
-                                                       class="gui-input phone-group" maxlength="10" minlength="10"
+                                                       class="gui-input phone-group" maxlength="13" minlength="12"
                                                        placeholder="Emergency number">
                                                 <label for="input002" class="field-icon">
                                                     <i class="fa fa-mobile-phone"></i>
@@ -357,140 +356,12 @@
                                 <section class="wizard-section">
                                     <!-- -------------- /section -------------- -->
                                     <div class="section">
-                                        <label for="input002"><h6 class="mb20 mt40"> Joining Formalities </h6></label>
-
-                                        <div class="option-group field">
-                                            <label class="field option mb5">
-                                                <input type="radio" value="1" name="formalities"
-                                                       id="formalities"
-                                                       @if(isset($emps))@if($emps->employee->formalities == '1')checked @endif @endif>
-                                                <span class="radio"></span>Completed</label>
-                                            <label class="field option mb5">
-                                                <input type="radio" value="0" name="formalities" id="formalities"
-                                                       @if(isset($emps))@if($emps->employee->formalities == '0')checked @endif @endif>
-                                                <span class="radio"></span>Pending</label>
-                                        </div>
-                                    </div>
-
-                                    <div class="section">
-                                        <label for="input002"><h6 class="mb20 mt40"> Offer Acceptance </h6></label>
-
-                                        <div class="option-group field">
-                                            <label class="field option mb5">
-                                                <input type="radio" value="1" name="offer_acceptance"
-                                                       id="offer_acceptance"
-                                                       @if(isset($emps))@if($emps->employee->offer_acceptance == '1')checked @endif @endif>
-                                                <span class="radio"></span>Completed</label>
-                                            <label class="field option mb5">
-                                                <input type="radio" value="0" name="offer_acceptance"
-                                                       id="offer_acceptance"
-                                                       @if(isset($emps))@if($emps->employee->offer_acceptance == '0')checked @endif @endif>
-                                                <span class="radio"></span>Pending</label>
-                                        </div>
-                                    </div>
-
-
-                                    <div class="section">
-                                        <label for="input002"><h6 class="mb20 mt40"> Probation Period </h6></label>
-
-                                                @if(\Route::getFacadeRoot()->current()->uri() == 'edit-emp/{id}')
-                                            <select class="select2-single form-control probation_select" name="prob_period" id="probation_period" >
-                                                <option value="">Select probation period</option>
-                                                    @if($emps->employee->probation_period == '0')
-                                                        <option value="0" selected>0 days</option>
-                                                        <option value="90">90 days</option>
-                                                        <option value="180">180 days</option>
-                                                        <option value="Other">Other</option>
-                                                    @elseif($emps->employee->probation_period == '90')
-                                                        <option value="0">0 days</option>
-                                                        <option value="90" selected>90 days</option>
-                                                        <option value="180">180 days</option>
-                                                        <option value="Other">Other</option>
-                                                    @elseif($emps->employee->probation_period == '180')
-                                                        <option value="0">0 days</option>
-                                                        <option value="90">90 days</option>
-                                                        <option value="180" selected>180 days</option>
-                                                        <option value="Other">Other</option>
-                                                     @else
-                                                        <option value="0">0 days</option>
-                                                        <option value="90">90 days</option>
-                                                        <option value="180">180 days</option>
-                                                        <option value="Other" selected>Other</option>
-
-                                                    @endif
-                                            </select>
-                                                    <input type="text" class="form-control probation_text hidden" id="probation_text" value={{$emps->employee->probation_period}}>
-                                                @else
-                                                    <select class="select2-single form-control probation_select" name="prob_period" id="probation_period" >
-                                                    <option value="">Select probation period</option>
-                                                    <option value="0">0 days</option>
-                                                    <option value="90">90 days</option>
-                                                    <option value="180">180 days</option>
-                                                    <option value="Other">Other</option>
-                                                    </select>
-                                            <input type="text" class="form-control probation_text hidden" id="probation_text">
-                                                @endif
-
-
-                                    </div>
-
-
-
-                                    <div class="section">
-                                        <label for="datepicker5" class="field prepend-icon mb5"><h6 class="mb20 mt40">
-                                                Date of Confirmation </h6></label>
-
-                                        <div class="field prepend-icon">
-                                            @if(\Route::getFacadeRoot()->current()->uri() == 'edit-emp/{id}')
-                                                <input type="text" id="datepicker5" class="gui-input fs13" name="doc"
-                                                       value="@if($emps && $emps->employee->date_of_confirmation){{$emps->employee->date_of_confirmation}}@endif"/>
-                                                <label class="field-icon">
-                                                    <i class="fa fa-calendar"></i>
-                                                </label>
-                                            @else
-                                                <input type="text" id="datepicker5" class="gui-input fs13" name="doc"/>
-                                                <label class="field-icon">
-                                                    <i class="fa fa-calendar"></i>
-                                                </label>
-                                            @endif
-                                        </div>
-                                    </div>
-
-
-                                    <div class="section">
-                                        <label for="input002"><h6 class="mb20 mt40"> Department </h6></label>
-                                            <select class="select2-single form-control" name="department" id="department">
-                                                <option value="">Select department</option>
-                                                @if(\Route::getFacadeRoot()->current()->uri() == 'edit-emp/{id}')
-                                                    @if($emps->employee->department == 'Marketplace')
-                                                        <option value="Marketplace" selected>Marketplace</option>
-                                                        <option value="Social Media">Social Media</option>
-                                                        <option value="IT">IT</option>
-                                                    @elseif($emps->employee->department == 'Social Media')
-                                                        <option value="Marketplace">Marketplace</option>
-                                                        <option value="Social Media" selected>Social Media</option>
-                                                        <option value="IT">IT</option>
-                                                    @else
-                                                        <option value="Marketplace">Marketplace</option>
-                                                        <option value="Social Media">Social Media</option>
-                                                        <option value="IT" selected>IT</option>
-                                                    @endif
-                                                @else
-                                                    <option value="Marketplace">Marketplace</option>
-                                                    <option value="Social Media">Social Media</option>
-                                                    <option value="IT">IT</option>
-                                                @endif
-                                            </select>
-                                    </div>
-
-
-                                    <div class="section">
                                         <label for="input002"><h6 class="mb20 mt40"> Salary on Confirmation </h6>
                                         </label>
                                         <label for="input002" class="field prepend-icon">
                                             @if(\Route::getFacadeRoot()->current()->uri() == 'edit-emp/{id}')
                                                 <input type="text" name="salary" id="salary" class="gui-input"
-                                                       value="@if($emps && $emps->employee->salary){{$emps->employee->salary}}@endif" readonly>
+                                                       value="@if($emps && $emps->employee->salary){{$emps->employee->salary}}@endif">
                                                 <label for="input002" class="field-icon">
                                                     IDR
                                                 </label>
@@ -508,11 +379,9 @@
                                         <label for="input002"><h6 class="mb20 mt40"> Email </h6></label>
                                         <label for="input002" class="field prepend-icon">
                                             @if(\Route::getFacadeRoot()->current()->uri() == 'edit-emp/{id}')
-                                                <input type="text" name="salary" id="salary" class="gui-input"
-                                                       value="@if($emps && $emps->employee->email){{$emps->employee->email}}@endif" readonly>
+                                                <input type="email" name="emp_email" id="emp_email" class="gui-input" value="@if($emps && $emps->employee->email){{$emps->employee->email}}@endif">
                                             @else
-                                                <input type="email" placeholder="input user email" name="email"
-                                                       id="email" class="gui-input">
+                                                <input type="email" placeholder="input user email" name="emp_email" id="emp_email" class="gui-input">
                                             @endif
                                         </label>
                                     </div>
@@ -570,79 +439,6 @@
                                         </label>
                                     </div>
                                     <!-- -------------- /section -------------- -->
-
-                                </section>
-
-
-                                <h4 class="wizard-section-title">
-                                    <i class="fa fa-file-text pr5"></i> Ex Employment Details </h4>
-                                <section class="wizard-section">
-
-
-                                    <div class="section">
-                                        <label for="datepicker6" class="field prepend-icon mb5"><h6 class="mb20 mt40">
-                                                Date of Resignation </h6></label>
-
-                                        <div class="field prepend-icon">
-                                            @if(\Route::getFacadeRoot()->current()->uri() == 'edit-emp/{id}')
-                                                <input type="text" id="datepicker6" class="gui-input fs13" name="dor"
-                                                       value="@if($emps && $emps->employee->date_of_resignation){{$emps->employee->date_of_resignation}}@endif"/>
-                                                <label class="field-icon">
-                                                    <i class="fa fa-calendar"></i>
-                                                </label>
-                                            @else
-                                                <input type="text" id="datepicker6" class="gui-input fs13" name="dor"/>
-                                                <label class="field-icon">
-                                                    <i class="fa fa-calendar"></i>
-                                                </label>
-                                            @endif
-                                        </div>
-                                    </div>
-
-
-                                    <div class="section">
-                                        <label for="input002"><h6 class="mb20 mt40"> Notice Period </h6></label>
-                                            <select class="select2-single form-control" name="notice_period" id="notice_period">
-                                                <option value="">Select notice period</option>
-                                                @if(\Route::getFacadeRoot()->current()->uri() == 'edit-emp/{id}')
-                                                    @if($emps->employee->notice_period == '1')
-                                                        <option value="1" selected>1 Month</option>
-                                                        <option value="2">2 Months</option>
-                                                    @else
-                                                        <option value="1">1 Month</option>
-                                                        <option value="2" selected>2 Months</option>
-                                                    @endif
-                                                @else
-                                                    <option value="1">1 Month</option>
-                                                    <option value="2">2 Months</option>
-                                                @endif
-                                            </select>
-                                    </div>
-
-
-                                    <div class="section">
-                                        <label for="datepicker7" class="field prepend-icon mb5"><h6 class="mb20 mt40">
-                                                Last Working Day </h6></label>
-
-                                        <div class="field prepend-icon">
-                                            @if(\Route::getFacadeRoot()->current()->uri() == 'edit-emp/{id}')
-                                                <input type="text" id="datepicker7" class="gui-input fs13"
-                                                       name="last_working_day"
-                                                       value="@if($emps && $emps->employee->last_working_day){{$emps->employee->last_working_day}} @endif"/>
-                                                <label class="field-icon">
-                                                    <i class="fa fa-calendar"></i>
-                                                </label>
-                                            @else
-                                                <input type="text" id="datepicker7" class="gui-input fs13"
-                                                       name="last_working_day"/>
-                                                <label class="field-icon">
-                                                    <i class="fa fa-calendar"></i>
-                                                </label>
-                                            @endif
-                                        </div>
-                                    </div>
-
-
                                     <div class="section">
                                         <label for="input002"><h6 class="mb20 mt40"> Full & Final </h6></label>
 

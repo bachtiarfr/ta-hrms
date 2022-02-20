@@ -53,6 +53,10 @@ class AuthController extends Controller
         return redirect()->to('/');
     }
 
+    public function displayName() {
+        return 'Bachtiar';
+    }
+
     public function doLogout()
     {
         \Auth::logout();
@@ -144,11 +148,12 @@ class AuthController extends Controller
         
         // get who's take a leave
         $offEmps = DB::table('users')
-            ->select('users.name', 'employee_leaves.date_from', 'employee_leaves.date_to', 'employee_leaves.status')
+            ->select('users.name', 'employee_leaves.date_from', 'employee_leaves.date_to', 'employee_leaves.status', 'employee_leaves.reason')
             ->join('employee_leaves', 'users.id', '=', 'employee_leaves.user_id')
             ->where('employee_leaves.status', '=', 1)
-            ->groupBy('users.name')
+            // ->groupBy('users.name')
             ->get();     
+        // dd($offEmps);
             
         $dataUserWhoOff = [];
         foreach ($offEmps as $dataEmp) {
@@ -197,23 +202,53 @@ class AuthController extends Controller
             ->where('employee_leaves.status', 1)
             ->first();
 
-        if($dataSickLeaves == null) {
-            $remainingSickLeave = 6;
-        } else {
-            $remainingSickLeave = $dataSickLeaves->number_of_days - $dataSickLeaves->days;
-        }
 
-        if($dataCasualLeaves == null) {
+        // check yearly leave
+        $dateNow = Carbon::now();
+        $firstDayOfYear = $dateNow->firstOfYear()->format('Y-m-d');  
+        if (Carbon::now()->format('Y-m-d') == $firstDayOfYear) {
+            // dd('iya');
+            $remainingSickLeave = 6;
             $remainingCasualLeave = 12;
-        } else {
-            $remainingCasualLeave = $dataCasualLeaves->number_of_days - $dataCasualLeaves->days;
-        }
-        
-        if($dataMaternityLeaves == null) {
             $remainingMaternityLeave = 30;
         } else {
-            $remainingMaternityLeave = $dataMaternityLeaves->number_of_days - $dataMaternityLeaves->days;
+            // dd('bukan');
+            if($dataSickLeaves == null) {
+                $remainingSickLeave = 6;
+            } else {
+                $remainingSickLeave = $dataSickLeaves->number_of_days - $dataSickLeaves->days;
+            }
+    
+            if($dataCasualLeaves == null) {
+                $remainingCasualLeave = 12;
+            } else {
+                $remainingCasualLeave = $dataCasualLeaves->number_of_days - $dataCasualLeaves->days;
+            }
+            
+            if($dataMaternityLeaves == null) {
+                $remainingMaternityLeave = 30;
+            } else {
+                $remainingMaternityLeave = $dataMaternityLeaves->number_of_days - $dataMaternityLeaves->days;
+            }
         }
+
+        // if($dataSickLeaves == null) {
+        //     $remainingSickLeave = 6;
+        // } else {
+        //     $remainingSickLeave = $dataSickLeaves->number_of_days - $dataSickLeaves->days;
+        // }
+
+        // if($dataCasualLeaves == null) {
+        //     $remainingCasualLeave = 12;
+        // } else {
+        //     $remainingCasualLeave = $dataCasualLeaves->number_of_days - $dataCasualLeaves->days;
+        // }
+        
+        // if($dataMaternityLeaves == null) {
+        //     $remainingMaternityLeave = 30;
+        // } else {
+        //     $remainingMaternityLeave = $dataMaternityLeaves->number_of_days - $dataMaternityLeaves->days;
+        // }
 
         // get role tooltip
         $renderRoleToolTip = DB::table('user_roles')
@@ -234,6 +269,9 @@ class AuthController extends Controller
         $renderGenderTooltip = DB::table('employees')
             ->select('name', 'gender')
             ->get();
+
+        // get who's off tooltip
+        // dd($dataUserWhoOff);
 
         // dd($dataUser);
         $genderTooltipHTML = '';
@@ -434,7 +472,7 @@ class AuthController extends Controller
 
 
             $this->mailer->send('hrms.auth.reset_password', ['user' => $user, 'string' => $string], function ($message) use ($user) {
-                $message->from('no-reply@dipi-ip.com', 'Digital IP Insights');
+                $message->from('no-reply@dipi-ip.com', 'Born Digital Yogyakarta');
                 $message->to($user->email, $user->name)->subject('Your new password');
             });
 
@@ -457,7 +495,7 @@ class AuthController extends Controller
 
 
             $this->mailer->send('hrms.auth.reset_password', ['user' => $user, 'string' => $string], function ($message) use ($user) {
-                $message->from('no-reply@dipi-ip.com', 'Digital IP Insights');
+                $message->from('no-reply@dipi-ip.com', 'Born Digital Yogyakarta');
                 $message->to($user->email, $user->name)->subject('Your new password');
             });
 

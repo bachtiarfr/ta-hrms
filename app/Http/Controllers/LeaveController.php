@@ -11,6 +11,7 @@
   use App\Models\Team;
   use App\User;
   use Illuminate\Contracts\Mail\Mailer;
+  use Carbon\Carbon;
 
   use Illuminate\Http\Request;
   use App\Http\Requests;
@@ -119,8 +120,7 @@
     {
 
       $leaves = LeaveType::get();
-      $user = Employee::where('id', \Auth::user()->id)->first();
-      // dd($user->gender);
+      $user = Employee::where('user_id', \Auth::user()->id)->first();
       if($user['gender'] == 1) {
         unset($leaves[2]);
       }
@@ -354,7 +354,7 @@
            */
           $leaves = \DB::table('users')->select(
               'users.id', 'users.name', 'employees.code', 'employee_leaves.days', 'employee_leaves.date_from',
-              'employee_leaves.date_to', 'employee_leaves.status', 'leave_types.leave_type','employee_leaves.remarks')
+              'employee_leaves.date_to', 'employee_leaves.status', 'leave_types.leave_type','employee_leaves.reason')
               ->join('employees', 'employees.user_id', '=', 'users.id')
               ->join('employee_leaves', 'employee_leaves.user_id', '=', 'users.id')
               ->join('leave_types', 'leave_types.id', '=', 'employee_leaves.leave_type_id');
@@ -457,14 +457,23 @@
 
       $day = 0;
       foreach($count as $days) {
-        $day += $days->days;
+        $dateNow = Carbon::now();
+        $firstDayOfYear = $dateNow->firstOfYear()->format('Y-m-d');  
+        if (Carbon::now()->format('Y-m-d') == $firstDayOfYear) {
+          $day += 0; 
+        } else {
+          $day += $days->days;
+        }
       }
+
       // $totalLeaves = totalLeaves($leaveTypeId);
       $totalLeaves = LeaveType::where('id', $leaveTypeId)->first();
       $totalLeaves = $totalLeaves->number_of_days;
       // dd($totalLeaves);
 
       $remainingLeaves = $totalLeaves - $day;
+
+
 
       return json_encode($remainingLeaves);
 
@@ -481,13 +490,14 @@
       $remarks = $request->remarks;
       $employeeLeave = EmployeeLeaves::where('id', $leaveId)->first();
       $user = User::where('id', $employeeLeave->user_id)->first();
-      
+
+      \DB::table('employee_leaves')->where('id', $leaveId)->update(['status' => '1', 'remarks' => $remarks]);
+
       $mail = $this->mailer->send('emails.leave_status', ['user' => $user, 'status' => 'approved', 'remarks' => $remarks ,'leave' => $employeeLeave], function($message) use($user) {
-        $message->from('bachtiar.faturrohim@gmail.com', 'HR Manager');
+        $message->from('hr@demo.com', 'HR Manager');
         $message->to($user->email,$user->name)->subject('Your leave has been approved');
       });
 
-      \DB::table('employee_leaves')->where('id', $leaveId)->update(['status' => '1', 'remarks' => $remarks]);
       return json_encode('success');
     }
 
@@ -503,13 +513,14 @@
       $remarks = $request->remarks;
       $employeeLeave = EmployeeLeaves::where('id', $leaveId)->first();
       $user = User::where('id', $employeeLeave->user_id)->first();
+
+      \DB::table('employee_leaves')->where('id', $leaveId)->update(['status'=> '2', 'remarks' => $remarks]);
      
       $mail = $this->mailer->send('emails.leave_status', ['user' => $user, 'status' => 'disapproved', 'remarks' => $remarks ,'leave' => $employeeLeave], function($message) use($user) {
         $message->from('hr@demo.test', 'HR Manager');
         $message->to($user->email,$user->name)->subject('Your leave has been disapproved');
       });
 
-      \DB::table('employee_leaves')->where('id', $leaveId)->update(['status'=> '2', 'remarks' => $remarks]);
       return json_encode('success');
     }
 

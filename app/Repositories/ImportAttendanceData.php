@@ -1,12 +1,5 @@
 <?php
 
-/**
- * Created by PhpStorm.
- * User: Kanak
- * Date: 13/8/16
- * Time: 10:43 PM
- */
-
 namespace App\Repositories;
 
 
@@ -26,8 +19,7 @@ class ImportAttendanceData
     {
 
         Excel::load(storage_path('attendance/' . $filename), function ($reader) {
-            $rows = $reader->get(['name', 'code', 'date', 'days', 'in_time', 'out_time', 'hours_worked', 'over_time']);
-
+            $rows = $reader->get(['name', 'code', 'date', 'days', 'in_time', 'out_time', 'hours_worked']);
             $counter = 0;
             $saturdays = 0;
             $totalSaturdaysBetweenDates = 0;

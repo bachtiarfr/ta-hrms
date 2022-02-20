@@ -24,6 +24,29 @@
                 <span class="sidebar-title">Dashboard</span>
             </a>
         </li>
+
+        
+        @if(Auth::user()->isHR())
+            <li>
+                <a class="accordion-toggle" href="#">
+                    <span class="sidebar-title"> Attendance </span>
+                    <span class="caret"></span>
+                </a>
+                <ul class="nav sub-nav">
+                    <li>
+                        <a href="{{route('attendance-upload')}}">
+                            <span class="glyphicon glyphicon-book"></span> Upload Sheets</a>
+                    </li>
+                    <li>
+                        <a href="{{route('attendance-manager')}}">
+                            <span class="glyphicon glyphicon-book"></span> Attendance Lists</a>
+                    </li>
+    
+                </ul>
+            </li>
+    
+        @endif
+
         @if(Auth::user()->isHR())
             <li>
                 <a class="accordion-toggle" href="/dashboard">
@@ -60,8 +83,8 @@
                         </li>
                     </ul>
                 </li>
-            @endif
-    
+            @endif    
+
             <li>
                 <a class="accordion-toggle" href="/dashboard">
                     <span class="sidebar-title">Projects</span>
@@ -90,15 +113,6 @@
                 </ul>
             </li>
     
-            {{-- <li>
-    
-                <a href="/bank-account-details">
-                    <span class="fa fa-bank"></span>
-                    <span class="sidebar-title">Bank Account</span>
-    
-                </a>
-            </li> --}}
-    
             <li>
                 <a class="accordion-toggle" href="/dashboard">
                     <span class="sidebar-title">Roles</span>
@@ -116,6 +130,8 @@
                 </ul>
             </li>
         @endif
+
+        
         <li>
             <a class="accordion-toggle" href="/dashboard">
                 <span class="sidebar-title">Leaves</span>
@@ -188,7 +204,7 @@
             </ul>
         </li> --}}
     
-        @if(Auth::user()->isHR())
+        {{-- @if(Auth::user()->isHR())
             <li>
                 <a class="accordion-toggle" href="/dashboard">
                     <span class="sidebar-title">Promotions</span>
@@ -205,33 +221,7 @@
                     </li>
                 </ul>
             </li>
-    
-            {{-- <li>
-                <a class="accordion-toggle" href="/dashboard">
-                    <span class="fa fa fa-trophy"></span>
-                    <span class="sidebar-title">Awards</span>
-                    <span class="caret"></span>
-                </a>
-                <ul class="nav sub-nav">
-                    <li>
-                        <a href="/add-award">
-                            <span class="fa fa-adn"></span> Add Award </a>
-                    </li>
-                    <li>
-                        <a href="/award-listing">
-                            <span class="glyphicon glyphicon-calendar"></span> Award Listings </a>
-                    </li>
-                    <li>
-                        <a href="/assign-award">
-                            <span class="fa fa-desktop"></span> Awardees </a>
-                    </li>
-                    <li>
-                        <a href="/awardees-listing">
-                            <span class="fa fa-clipboard"></span> Awardees Listings </a>
-                    </li>
-                </ul>
-            </li> --}}
-        @endif
+        @endif --}}
     
     
         {{-- <li>
@@ -263,28 +253,6 @@
                 </li>
             </ul>
         </li> --}}
-    
-    
-        @if(Auth::user()->isHR())
-            <li>
-                <a class="accordion-toggle" href="#">
-                    <span class="sidebar-title"> Attendance </span>
-                    <span class="caret"></span>
-                </a>
-                <ul class="nav sub-nav">
-                    <li>
-                        <a href="{{route('attendance-upload')}}">
-                            <span class="glyphicon glyphicon-book"></span> Upload Sheets</a>
-                    </li>
-                    <li>
-                        <a href="{{route('attendance-manager')}}">
-                            <span class="glyphicon glyphicon-book"></span> Attendance Lists</a>
-                    </li>
-    
-                </ul>
-            </li>
-    
-        @endif
     </ul>
     <ul class="nav navbar-nav navbar-right">
         <li class="dropdown dropdown-fuse">

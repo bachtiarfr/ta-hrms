@@ -304,7 +304,7 @@
                 <table cellspacing="0" cellpadding="0" width="600" class="w320">
                     <tr>
                         <td class="footer-content">
-                            <img src="{{env('APP_URL')}}/emails/footer-1.png" alt="" style="vertical-align: middle;"/>Digital IP Insights, C-7, Sector 3, Noida 201301<img src="{{env('APP_URL')}}/emails/footer-2.png" alt="" style="vertical-align: middle;"/>+91-120-428-2484
+                            <img src="{{env('APP_URL')}}/emails/footer-1.png" alt="" style="vertical-align: middle;"/>Born Digital Yogyakarta, C-7, Sector 3, Noida 201301<img src="{{env('APP_URL')}}/emails/footer-2.png" alt="" style="vertical-align: middle;"/>+91-120-428-2484
                         </td>
                     </tr>
                 </table>

@@ -51,12 +51,10 @@
                                         <th class="text-center">Id</th>
                                         <th class="text-center">Code</th>
                                         <th class="text-center">Name</th>
-                                        <th class="text-center">Status</th>
                                         <th class="text-center">Role</th>
                                         <th class="text-center">Joining Date</th>
                                         <th class="text-center">Address</th>
                                         <th class="text-center">Mobile Number</th>
-                                        <th class="text-center">Department</th>
                                         <th class="text-center">Actions</th>
                                     </tr>
                                     </thead>
@@ -67,12 +65,10 @@
                                         <td class="text-center">{{$i+=1}}</td>
                                         <td class="text-center">{{$emp->employee['code']}}</td>
                                         <td class="text-center">{{$emp->name}}</td>
-                                        <td class="text-center">{{$emp->status}}</td>
                                         <td class="text-center">{{isset($emp->role->role->name)?$emp->role->role->name:''}}</td>
                                         <td class="text-center">{{date('Y-m-d', strtotime($emp->employee['date_of_joining']))}}</td>
                                         <td class="text-center">{{$emp->employee['current_address']}}</td>
                                         <td class="text-center">{{$emp->employee['number']}}</td>
-                                        <td class="text-center">{{$emp->employee['department']}}</td>
                                         <td class="text-center">
                                             <div class="btn-group text-right">
                                                 <button type="button"

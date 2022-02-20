@@ -45,7 +45,7 @@ class EmpController extends Controller
 
         $user           = new User;
         $user->name     = $request->emp_name;
-        $user->email    = $request->email;
+        $user->email    = $request->emp_email;
         $user->password = bcrypt('123456');
         $user->save();
 
@@ -64,16 +64,9 @@ class EmpController extends Controller
         $emp->current_address      = $request->current_address;
         $emp->permanent_address    = $request->permanent_address;
         $emp->formalities          = $request->formalities;
-        $emp->offer_acceptance     = $request->offer_acceptance;
-        $emp->probation_period     = $request->probation_period;
-        $emp->date_of_confirmation = date_format(date_create($request->date_of_confirmation), 'Y-m-d');
-        $emp->department           = $request->department;
         $emp->salary               = $request->salary;
         $emp->account_number       = $request->account_number;
         $emp->bank_name            = $request->bank_name;
-        $emp->date_of_resignation  = date_format(date_create($request->date_of_resignation), 'Y-m-d');
-        $emp->notice_period        = $request->notice_period;
-        $emp->last_working_day     = date_format(date_create($request->last_working_day), 'Y-m-d');
         $emp->full_final           = $request->full_final;
         $emp->user_id              = $user->id;
         $emp->save();
@@ -133,30 +126,15 @@ class EmpController extends Controller
         $emp_status        = $request->status;
         $emp_role          = $request->role;
         $gender            = $request->gender;
-        $dob               = date_format(date_create($request->date_of_birth), 'Y-m-d');
-        $doj               = date_format(date_create($request->date_of_joining), 'Y-m-d');
-        $mob_number        = $request->number;
         $qualification     = $request->qualification;
         $emer_number       = $request->emergency_number;
-        $pan_number        = $request->pan_number;
         $father_name       = $request->father_name;
         $address           = $request->current_address;
         $permanent_address = $request->permanent_address;
         $formalities       = $request->formalities;
-        $offer_acceptance  = $request->offer_acceptance;
-        $prob_period       = $request->probation_period;
-        $doc               = date_format(date_create($request->date_of_confirmation), 'Y-m-d');
-        $department        = $request->department;
         $salary            = $request->salary;
         $account_number    = $request->account_number;
         $bank_name         = $request->bank_name;
-        $ifsc_code         = $request->ifsc_code;
-        $pf_account_number = $request->pf_account_number;
-        $un_number         = $request->un_number;
-        $pf_status         = $request->pf_status;
-        $dor               = date_format(date_create($request->date_of_resignation), 'Y-m-d');
-        $notice_period     = $request->notice_period;
-        $last_working_day  = date_format(date_create($request->last_working_day), 'Y-m-d');
         $full_final        = $request->full_final;
 
         //$edit = Employee::findOrFail($id);

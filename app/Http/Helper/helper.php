@@ -124,10 +124,6 @@ function getAttendanceDropDown()
         "" => "Select",
         'name' => 'Name',
         'code' => 'Code',
-        'date' => 'Date',
-        'day' => 'Day',
-        'hours_worked' => 'Hours Worked',
-        'status' => 'Status'
     ];
     return $data;
 }

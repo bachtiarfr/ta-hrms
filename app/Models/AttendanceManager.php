@@ -18,7 +18,7 @@ class AttendanceManager extends Model
         $dateTo =  date_format(date_create($request['dateTo']), 'Y-m-d');
         $dateFrom =  date_format(date_create($request['dateFrom']), 'Y-m-d');
 
-        if(!empty($column) && !empty($string) && empty($dateFrom) && empty($dateTo)) {
+        if(!empty($column) && !empty($string) || empty($dateFrom) || empty($dateTo)) {
             $attendances = AttendanceManager::whereRaw($column . " like '%" . $string . "%'")->paginate(20);
         } elseif(!empty($dateFrom) && !empty($dateTo) && empty($column) && empty($string)) {
             $attendances = AttendanceManager::whereBetween('date', [$dateFrom, $dateTo])->paginate(20);
@@ -59,7 +59,7 @@ class AttendanceManager extends Model
         $attendance->user_id = $user->user_id;
         $attendance->hours_worked = $hoursWorked;
         $attendance->difference = $difference;
-        // $attendance->save();
+        $attendance->save();
         $userPoint = DB::table('employees')
             ->where('code', $row->code)
             ->update([

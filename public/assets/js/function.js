@@ -239,7 +239,7 @@ $('#proceed-button').click(function () {
             statusmessage.append("<div class='alert " + divClass + "'>" + message + "</div>");
             statusmessage.removeClass('hidden');
             var remarks_div = $('#remark-' + leave_id);
-            remarks_div.append(remarks);
+            // remarks_div.append(remarks);
             var leavebutton = $('#button-' + leave_id);
             leavebutton.empty();
             leavebutton.append("<button type='button' class='btn " + buttonClass + " br2 btn-xs fs12' aria-expanded='false'><i class='fa " + buttonIcon + "'>" + buttonText + "</i> </button>");

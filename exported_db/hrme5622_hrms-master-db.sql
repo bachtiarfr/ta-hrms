@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jan 31, 2022 at 07:12 PM
+-- Generation Time: Feb 04, 2022 at 08:06 PM
 -- Server version: 5.7.24
 -- PHP Version: 7.3.33
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `hrme5622_hrms-master-db`
+-- Database: `hrms-master-db`
 --
 
 -- --------------------------------------------------------
@@ -75,13 +75,16 @@ CREATE TABLE `assign_projects` (
 --
 
 INSERT INTO `assign_projects` (`id`, `project_id`, `user_id`, `project_leader_id`, `authority_id`, `date_of_assignment`, `date_of_release`, `created_at`, `updated_at`) VALUES
-(1, 1, 2, 3, 1, '2022-01-31', '2022-03-10', '2022-01-26 15:46:07', '2022-01-26 15:46:07'),
-(2, 1, 3, 3, 1, '2022-01-31', '2022-03-10', '2022-01-26 15:46:07', '2022-01-26 15:46:07'),
-(3, 2, 5, 5, 1, '2022-01-06', '2022-01-12', '2022-01-26 15:48:17', '2022-01-26 15:48:17'),
-(4, 2, 6, 5, 1, '2022-01-06', '2022-01-12', '2022-01-26 15:48:17', '2022-01-26 15:48:17'),
-(5, 2, 7, 5, 1, '2022-01-06', '2022-01-12', '2022-01-26 15:48:17', '2022-01-26 15:48:17'),
-(6, 3, 8, 8, 1, '2022-01-01', '2022-01-13', '2022-01-31 15:34:57', '2022-01-31 15:34:57'),
-(7, 3, 9, 8, 1, '2022-01-01', '2022-01-13', '2022-01-31 15:34:57', '2022-01-31 15:34:57');
+(8, 4, 35, 36, 1, '2022-02-01', '2022-02-12', '2022-02-04 18:05:55', '2022-02-04 18:05:55'),
+(9, 4, 36, 36, 1, '2022-02-01', '2022-02-12', '2022-02-04 18:05:55', '2022-02-04 18:05:55'),
+(10, 4, 37, 36, 1, '2022-02-01', '2022-02-12', '2022-02-04 18:05:55', '2022-02-04 18:05:55'),
+(11, 3, 38, 39, 1, '2022-01-24', '2022-02-01', '2022-02-04 18:07:49', '2022-02-04 18:07:49'),
+(12, 3, 45, 39, 1, '2022-01-24', '2022-02-01', '2022-02-04 18:07:49', '2022-02-04 18:07:49'),
+(13, 2, 35, 35, 1, '2021-12-06', '2021-12-20', '2022-02-04 18:12:37', '2022-02-04 18:12:37'),
+(14, 2, 36, 35, 1, '2021-12-06', '2021-12-20', '2022-02-04 18:12:37', '2022-02-04 18:12:37'),
+(15, 2, 37, 35, 1, '2021-12-06', '2021-12-20', '2022-02-04 18:12:37', '2022-02-04 18:12:37'),
+(16, 1, 45, 46, 1, '2022-02-02', '2022-02-12', '2022-02-04 18:13:49', '2022-02-04 18:13:49'),
+(17, 1, 46, 46, 1, '2022-02-02', '2022-02-12', '2022-02-04 18:13:49', '2022-02-04 18:13:49');
 
 -- --------------------------------------------------------
 
@@ -220,14 +223,26 @@ CREATE TABLE `employees` (
 
 INSERT INTO `employees` (`id`, `photo`, `code`, `name`, `status`, `gender`, `date_of_birth`, `date_of_joining`, `number`, `qualification`, `emergency_number`, `father_name`, `current_address`, `permanent_address`, `formalities`, `offer_acceptance`, `probation_period`, `date_of_confirmation`, `department`, `salary`, `account_number`, `bank_name`, `date_of_resignation`, `notice_period`, `last_working_day`, `full_final`, `attendance_points`, `user_id`, `created_at`, `updated_at`) VALUES
 (1, '', 'HR0001', 'HR Manager', 1, 0, '0000-00-00', '2020-03-16', '9999999999', '', '', '', '', '', 0, 0, '', '0000-00-00', '', '10000', '', '', '0000-00-00', '', '0000-00-00', 0, 0, 1, NULL, NULL),
-(2, '', 'FE001', 'Bachtiar Fatur Rohim', 1, 1, '0000-00-00', '2020-03-16', '9999999999', '', '', '', '', '', 0, 0, '', '0000-00-00', 'IT', '6000000', '', '', '0000-00-00', '', '0000-00-00', 0, 0, 2, NULL, NULL),
-(3, '', 'DCK001', 'Dicky Saputra', 1, 1, '0000-00-00', '2021-08-16', '9999999999', '', '', '', '', '', 0, 0, '', '0000-00-00', 'IT', '6000000', '', '', '0000-00-00', '', '0000-00-00', 0, 0, 3, NULL, NULL),
-(4, '', 'AND001', 'Andi Gusta', 1, 1, '0000-00-00', '2020-03-16', '9999999999', '', '', '', '', '', 0, 0, '', '0000-00-00', 'IT', '6000000', '', '', '0000-00-00', '', '0000-00-00', 0, 0, 4, NULL, NULL),
-(5, '', 'TM001', 'Tama', 1, 1, '0000-00-00', '2021-03-16', '9999999999', '', '', '', '', '', 0, 0, '', '0000-00-00', 'IT', '6000000', '', '', '0000-00-00', '', '0000-00-00', 0, 0, 5, NULL, NULL),
-(6, '', 'OWN001', 'Owen', 1, 1, '0000-00-00', '2021-03-16', '9999999999', '', '', '', '', '', 0, 0, '', '0000-00-00', 'IT', '6000000', '', '', '0000-00-00', '', '0000-00-00', 0, 0, 6, NULL, NULL),
-(7, '', 'BKO001', 'Biko', 1, 1, '0000-00-00', '2021-03-16', '9999999999', '', '', '', '', '', 0, 0, '', '0000-00-00', 'IT', '6000000', '', '', '0000-00-00', '', '0000-00-00', 0, 0, 7, NULL, NULL),
-(8, '', 'LEO001', 'Leo Dandy', 1, 1, '0000-00-00', '2020-03-16', '9999999999', '', '', '', '', '', 0, 0, '', '0000-00-00', 'IT', '6000000', '', '', '0000-00-00', '', '0000-00-00', 0, 0, 8, NULL, NULL),
-(9, '', 'RZK001', 'Muhammad Rizky', 1, 1, '0000-00-00', '2021-08-16', '9999999999', '', '', '', '', '', 0, 0, '', '0000-00-00', 'IT', '6000000', '', '', '0000-00-00', '', '0000-00-00', 0, 0, 9, NULL, NULL);
+(11, 'photo_Bachtiar Fatur Rohim.jpg', 'BFR001', 'Bachtiar Fatur Rohim', 1, 1, '2022-02-05', '2022-02-05', '0895334568841', 'D3', '0895334568841', 'John', 'Jl. One two three', 'cirebon', 0, 0, '', '0000-00-00', '', '5000000', '8083038', 'BNI', '0000-00-00', '', '0000-00-00', 1, 0, 35, '2022-02-04 17:44:10', '2022-02-04 17:44:10'),
+(12, 'photo_Dicky Saputra.jpg', 'DCK001', 'Dicky Saputra', 1, 1, '2022-02-05', '2022-02-05', '0895334568841', 'SMA/SMK Sederajat', '0895334568841', 'John', 'Jl. One two three', 'cirebon', 0, 0, '', '0000-00-00', '', '5000000', '8083038', 'BNI', '0000-00-00', '', '0000-00-00', 0, 0, 36, '2022-02-04 17:45:42', '2022-02-04 17:45:42'),
+(13, 'photo_Andi Gusta.jpg', 'AND001', 'Andi Gusta', 1, 1, '2022-02-05', '2022-02-05', '0895334568841', 'S1', '0895334568841', 'John', 'Jl. One two three', 'cirebon', 0, 0, '', '0000-00-00', '', '5000000', '8083038', 'BNI', '0000-00-00', '', '0000-00-00', 1, 0, 37, '2022-02-04 17:46:45', '2022-02-04 17:46:45'),
+(14, 'photo_Tama.jpg', 'TMA001', 'Tama', 1, 1, '2022-02-05', '2022-02-05', '0895334568841', 'S1', '0895334568841', 'John', 'Jl. One two three', 'cirebon', 0, 0, '', '0000-00-00', '', '5000000', '8083038', 'BNI', '0000-00-00', '', '0000-00-00', 1, 0, 38, '2022-02-04 17:47:47', '2022-02-04 17:47:47'),
+(15, 'photo_Owen.jpg', 'OWN001', 'Owen', 1, 1, '2022-02-05', '2022-02-05', '0895334568841', 'S1', '0895334568841', 'John', 'Jl. One two three', 'cirebon', 0, 0, '', '0000-00-00', '', '5000000', '8083038', 'BNI', '0000-00-00', '', '0000-00-00', 1, 0, 39, '2022-02-04 17:48:17', '2022-02-04 17:48:17'),
+(16, 'photo_Biko.jpg', 'BKO001', 'Biko', 1, 1, '2022-02-05', '2022-02-05', '0895334568841', 'S1', '0895334568841', 'John', 'Jl. One two three', 'cirebon', 0, 0, '', '0000-00-00', '', '5000000', '8083038', 'BNI', '0000-00-00', '', '0000-00-00', 1, 0, 43, '2022-02-04 17:49:19', '2022-02-04 17:49:19'),
+(17, 'photo_Rizki.jpg', 'RZK001', 'Rizki', 1, 1, '2022-02-05', '2022-02-05', '0895334568841', 'S1', '0895334568841', 'John', 'Jl. One two three', 'cirebon', 0, 0, '', '0000-00-00', '', '5000000', '8083038', 'BNI', '0000-00-00', '', '0000-00-00', 1, 0, 44, '2022-02-04 17:50:06', '2022-02-04 17:50:06'),
+(18, 'photo_Anggit.jpg', 'ANG001', 'Anggit', 1, 1, '2022-02-05', '2022-02-05', '0895334568841', 'S1', '0895334568841', 'John', 'Jl. One two three', 'cirebon', 0, 0, '', '0000-00-00', '', '5000000', '8083038', 'BNI', '0000-00-00', '', '0000-00-00', 1, 0, 45, '2022-02-04 17:50:28', '2022-02-04 17:50:28'),
+(19, 'photo_Leo.jpg', 'LEO001', 'Leo', 1, 1, '2022-02-05', '2022-02-05', '0895334568841', 'S1', '0895334568841', 'John', 'Jl. One two three', 'cirebon', 0, 0, '', '0000-00-00', '', '5000000', '8083038', 'BNI', '0000-00-00', '', '0000-00-00', 1, 0, 46, '2022-02-04 17:51:06', '2022-02-04 17:51:06'),
+(20, 'photo_Riris Ayu.jpg', 'RRS001', 'Riris Ayu', 1, 0, '2022-02-05', '2022-02-05', '0895334568841', 'S1', '0895334568841', 'John', 'Jl. One two three', 'cirebon', 0, 0, '', '0000-00-00', '', '5000000', '8083038', 'BNI', '0000-00-00', '', '0000-00-00', 1, 0, 47, '2022-02-04 17:51:36', '2022-02-04 17:51:36'),
+(21, 'photo_Ummi.jpg', 'UMI001', 'Ummi', 1, 0, '2022-02-05', '2022-02-05', '0895334568841', 'S1', '0895334568841', 'John', 'Jl. One two three', 'cirebon', 0, 0, '', '0000-00-00', '', '5000000', '8083038', 'BNI', '0000-00-00', '', '0000-00-00', 1, 0, 48, '2022-02-04 17:51:59', '2022-02-04 17:51:59'),
+(22, 'photo_Agyl.jpg', 'AGL001', 'Agyl', 1, 1, '2022-02-05', '2022-02-05', '0895334568841', 'S1', '0895334568841', 'John', 'Jl. One two three', 'cirebon', 0, 0, '', '0000-00-00', '', '5000000', '8083038', 'BNI', '0000-00-00', '', '0000-00-00', 1, 0, 49, '2022-02-04 17:52:31', '2022-02-04 17:52:31'),
+(23, 'photo_Arief.jpg', 'ARF001', 'Arief', 1, 1, '2022-02-05', '2022-02-05', '0895334568841', 'S1', '0895334568841', 'John', 'Jl. One two three', 'cirebon', 0, 0, '', '0000-00-00', '', '5000000', '8083038', 'BNI', '0000-00-00', '', '0000-00-00', 1, 0, 50, '2022-02-04 17:52:52', '2022-02-04 17:52:52'),
+(24, 'photo_Ghulam.jpg', 'GLM001', 'Ghulam', 1, 1, '2022-02-05', '2022-02-05', '0895334568841', 'S1', '0895334568841', 'John', 'Jl. One two three', 'cirebon', 0, 0, '', '0000-00-00', '', '5000000', '8083038', 'BNI', '0000-00-00', '', '0000-00-00', 1, 0, 51, '2022-02-04 17:53:15', '2022-02-04 17:53:15'),
+(25, 'photo_Deden.jpg', 'DDN001', 'Deden', 1, 1, '2022-02-05', '2022-02-05', '0895334568841', 'S1', '0895334568841', 'John', 'Jl. One two three', 'cirebon', 0, 0, '', '0000-00-00', '', '5000000', '8083038', 'BNI', '0000-00-00', '', '0000-00-00', 1, 0, 52, '2022-02-04 17:53:42', '2022-02-04 17:53:42'),
+(26, 'photo_Herjun.jpg', 'HRJ001', 'Herjun', 1, 1, '2022-02-05', '2022-02-05', '0895334568841', 'S1', '0895334568841', 'John', 'Jl. One two three', 'cirebon', 0, 0, '', '0000-00-00', '', '5000000', '8083038', 'BNI', '0000-00-00', '', '0000-00-00', 1, 0, 53, '2022-02-04 17:54:11', '2022-02-04 17:54:11'),
+(27, 'photo_Nanda.jpg', 'NND001', 'Nanda', 1, 0, '2022-02-05', '2022-02-05', '0895334568841', 'S1', '0895334568841', 'John', 'Jl. One two three', 'cirebon', 0, 0, '', '0000-00-00', '', '5000000', '8083038', 'BNI', '0000-00-00', '', '0000-00-00', 1, 0, 54, '2022-02-04 17:54:48', '2022-02-04 17:54:48'),
+(28, 'photo_Monic.jpg', 'MNC001', 'Monic', 1, 0, '2022-02-05', '2022-02-05', '0895334568841', 'S1', '0895334568841', 'John', 'Jl. One two three', 'cirebon', 0, 0, '', '0000-00-00', '', '5000000', '8083038', 'BNI', '0000-00-00', '', '0000-00-00', 1, 0, 55, '2022-02-04 17:55:07', '2022-02-04 17:55:07'),
+(29, 'photo_Yvon.jpg', 'YVN001', 'Yvon', 1, 0, '2022-02-05', '2022-02-05', '0895334568841', 'S1', '0895334568841', 'John', 'Jl. One two three', 'cirebon', 0, 0, '', '0000-00-00', '', '5000000', '8083038', 'BNI', '0000-00-00', '', '0000-00-00', 1, 0, 56, '2022-02-04 17:55:32', '2022-02-04 17:55:32'),
+(30, 'photo_Zia.jpg', 'ZIA001', 'Zia', 1, 1, '2022-02-05', '2022-02-05', '0895334568841', 'S1', '0895334568841', 'John', 'Jl. One two three', 'cirebon', 0, 0, '', '0000-00-00', '', '5000000', '8083038', 'BNI', '0000-00-00', '', '0000-00-00', 1, 0, 57, '2022-02-04 17:55:53', '2022-02-04 17:55:53');
 
 -- --------------------------------------------------------
 
@@ -258,8 +273,8 @@ CREATE TABLE `employee_leaves` (
 --
 
 INSERT INTO `employee_leaves` (`id`, `user_id`, `tl_id`, `manager_id`, `leave_type_id`, `date_from`, `date_to`, `from_time`, `to_time`, `days`, `status`, `remarks`, `reason`, `created_at`, `updated_at`) VALUES
-(1, 2, 0, 0, 1, '2022-01-27', '2022-01-31', '09:30:00', '18:00:00', '4', 1, 'oke boleh, gws ya bachtiar', 'Sakit perut', '2022-01-26 15:36:29', '2022-01-26 15:36:29'),
-(2, 1, 0, 0, 2, '2022-01-31', '2022-02-03', '09:30:00', '18:00:00', '3', 1, 'ok', 'pengen liburan', '2022-01-28 17:35:56', '2022-01-28 17:35:56');
+(2, 1, 0, 0, 2, '2022-01-31', '2022-02-03', '09:30:00', '18:00:00', '3', 1, 'ok', 'pengen liburan', '2022-01-28 17:35:56', '2022-01-28 17:35:56'),
+(3, 35, 0, 0, 1, '2022-02-07', '2022-02-09', '09:30:00', '18:00:00', '2', 1, 'oke', 'Sakit perut', '2022-02-04 18:16:07', '2022-02-04 18:16:07');
 
 -- --------------------------------------------------------
 
@@ -598,7 +613,8 @@ CREATE TABLE `projects` (
 INSERT INTO `projects` (`id`, `name`, `description`, `code`, `status`, `client_id`, `created_at`, `updated_at`) VALUES
 (1, 'Contoh Project Berjalan Baru', 'ini cuman contoh', 'TP01', 0, 1, '2022-01-26 15:39:30', '2022-01-26 15:39:30'),
 (2, 'Contoh finished project', 'ini cuman contoh', 'TP01', 1, 2, '2022-01-26 15:47:36', '2022-01-26 15:47:36'),
-(3, 'Contoh project delayed', 'description of contoh project delayed', 'PD01', 1, 1, '2022-01-31 15:29:49', '2022-01-31 17:29:15');
+(3, 'Contoh project delayed', 'description of contoh project delayed', 'PD01', 2, 1, '2022-01-31 15:29:49', '2022-02-04 18:11:40'),
+(4, 'Test running project', 'test running project description', 'TEST001', 0, 1, '2022-02-04 17:58:56', '2022-02-04 17:58:56');
 
 -- --------------------------------------------------------
 
@@ -632,6 +648,32 @@ CREATE TABLE `remaining_leaves` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+--
+-- Dumping data for table `remaining_leaves`
+--
+
+INSERT INTO `remaining_leaves` (`id`, `user_id`, `remaining_days`, `created_at`, `updated_at`) VALUES
+(0, 35, 12, '2022-02-04 17:44:10', '2022-02-04 17:44:10'),
+(0, 36, 12, '2022-02-04 17:45:42', '2022-02-04 17:45:42'),
+(0, 37, 12, '2022-02-04 17:46:45', '2022-02-04 17:46:45'),
+(0, 38, 12, '2022-02-04 17:47:47', '2022-02-04 17:47:47'),
+(0, 39, 12, '2022-02-04 17:48:17', '2022-02-04 17:48:17'),
+(0, 43, 12, '2022-02-04 17:49:19', '2022-02-04 17:49:19'),
+(0, 44, 12, '2022-02-04 17:50:06', '2022-02-04 17:50:06'),
+(0, 45, 12, '2022-02-04 17:50:28', '2022-02-04 17:50:28'),
+(0, 46, 12, '2022-02-04 17:51:06', '2022-02-04 17:51:06'),
+(0, 47, 12, '2022-02-04 17:51:36', '2022-02-04 17:51:36'),
+(0, 48, 12, '2022-02-04 17:51:59', '2022-02-04 17:51:59'),
+(0, 49, 12, '2022-02-04 17:52:31', '2022-02-04 17:52:31'),
+(0, 50, 12, '2022-02-04 17:52:52', '2022-02-04 17:52:52'),
+(0, 51, 12, '2022-02-04 17:53:15', '2022-02-04 17:53:15'),
+(0, 52, 12, '2022-02-04 17:53:42', '2022-02-04 17:53:42'),
+(0, 53, 12, '2022-02-04 17:54:11', '2022-02-04 17:54:11'),
+(0, 54, 12, '2022-02-04 17:54:48', '2022-02-04 17:54:48'),
+(0, 55, 12, '2022-02-04 17:55:07', '2022-02-04 17:55:07'),
+(0, 56, 12, '2022-02-04 17:55:32', '2022-02-04 17:55:32'),
+(0, 57, 12, '2022-02-04 17:55:53', '2022-02-04 17:55:53');
+
 -- --------------------------------------------------------
 
 --
@@ -653,8 +695,8 @@ CREATE TABLE `roles` (
 INSERT INTO `roles` (`id`, `name`, `description`, `created_at`, `updated_at`) VALUES
 (1, 'Admin | HR', 'Has all the rights', '2022-01-26 12:01:52', '2022-01-26 12:01:52'),
 (2, 'Project Manager', 'Project Manager', '2022-01-26 12:01:52', '2022-01-26 12:01:52'),
-(3, 'Software Developer | Front End', 'Front End Developer', '2022-01-26 12:01:52', '2022-01-26 12:01:52'),
-(4, 'Software Developer | Back End', 'Back End Developer', '2022-01-26 12:01:52', '2022-01-26 12:01:52'),
+(3, 'Front End', 'Front End Developer', '2022-01-26 12:01:52', '2022-02-04 07:29:22'),
+(4, 'Back End', 'Back End Developer', '2022-01-26 12:01:52', '2022-02-04 07:29:36'),
 (5, 'Designer', 'Designer', '2022-01-26 12:01:52', '2022-01-26 12:01:52'),
 (6, 'Data Entry', 'Back End Developer', '2022-01-26 12:01:52', '2022-01-26 12:01:52');
 
@@ -727,37 +769,27 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'HR Manager', 'hr@demo.com', '$2y$10$E.umobcv8y5tQbnQY3Tg2O9KdW.u.XCZzczT3BXk5STn/gIaerqiS', NULL, NULL, NULL),
-(2, 'Bachtiar Fatur Rohim', 'bachtiar@demo.com', '$2y$10$JSVLv3z2c8NQaPOOLnX.N.qnFKGAP/sTTPrkhs9TSA2eV7vXvZWbK', NULL, NULL, NULL),
-(3, 'Dicky Saputra', 'dikcy@demo.com', '$2y$10$dgYgcS1bkYYJqnzj67CKSu9xmSvSvq1VIxLvT4dkFFVMogwTh50sC', NULL, NULL, NULL),
-(4, 'Andi Gusta', 'andi@demo.com', '$2y$10$s01PjsnZV6KZfnMX2mvfFODnnn5WDtSXxL5dYZgP4mnORThmhaLJW', NULL, NULL, NULL),
-(5, 'Tama', 'tama@demo.com', '$2y$10$yvacpJCpEnqrYGSFsQxgHu09ab/UgmBaqSTrsneWYValVssxe0l9i', NULL, NULL, NULL),
-(6, 'Owen', 'owen@demo.com', '$2y$10$Nu2lJbv7yqSKWgaICa0DaeuO502OxW99XMZtj.2k7l3zfmHBH8kP6', NULL, NULL, NULL),
-(7, 'Biko', 'biko@demo.com', '$2y$10$r4a0p3TOWaN6/mHHXmONRu6IbUMNm2YeYPTh4CiFcd2XIL7wXowNu', NULL, NULL, NULL),
-(8, 'Leo Dandy', 'leo@demo.com', '$2y$10$0vuuXoDW1Q4Gij7U0Yhk7.Xm0mBVR9y7pqN8UwTYctXzzM3599x52', NULL, NULL, NULL),
-(9, 'Muhammad Rizky', 'rizky@demo.com', '$2y$10$ddJX.DqbmJQlzlDmVoZADevkpe32/.G/d8IfDfQVOTa0g9RIWjx4G', NULL, NULL, NULL),
-(10, 'Herjun Sasmita', 'herjun@demo.com', '$2y$10$4Agii7hZUfuU7t.P6Q1Grukl07iytlstEUOd0vZ.Zzz5IialYiXkW', NULL, NULL, NULL),
-(11, 'Ketymas Agyl', 'agil@demo.com', '$2y$10$yK9GUiQ5QjJCPQBXxEQ67.DK8YskkRk7s6K3HWtYALBO9DVhRsbMq', NULL, NULL, NULL),
-(12, 'Muhammad Arief', 'arief@demo.com', '$2y$10$DapVtqbHjkl7hJOdG28nA.hYCIDh8BFrDyse.FKMcC36CVsAaAFAG', NULL, NULL, NULL),
-(13, 'Ghulam', 'ghulam@demo.com', '$2y$10$GsnVdqAexz4Mm7hzNLyPhu6OpWDEZ2o7ep5StaI/1idTiy/yBjMFK', NULL, NULL, NULL),
-(14, 'Deden', 'deden@demo.com', '$2y$10$S5nR19wdipZqKa4DHXK/FOANHgB0Aya.RCzBqBllEnx3uFFZN7e4m', NULL, NULL, NULL),
-(15, 'Yvon de Wit', 'yvon@demo.com', '$2y$10$Ag4RvcBkbTLpcb5CTr3p1uati7sbjXk8zGh1hrcn4PSKQRu5RK0Ku', NULL, NULL, NULL),
-(16, 'Zia', 'zia@demo.com', '$2y$10$G.oh3CqeB42hvzrp8ERw6.IqSPIcq4g89g1JGlHXwtuq2svyEHBmC', NULL, NULL, NULL),
-(17, 'Erwin', 'erwin@demo.com', '$2y$10$hgfRHSDrL6N0gMTuKu4ZvegjT0lvvj/xz/S5zPF.aLfJJknA90xuu', NULL, NULL, NULL),
-(18, 'Muhammad Angga', 'angga@demo.com', '$2y$10$Gdy5pWDU4zqj6LJDoTC4G.8.khEGkyR9zui2nAA/oex7nZJhjxuva', NULL, NULL, NULL),
-(19, 'Dwi', 'dwi@demo.com', '$2y$10$Y4uwNdM25v3SwuaMP7pBYOwFuGEbFFJd282GYQkFwH9lHR7McSz2u', NULL, NULL, NULL),
-(20, 'Riris Ayu', 'riris@demo.com', '$2y$10$C4DZVJcmqBuw0BtM/AgKw.IOjliUHohcXPk7GIe6tPteIhwZLcqtm', NULL, NULL, NULL),
-(21, 'Ummi', 'ummi@demo.com', '$2y$10$K08TNVHWMoelH2Fqb77AAO0i8.6XsWwJPfuvAZ5ANHKMjPzspDTha', NULL, NULL, NULL),
-(22, 'Nanda', 'nanda@demo.com', '$2y$10$Txtwc9Eq/Bau3evgxWeqRO17JN2sz0DOvTCGwBXeHDFWCTmJ/EksW', NULL, NULL, NULL),
-(23, 'Samuel', 'samuel@demo.com', '$2y$10$miZtJN8E/T6V0Gs12/SEzuppdg2UXf8HxcWXFkySPpVQQvOQEcC9O', NULL, NULL, NULL),
-(24, 'Alvin Novian', 'alvin@demo.com', '$2y$10$nWK6qdSde7/E3JPz9C9ySuCDJ8M3hZwmb4qJOeLHAP08ttyfHVJXa', NULL, NULL, NULL),
-(25, 'Pras Yuli', 'pras@demo.com', '$2y$10$ISrJCGJIKJqEPrzVmMONSOnWwJI8AHAAlFjS8ztCWBLslkgi6mVw6', NULL, NULL, NULL),
-(26, 'Wildan Fathan', 'wildan@demo.com', '$2y$10$8rd.65us06noddk6b39s6udcP8.xvspyq2XI2/CzVm/9KbGSxeq3S', NULL, NULL, NULL),
-(27, 'Syarief', 'syarief@demo.com', '$2y$10$GAXirVYcI/oR7FJYvr5hnuOxEn4JdnY3kx35S/rgx.AD6gAnoDLYa', NULL, NULL, NULL),
-(28, 'Olaf', 'olaf@demo.com', '$2y$10$2fbMr22YBiqf5eptNWjGC.mmG4MgVJ6fe.c8A1SBs1ymxuu1QnrWG', NULL, NULL, NULL),
-(29, 'Han Mak', 'han@demo.com', '$2y$10$V6FFgoXsKPlrW/zYpbLGMOqhhHIOzGbAWOuga/rlmbpwrH5oPIBPq', NULL, NULL, NULL),
-(30, 'Handoko', 'handoko@demo.com', '$2y$10$gzdyixtpIoLS6WTjbM7xTewJnP86qEbKC35z.yCfZ.vGZ7.WRcRhe', NULL, NULL, NULL),
-(31, 'Tri Hartanto', 'tri@demo.com', '$2y$10$bahLzGNFHUTaO8o9LxOyUu4XF2TQu0sLHWqP3EqaCgaJlweNGD6Zi', NULL, NULL, NULL);
+(1, 'HR Manager', 'hr@demo.com', '$2y$10$E.umobcv8y5tQbnQY3Tg2O9KdW.u.XCZzczT3BXk5STn/gIaerqiS', '6wyxmggFiEUhZmryzWJrE7MXaXi5sqq5dHGFRFoqjn3jpNIYNIlpHMD4CrqR', NULL, NULL),
+(35, 'Bachtiar Fatur Rohim', 'bachtiar@demo.com', '$2y$10$foVMLS4DPfKcO2pJwSAVM.lHPtTWt4ET0J/NPd66523E1pHdPDGGW', 'kMUqVJs0WCONUcUK9JKo2Ci7VUjEpSbilrhfPwVotmv2m56BkqXsRhGDMCYr', '2022-02-04 17:44:10', '2022-02-04 17:44:10'),
+(36, 'Dicky Saputra', 'dicky@demo.com', '$2y$10$.FRXG4cbVHS/fdUEurZ2Kujama3wRYYUuvP4O7icNjIn0IbFXTJPm', NULL, '2022-02-04 17:45:42', '2022-02-04 17:45:42'),
+(37, 'Andi Gusta', 'andi@demo.com', '$2y$10$vU//JImbprbIiCUSorkBC.Ev3GpbyXtiRk/Bd0TfpQvcli4cQaAdG', NULL, '2022-02-04 17:46:45', '2022-02-04 17:46:45'),
+(38, 'Tama', 'tama@demo.com', '$2y$10$JVNUA9p6dMg1PnAgYmzaSeSmPSPOjvI1ZxBjWpPHs5aYnY7ZdYvt6', NULL, '2022-02-04 17:47:47', '2022-02-04 17:47:47'),
+(39, 'Owen', 'owen@demo.com', '$2y$10$CbC2e3x0YovY2vagfRK51eGxGitK8GEgTk.hhh1BMZElcFwqcIg7i', NULL, '2022-02-04 17:48:17', '2022-02-04 17:48:17'),
+(43, 'Biko', 'biko@demo.com', '$2y$10$LVW4W/r3zbc40QVASxtvsOAOox/xfYZKie7EHzUE5o0VPkPq6aoRK', NULL, '2022-02-04 17:49:19', '2022-02-04 17:49:19'),
+(44, 'Rizki', 'rizki@demo.com', '$2y$10$HF0OoKDcqnHMSXKla.fxf.GRBN6472DHHMqKq/DiqnZWL3QYfbR7W', NULL, '2022-02-04 17:50:06', '2022-02-04 17:50:06'),
+(45, 'Anggit', 'anggit@demo.com', '$2y$10$0IYatTu/jLpBG6vTeuDwpubTERPeLXflC.mXDO3EW4NP.PXemL8f2', NULL, '2022-02-04 17:50:28', '2022-02-04 17:50:28'),
+(46, 'Leo', 'leo@demo.com', '$2y$10$gnbYXB6MnRUaCEQlWeCbLO.O7c71agrOBx5lZ4zmjO3a5rmLW5OtK', NULL, '2022-02-04 17:51:06', '2022-02-04 17:51:06'),
+(47, 'Riris Ayu', 'riris@demo.com', '$2y$10$rExxg1ou/65WhDbyb7Wf7e5h1ioSwE4wWMdlZmEezyvRLkjKryCQy', 'Q1NgpAuZV2HJnD1heomryk4VWReXZnhvCKspCbN0P8MzSG4zJjJEVS1Btmvl', '2022-02-04 17:51:36', '2022-02-04 17:51:36'),
+(48, 'Ummi', 'ummi@demo.com', '$2y$10$Lpmej1A/X3eCqVGBdcICPu1St9nq/Wj1/anhaNyP3.rzv2j3IHXoe', NULL, '2022-02-04 17:51:59', '2022-02-04 17:51:59'),
+(49, 'Agyl', 'agyl@demo.com', '$2y$10$GWjHphBzGyjUovmye8GKEe.YDMCwFKi/yQVglTFOM.swjZ6B51iEK', NULL, '2022-02-04 17:52:31', '2022-02-04 17:52:31'),
+(50, 'Arief', 'arief@demo.com', '$2y$10$x2kKHPkB5djJzRr4DsJ5H.PAGEPDVAuwbkgbDyJYFUTf/bmzPq9xq', NULL, '2022-02-04 17:52:52', '2022-02-04 17:52:52'),
+(51, 'Ghulam', 'ghulam@demo.com', '$2y$10$wSViFQKCinabHr6NXRwOQullzfHSX2tH9qGpgRI2tZH0k/zQqpyLW', NULL, '2022-02-04 17:53:15', '2022-02-04 17:53:15'),
+(52, 'Deden', 'deden@demo.com', '$2y$10$p2bPJ3RZzeCIpIRSZ53SBuCkNDg4xxUQc9VKiSV8.Gt4bD0RUwXs.', NULL, '2022-02-04 17:53:42', '2022-02-04 17:53:42'),
+(53, 'Herjun', 'herjun@demo.com', '$2y$10$eL0.YAO2YeEvdYjMi5KsBeFuaJsUu8xZ5nDbatN2Y5djnF9Mq3lCy', NULL, '2022-02-04 17:54:11', '2022-02-04 17:54:11'),
+(54, 'Nanda', 'nanda@demo.com', '$2y$10$cNzJxRpsF6C7abiNYNjAEugFiP3nHwtuG8e8GTd/CHIKSHctHW6I.', NULL, '2022-02-04 17:54:48', '2022-02-04 17:54:48'),
+(55, 'Monic', 'monic@demo.com', '$2y$10$5B5NPd6BgeZ4n5tMZqD0JuFTWe.M4TRZ1iPK45bD2QqsSOvoKe7Ya', NULL, '2022-02-04 17:55:07', '2022-02-04 17:55:07'),
+(56, 'Yvon', 'yvon@demo.com', '$2y$10$CCzCvvcr6bOfp8j9n2Cn4.kwEqqxpDRnoXoQ1SWZfCzvCo.UWPEOO', NULL, '2022-02-04 17:55:32', '2022-02-04 17:55:32'),
+(57, 'Zia', 'zia@demo.com', '$2y$10$I4r.tVekz/2jMJtrKL.8vuqH1CjhjGBgMB7ykyofJd/UxcRhvf/ce', NULL, '2022-02-04 17:55:53', '2022-02-04 17:55:53');
 
 -- --------------------------------------------------------
 
@@ -779,14 +811,26 @@ CREATE TABLE `user_roles` (
 
 INSERT INTO `user_roles` (`id`, `role_id`, `user_id`, `created_at`, `updated_at`) VALUES
 (1, 1, 1, '2022-01-26 12:01:52', '2022-01-26 12:01:52'),
-(2, 4, 2, '2022-01-26 12:01:52', '2022-01-26 12:01:52'),
-(3, 4, 3, '2022-01-26 12:01:52', '2022-01-26 12:01:52'),
-(4, 5, 4, '2022-01-26 12:01:52', '2022-01-26 12:01:52'),
-(5, 4, 5, '2022-01-26 12:01:52', '2022-01-26 12:01:52'),
-(6, 4, 6, '2022-01-26 12:01:52', '2022-01-26 12:01:52'),
-(7, 4, 7, '2022-01-26 12:01:52', '2022-01-26 12:01:52'),
-(8, 4, 8, '2022-01-26 12:01:52', '2022-01-26 12:01:52'),
-(9, 5, 9, '2022-01-26 12:01:52', '2022-01-26 12:01:52');
+(11, 3, 35, '2022-02-04 17:44:10', '2022-02-04 17:44:10'),
+(12, 3, 36, '2022-02-04 17:45:42', '2022-02-04 17:45:42'),
+(13, 4, 37, '2022-02-04 17:46:45', '2022-02-04 17:46:45'),
+(14, 3, 38, '2022-02-04 17:47:47', '2022-02-04 17:47:47'),
+(15, 3, 39, '2022-02-04 17:48:17', '2022-02-04 17:48:17'),
+(16, 3, 43, '2022-02-04 17:49:19', '2022-02-04 17:49:19'),
+(17, 4, 44, '2022-02-04 17:50:06', '2022-02-04 17:50:06'),
+(18, 4, 45, '2022-02-04 17:50:28', '2022-02-04 17:50:28'),
+(19, 6, 46, '2022-02-04 17:51:06', '2022-02-04 17:51:06'),
+(20, 6, 47, '2022-02-04 17:51:36', '2022-02-04 17:51:36'),
+(21, 6, 48, '2022-02-04 17:51:59', '2022-02-04 17:51:59'),
+(22, 5, 49, '2022-02-04 17:52:31', '2022-02-04 17:52:31'),
+(23, 5, 50, '2022-02-04 17:52:52', '2022-02-04 17:52:52'),
+(24, 5, 51, '2022-02-04 17:53:15', '2022-02-04 17:53:15'),
+(25, 5, 52, '2022-02-04 17:53:42', '2022-02-04 17:53:42'),
+(26, 5, 53, '2022-02-04 17:54:11', '2022-02-04 17:54:11'),
+(27, 6, 54, '2022-02-04 17:54:48', '2022-02-04 17:54:48'),
+(28, 6, 55, '2022-02-04 17:55:07', '2022-02-04 17:55:07'),
+(29, 2, 56, '2022-02-04 17:55:32', '2022-02-04 17:55:32'),
+(30, 2, 57, '2022-02-04 17:55:53', '2022-02-04 17:55:53');
 
 --
 -- Indexes for dumped tables
@@ -1071,7 +1115,7 @@ ALTER TABLE `assign_assets`
 -- AUTO_INCREMENT for table `assign_projects`
 --
 ALTER TABLE `assign_projects`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `attendance_filenames`
@@ -1107,13 +1151,13 @@ ALTER TABLE `clients`
 -- AUTO_INCREMENT for table `employees`
 --
 ALTER TABLE `employees`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT for table `employee_leaves`
 --
 ALTER TABLE `employee_leaves`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `employee_uploads`
@@ -1221,7 +1265,7 @@ ALTER TABLE `profiles`
 -- AUTO_INCREMENT for table `projects`
 --
 ALTER TABLE `projects`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `promotions`
@@ -1257,13 +1301,13 @@ ALTER TABLE `training_programs`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
 
 --
 -- AUTO_INCREMENT for table `user_roles`
 --
 ALTER TABLE `user_roles`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- Constraints for dumped tables
